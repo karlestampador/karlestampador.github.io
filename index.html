@@ -86,36 +86,141 @@
             border: 1px solid rgba(240, 192, 64, 0.1);
             border-radius: 50%;
         }
+        .hero-chart-path {
+            stroke: rgba(240, 192, 64, 0.16);
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 360;
+            stroke-dashoffset: 360;
+            animation: drawPath 1.8s ease-out forwards;
+        }
+        .hero-chart-path.path-delay-1 {
+            animation-delay: 0.18s;
+        }
+        .hero-chart-path.path-delay-2 {
+            animation-delay: 0.35s;
+        }
+        @keyframes drawPath {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        .rotating-title {
+            transition: opacity 0.4s ease;
+        }
+        .reveal-ready {
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+            transition-delay: var(--stagger-delay, 0ms);
+        }
+        .reveal-show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .project-pill-link {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #1B3A6B;
+            color: #1B3A6B;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+        }
+        .project-pill-link:hover {
+            background: rgba(27, 58, 107, 0.08);
+        }
+        .hero-mobile-menu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(-10px);
+            transition: max-height 0.35s ease, opacity 0.25s ease, transform 0.35s ease;
+        }
+        .hero-mobile-menu.open {
+            max-height: 320px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .about-carousel-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        .about-carousel-slide.active {
+            opacity: 1;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-chart-path,
+            .rotating-title,
+            .reveal-ready,
+            .about-carousel-slide {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-background text-on-background font-body selection:bg-secondary-fixed-dim selection:text-on-secondary-fixed">
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-[#1B3A6B]/85 backdrop-blur-xl shadow-lg shadow-blue-900/20">
-<div class="flex justify-between items-center px-12 py-6 w-full max-w-screen-2xl mx-auto">
-<span class="text-2xl font-bold font-headline text-white">Karl</span>
+<div class="px-6 md:px-12 py-6 w-full max-w-screen-2xl mx-auto">
+<div class="flex justify-between items-center">
+<span class="text-xl md:text-2xl font-bold font-headline text-white">Karl Estampador</span>
 <div class="hidden md:flex gap-8 items-center">
 <a class="text-[#F0C040] font-semibold transition-colors duration-300" href="#hero">Work</a>
 <a class="text-white/90 hover:text-[#F0C040] transition-colors duration-300" href="#about">About</a>
 <a class="text-white/90 hover:text-[#F0C040] transition-colors duration-300" href="#experience">Experience</a>
 <a class="text-white/90 hover:text-[#F0C040] transition-colors duration-300 border border-white/20 px-6 py-2 rounded-full" href="#contact">Contact</a>
 </div>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" class="md:hidden inline-flex items-center justify-center text-white" id="mobile-menu-button" type="button">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+<div class="hero-mobile-menu md:hidden mt-4 rounded-xl border border-white/10 bg-[#1B3A6B]/95" id="mobile-menu">
+<div class="flex flex-col p-4 gap-3">
+<a class="text-white/90 hover:text-[#F0C040] transition-colors duration-300 px-2 py-1" href="#hero">Work</a>
+<a class="text-white/90 hover:text-[#F0C040] transition-colors duration-300 px-2 py-1" href="#about">About</a>
+<a class="text-white/90 hover:text-[#F0C040] transition-colors duration-300 px-2 py-1" href="#experience">Experience</a>
+<a class="text-white/90 hover:text-[#F0C040] transition-colors duration-300 border border-white/20 px-4 py-2 rounded-full text-center" href="#contact">Contact</a>
+</div>
+</div>
 </div>
 </nav>
 <main>
 <!-- HERO SECTION -->
-<section class="relative cobalt-gradient min-h-screen flex items-center justify-center overflow-hidden pt-20" id="hero">
+<section class="relative cobalt-gradient min-h-[60vh] md:min-h-screen flex items-center justify-center overflow-hidden pt-20" id="hero">
 <!-- Geometric Circle Overlay -->
 <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-<div class="hero-circle w-[600px] h-[600px] absolute opacity-20"></div>
-<div class="hero-circle w-[850px] h-[850px] absolute opacity-10"></div>
-<div class="hero-circle w-[1100px] h-[1100px] absolute opacity-5"></div>
+<div class="hero-circle w-[80vw] max-w-[600px] h-[80vw] max-h-[600px] absolute opacity-20"></div>
+<div class="hero-circle w-[100vw] max-w-[850px] h-[100vw] max-h-[850px] absolute opacity-10"></div>
+<div class="hero-circle w-[130vw] max-w-[1100px] h-[130vw] max-h-[1100px] absolute opacity-5"></div>
+</div>
+<div class="absolute inset-0 opacity-60 pointer-events-none">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 600">
+<path class="hero-chart-path" d="M0,470 C140,430 230,360 360,390 C500,425 630,300 770,320 C910,340 1040,230 1200,200"></path>
+<path class="hero-chart-path path-delay-1" d="M0,520 C120,470 260,500 390,445 C520,390 640,430 780,360 C930,285 1060,320 1200,250"></path>
+<path class="hero-chart-path path-delay-2" d="M0,390 C150,360 260,280 390,300 C510,320 640,230 780,250 C930,270 1040,170 1200,140"></path>
+</svg>
 </div>
 <div class="relative z-10 text-center px-6 max-w-4xl">
 <h1 class="font-headline text-white text-6xl md:text-8xl font-extrabold leading-tight tracking-tight mb-4">
                 Hi, I'm Karl.
             </h1>
-<p class="font-label text-[#F0C040] text-lg md:text-xl font-bold tracking-[0.2em] mb-8 uppercase">
-                ACTUARIAL ANALYST &amp; DATA SCIENTIST
+<p class="font-label text-lg md:text-xl mb-8">
+                <span class="text-white/85 font-medium" id="title-prefix">I'm a </span><span class="rotating-title text-[#F0C040] font-bold tracking-[0.2em] uppercase" id="rotating-title">Data Analyst</span><span class="text-white/85 font-medium">.</span>
             </p>
 <p class="text-on-primary-container text-xl md:text-2xl font-light max-w-2xl mx-auto leading-relaxed mb-12">
                 Translating risk and data into decisions that matter.
@@ -132,9 +237,9 @@
 </section>
 <!-- ABOUT ME SECTION -->
 <section class="py-32 bg-surface-container-low overflow-hidden" id="about">
-<div class="max-w-7xl mx-auto px-12">
+<div class="max-w-7xl mx-auto px-6 md:px-12 reveal-target">
 <div class="flex flex-col lg:flex-row gap-20 items-center">
-<div class="lg:w-1/2">
+<div class="lg:w-1/2 reveal-target">
 <h2 class="font-headline text-5xl font-bold text-primary mb-8">Karl</h2>
 <div class="space-y-6 text-on-surface leading-relaxed text-lg max-w-xl">
 <p>With a background in actuarial science and a passion for structural design, I build tools that manage complexity without sacrificing elegance. My approach is rooted in the "Architectural Editorialism" philosophy—where data isn't just displayed, it's curated.</p>
@@ -152,10 +257,12 @@
 </a>
 </div>
 </div>
-<div class="lg:w-1/2 w-full">
+<div class="lg:w-1/2 w-full reveal-target">
 <div class="relative max-w-md mx-auto">
 <div class="aspect-[4/5] overflow-hidden rounded-2xl editorial-shadow">
-<img alt="Karl - Actuarial Analyst &amp; Data Scientist" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJKr_x2MFHP7YRF2knnKlUzoWe4_alz7uTH27vWUKKWVLwKFW9BRWPM9BlFEUDYytdmzLRt4MfgTlAcb10ZqpN5Fohiy7LYuAk6n5_Y596jujyz5uJAsmiWESiQ2l8-OwAs-9MsWEdG_y8LcgitjY9Z-9dFh2Ag84nJ2RlIOLvpgYpjtX-ZnA-DUukvslAOFgqkBuXLwQv1RVOAdsbKja30AFNVdcLSM-Beu8NeIneYHO6RCFM5oEuZuR2GEFIbmUQ93SCjkdhXaGJ"/>
+<img alt="LinkedIn profile portrait" class="about-carousel-slide active" src="images/Linkedin_PFP.JPG"/>
+<img alt="Karl informal portrait" class="about-carousel-slide" src="images/karlestampador_informal_pfp.jpg"/>
+<img alt="IONA profile portrait" class="about-carousel-slide" src="images/IONA_PFP.JPG"/>
 </div>
 <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-[#F0C040] rounded-full -z-10 opacity-20"></div>
 <div class="absolute -top-6 -left-6 w-24 h-24 border-2 border-primary rounded-xl -z-10 opacity-10"></div>
@@ -166,15 +273,15 @@
 </section>
 <!-- PROJECTS SECTION -->
 <section class="py-32 bg-surface" id="projects">
-<div class="max-w-7xl mx-auto px-12">
-<div class="mb-24 text-right">
+<div class="max-w-7xl mx-auto px-6 md:px-12">
+<div class="mb-24 text-right reveal-target">
 <h2 class="font-headline text-4xl md:text-6xl text-primary-container font-extrabold mb-4">Featured Projects</h2>
 <div class="h-1 w-32 bg-[#F0C040] ml-auto"></div>
 </div>
 <!-- Project 1: Featured -->
-<div class="mb-20 group">
+<div class="mb-20 group reveal-target">
 <div class="bg-surface-container-lowest rounded-xl overflow-hidden editorial-shadow flex flex-col md:flex-row transition-transform duration-500 hover:-translate-y-2">
-<div class="md:w-3/5 h-[400px] cobalt-gradient flex items-center justify-center p-12 overflow-hidden relative">
+<div class="md:w-3/5 h-[300px] md:h-[400px] cobalt-gradient flex items-center justify-center p-8 md:p-12 overflow-hidden relative">
 <div class="absolute inset-0 opacity-10 flex items-center justify-center">
 <div class="grid grid-cols-12 gap-1 w-full h-full">
 <div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div>
@@ -188,9 +295,10 @@
 <circle cx="400" cy="40" fill="#F0C040" r="8"></circle>
 </svg>
 </div>
-<div class="md:w-2/5 p-12 flex flex-col justify-center">
+<div class="md:w-2/5 p-8 md:p-12 flex flex-col justify-center">
 <div class="flex items-center gap-3 mb-4">
 <span class="text-[10px] font-black tracking-widest bg-[#F0C040] text-[#002452] px-3 py-1 rounded-full uppercase">FEATURED</span>
+<a class="project-pill-link" href="projects/march-madness/proto_final_bayanihan.html">CASE STUDY ↗</a>
 </div>
 <h3 class="font-headline text-3xl font-bold text-primary mb-4">March Madness Kaggle</h3>
 <p class="text-on-surface-variant leading-relaxed mb-6">LightGBM ensemble model predicting NCAA tournament outcomes using Elo ratings and isotonic calibration.</p>
@@ -201,16 +309,19 @@
 <span class="text-xs font-bold text-primary-container opacity-60">•</span>
 <span class="text-xs font-bold text-primary-container opacity-60">Scikit-learn</span>
 </div>
-<a class="inline-flex items-center gap-2 text-primary font-bold group-hover:text-[#F0C040] transition-colors" href="#">
+<a class="inline-flex items-center gap-2 text-primary font-bold group-hover:text-[#F0C040] transition-colors" href="projects/march-madness/proto_final_bayanihan.html">
                             View Case Study <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<a class="mt-3 inline-flex items-center gap-2 text-sm text-on-surface-variant hover:underline" href="[REPO_URL_MARCH_MADNESS]">
+                            View Repository <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
 </div>
 </div>
 </div>
 <!-- 2x2 Grid for other projects -->
-<div class="grid md:grid-cols-2 gap-12">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
 <!-- Project 2 -->
-<div class="group">
+<div class="group reveal-target" style="--stagger-delay: 100ms;">
 <div class="bg-surface-container-high aspect-video rounded-xl mb-8 flex items-center justify-center p-10 overflow-hidden relative cobalt-gradient"><svg class="w-full h-40" viewbox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
 <path d="M0,80 Q20,70 40,75 T80,60 T120,65" fill="none" stroke="#F0C040" stroke-width="2"></path>
 <path d="M120,65 L200,40 L200,90 Z" fill="#F0C040" fill-opacity="0.2"></path>
@@ -218,16 +329,19 @@
 <circle cx="120" cy="65" fill="#F0C040" r="3"></circle>
 </svg></div>
 <div class="flex items-center gap-3 mb-3">
-<span class="text-[10px] font-black tracking-widest bg-slate-500 text-white px-3 py-1 rounded-full uppercase">IN PROGRESS</span>
+<a class="project-pill-link" href="projects/ili-forecasting/ili_forecasting.html">PROJECT PAGE ↗</a>
 <h4 class="font-headline text-2xl font-bold text-primary">ILI Influenza Forecasting</h4>
 </div>
 <p class="text-on-surface-variant mb-4">ARIMAX model forecasting influenza-like illness using lagged age-group covariates and rolling one-step-ahead evaluation.</p>
 <div class="flex gap-4">
 <span class="text-xs font-bold text-primary-container opacity-60">R, ARIMAX</span>
 </div>
+<a class="mt-3 inline-flex items-center gap-2 text-sm text-on-surface-variant hover:underline" href="[REPO_URL_ILI]">
+                        View Repository <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
 </div>
 <!-- Project 3 -->
-<div class="group">
+<div class="group reveal-target" style="--stagger-delay: 200ms;">
 <div class="bg-surface-container-high aspect-video rounded-xl mb-8 flex items-center justify-center p-10 overflow-hidden relative cobalt-gradient"><div class="grid grid-cols-8 gap-4 opacity-40">
 <div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-20"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-60"></div>
 <div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-40"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-10"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div>
@@ -235,14 +349,20 @@
 <div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-50"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-90"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div>
 <div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-20"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-60"></div>
 </div></div>
+<div class="flex items-center gap-3 mb-3">
+<a class="project-pill-link" href="projects/airbnb-nyc/nyc_airbnb.html">PROJECT PAGE ↗</a>
 <h4 class="font-headline text-2xl font-bold text-primary mb-3">NYC Airbnb Data Visualization</h4>
+</div>
 <p class="text-on-surface-variant mb-4">Exploratory data analysis and interactive visual storytelling of NYC short-term rental market.</p>
 <div class="flex gap-4">
 <span class="text-xs font-bold text-primary-container opacity-60">Python, Altair</span>
 </div>
+<a class="mt-3 inline-flex items-center gap-2 text-sm text-on-surface-variant hover:underline" href="https://github.com/karlestampador/dataviz-airbnbNYC-personal">
+                        View Repository <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
 </div>
 <!-- Project 4 -->
-<div class="group">
+<div class="group reveal-target" style="--stagger-delay: 300ms;">
 <div class="bg-surface-container-high aspect-video rounded-xl mb-8 flex items-center justify-center p-10 overflow-hidden relative cobalt-gradient"><svg class="w-full h-40" viewbox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
 <circle cx="30" cy="80" fill="#F0C040" opacity="0.6" r="2"></circle>
 <circle cx="50" cy="70" fill="#F0C040" opacity="0.6" r="2"></circle>
@@ -259,9 +379,12 @@
 <div class="flex gap-4">
 <span class="text-xs font-bold text-primary-container opacity-60">R, LASSO</span>
 </div>
+<a class="mt-3 inline-flex items-center gap-2 text-sm text-on-surface-variant hover:underline" href="https://github.com/karlestampador/stat301-hungary-airbnb">
+                        View Repository <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
 </div>
 <!-- Project 5 -->
-<div class="group">
+<div class="group reveal-target" style="--stagger-delay: 400ms;">
 <div class="bg-surface-container-high aspect-video rounded-xl mb-8 flex items-center justify-center p-10 overflow-hidden relative cobalt-gradient"><svg class="w-full h-40" viewbox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
 <path d="M20,90 Q60,10 100,90" fill="#F0C040" fill-opacity="0.3" stroke="#F0C040" stroke-width="2"></path>
 <path d="M80,90 Q120,30 160,90" fill="#F0C040" fill-opacity="0.15" stroke="#F0C040" stroke-dasharray="2 2" stroke-width="2"></path>
@@ -272,15 +395,18 @@
 <div class="flex gap-4">
 <span class="text-xs font-bold text-primary-container opacity-60">R, OLS, Econometrics</span>
 </div>
+<a class="mt-3 inline-flex items-center gap-2 text-sm text-on-surface-variant hover:underline" href="https://github.com/karlestampador/econ326-immigrant-income-disparity-analysis">
+                        View Repository <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
 </div>
 </div>
 </div>
 </section>
 <!-- EXPERIENCE TIMELINE -->
 <section class="py-32 cobalt-gradient" id="experience">
-<div class="max-w-5xl mx-auto px-12">
-<h2 class="font-headline text-5xl font-bold text-white mb-20">Professional Experience</h2>
-<div class="relative border-l border-white/20 pl-12 space-y-24">
+<div class="max-w-5xl mx-auto px-6 md:px-12">
+<h2 class="font-headline text-5xl font-bold text-white mb-20 reveal-target">Professional Experience</h2>
+<div class="relative border-l border-white/20 pl-6 md:pl-12 space-y-24 reveal-target">
 <!-- Item 1 -->
 <div class="relative">
 <div class="absolute -left-[54px] top-0 w-3 h-3 bg-[#F0C040] rounded-full ring-8 ring-white/5"></div>
@@ -331,10 +457,10 @@
 </section>
 <!-- ACADEMIC FOUNDATION SECTION -->
 <section class="py-32 bg-surface-container-low">
-<div class="max-w-7xl mx-auto px-12">
-<h2 class="font-headline text-5xl font-bold text-primary mb-16">Academic Foundation</h2>
+<div class="max-w-7xl mx-auto px-6 md:px-12">
+<h2 class="font-headline text-5xl font-bold text-primary mb-16 reveal-target">Academic Foundation</h2>
 <!-- Part 1: Main Degree Card -->
-<div class="bg-surface-container-lowest p-12 rounded-lg editorial-shadow border-l-8 border-primary mb-16">
+<div class="bg-surface-container-lowest p-8 md:p-12 rounded-lg editorial-shadow border-l-8 border-primary mb-10 reveal-target">
 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
 <div>
 <h3 class="font-headline text-4xl font-bold text-primary">University of British Columbia</h3>
@@ -350,17 +476,31 @@
 <span class="font-bold text-primary">SOA Exam P and FM — Passed</span>
 </div>
 </div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16 reveal-target" id="academic-stats">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-primary/10 text-center">
+<div class="font-headline text-5xl text-primary font-bold counter-value" data-target="2">0</div>
+<p class="text-xs font-black tracking-[0.2em] uppercase text-on-surface-variant mt-2">SOA Exams Passed</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-primary/10 text-center">
+<div class="font-headline text-5xl text-primary font-bold counter-value" data-target="5">0</div>
+<p class="text-xs font-black tracking-[0.2em] uppercase text-on-surface-variant mt-2">Projects Completed</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-primary/10 text-center">
+<div class="font-headline text-5xl text-primary font-bold counter-value" data-target="3">0</div>
+<p class="text-xs font-black tracking-[0.2em] uppercase text-on-surface-variant mt-2">Years at UBC</p>
+</div>
+</div>
 <!-- Part 2: Coursework Grid -->
-<div class="grid md:grid-cols-3 gap-8">
+<div class="grid md:grid-cols-3 gap-8 reveal-target">
 <!-- Economics Column -->
 <div class="space-y-6">
 <h4 class="text-[#F0C040] font-black uppercase tracking-[0.2em] text-xs">Economics</h4>
 <div class="h-0.5 bg-primary/10 w-full mb-6"></div>
 <ul class="space-y-3 text-on-surface">
-<li class="flex items-center gap-3">Microeconomics</li>
-<li class="flex items-center gap-3">Macroeconomics</li>
-<li class="flex items-center gap-3">Labor Economics</li>
 <li class="flex items-center gap-3">Econometrics</li>
+<li class="flex items-center gap-3">Intermediate Microeconomics &amp; Macroeconomics</li>
+<li class="flex items-center gap-3">Money &amp; Banking</li>
+<li class="flex items-center gap-3">International Trade</li>
 </ul>
 </div>
 <!-- Statistics & Data Science Column -->
@@ -368,10 +508,10 @@
 <h4 class="text-[#F0C040] font-black uppercase tracking-[0.2em] text-xs">Statistics &amp; Data Science</h4>
 <div class="h-0.5 bg-primary/10 w-full mb-6"></div>
 <ul class="space-y-3 text-on-surface">
+<li class="flex items-center gap-3">Data Visualization</li>
+<li class="flex items-center gap-3">Time Series &amp; Forecasting</li>
 <li class="flex items-center gap-3">Statistical Inference</li>
-<li class="flex items-center gap-3">Regression Analysis</li>
-<li class="flex items-center gap-3">Machine Learning</li>
-<li class="flex items-center gap-3">Statistical Theory</li>
+<li class="flex items-center gap-3">Applied Machine Learning</li>
 </ul>
 </div>
 <!-- Mathematics Column -->
@@ -379,10 +519,10 @@
 <h4 class="text-[#F0C040] font-black uppercase tracking-[0.2em] text-xs">Mathematics</h4>
 <div class="h-0.5 bg-primary/10 w-full mb-6"></div>
 <ul class="space-y-3 text-on-surface">
-<li class="flex items-center gap-3">Multivariable Calculus</li>
-<li class="flex items-center gap-3">Linear Algebra</li>
 <li class="flex items-center gap-3">Probability Theory</li>
-<li class="flex items-center gap-3">Stochastic Processes</li>
+<li class="flex items-center gap-3">Mathematical Modelling</li>
+<li class="flex items-center gap-3">Linear Algebra</li>
+<li class="flex items-center gap-3">Multivariable Calculus</li>
 </ul>
 </div>
 </div>
@@ -390,47 +530,49 @@
 </section>
 <!-- CONTACT SECTION -->
 <section class="py-32 bg-white" id="contact">
-<div class="max-w-7xl mx-auto px-12">
+<div class="max-w-7xl mx-auto px-6 md:px-12">
 <div class="flex flex-col lg:flex-row gap-20">
 <!-- Left: Info -->
-<div class="lg:w-1/2">
+<div class="lg:w-1/2 reveal-target">
 <h2 class="font-headline text-6xl font-bold text-primary mb-12">Let’s connect <br/>on a project.</h2>
 <div class="space-y-10">
 <div>
 <p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Email</p>
-<a class="text-3xl font-headline text-primary hover:text-[#F0C040] transition-colors" href="mailto:hello@karl.com">hello@karl.com</a>
+<a class="text-3xl font-headline text-primary hover:text-[#F0C040] transition-colors" href="mailto:karlestampador@gmail.com">karlestampador@gmail.com</a>
 </div>
 <div>
 <p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Social</p>
 <div class="flex gap-8">
-<a class="text-primary hover:text-[#F0C040] font-bold" href="#">LinkedIn</a>
-<a class="text-primary hover:text-[#F0C040] font-bold" href="#">GitHub</a>
-<a class="text-primary hover:text-[#F0C040] font-bold" href="#">Twitter</a>
+<a class="text-primary hover:text-[#F0C040] font-bold" href="https://www.linkedin.com/in/karlestampador/">LinkedIn</a>
+<a class="text-primary hover:text-[#F0C040] font-bold" href="https://github.com/karlestampador">GitHub</a>
 </div>
 </div>
 </div>
 </div>
 <!-- Right: Form Card -->
-<div class="lg:w-1/2">
+<div class="lg:w-1/2 reveal-target">
 <div class="bg-surface-container-low p-12 rounded-xl">
-<form class="space-y-8">
-<div class="grid grid-cols-2 gap-8">
+<form action="https://formspree.io/f/[YOUR_FORMSPREE_ENDPOINT]" class="space-y-8" id="contact-form" method="POST">
+<input name="_gotcha" style="display:none" type="text"/>
+<input id="_replyto" name="_replyto" type="hidden"/>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 <div class="space-y-2">
 <label class="text-xs font-bold uppercase tracking-widest text-primary">Name</label>
-<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary transition-colors py-3" placeholder="Jane Doe" type="text"/>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary transition-colors py-3" name="name" placeholder="Jane Doe" required="" type="text"/>
 </div>
 <div class="space-y-2">
-<label class="text-xs font-bold uppercase tracking-widest text-primary">Company</label>
-<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary transition-colors py-3" placeholder="Organization" type="text"/>
+<label class="text-xs font-bold uppercase tracking-widest text-primary">Email</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary transition-colors py-3" id="email" name="email" placeholder="karlestampador@gmail.com" required="" type="email"/>
 </div>
 </div>
 <div class="space-y-2">
 <label class="text-xs font-bold uppercase tracking-widest text-primary">Message</label>
-<textarea class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary transition-colors py-3" placeholder="How can I help you today?" rows="4"></textarea>
+<textarea class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary transition-colors py-3" name="message" placeholder="How can I help you today?" required="" rows="4"></textarea>
 </div>
-<button class="w-full bg-primary text-white py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-primary-container transition-all" type="submit">
+<button class="w-full bg-primary text-white py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-primary-container transition-all disabled:opacity-60" id="submit-button" type="submit">
                                 Send Inquiry
                             </button>
+<p class="text-sm font-medium text-on-surface-variant hidden" id="form-status"></p>
 </form>
 </div>
 </div>
@@ -440,12 +582,202 @@
 </main>
 <!-- Footer -->
 <footer class="bg-[#1B3A6B] w-full py-12">
-<div class="flex flex-col md:flex-row justify-between items-center px-12 w-full max-w-screen-2xl mx-auto">
-<span class="font-sans text-sm tracking-wide text-white/70">© 2024 Karl. All rights reserved.</span>
+<div class="flex flex-col md:flex-row justify-between items-center px-6 md:px-12 w-full max-w-screen-2xl mx-auto">
+<span class="font-sans text-sm tracking-wide text-white/70">© 2024–2026 Karl Estampador. All rights reserved.</span>
 <div class="flex gap-8 mt-6 md:mt-0">
-<a class="font-sans text-sm tracking-wide text-white/70 hover:text-white transition-colors" href="#">LinkedIn</a>
-<a class="font-sans text-sm tracking-wide text-white/70 hover:text-white transition-colors" href="#">GitHub</a>
+<a class="font-sans text-sm tracking-wide text-white/70 hover:text-white transition-colors" href="https://www.linkedin.com/in/karlestampador/">LinkedIn</a>
+<a class="font-sans text-sm tracking-wide text-white/70 hover:text-white transition-colors" href="https://github.com/karlestampador">GitHub</a>
 </div>
 </div>
 </footer>
+<script>
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        let mobileMenuOpen = false;
+
+        function setMobileMenuState(isOpen) {
+            mobileMenuOpen = isOpen;
+            mobileMenu.classList.toggle("open", isOpen);
+            mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+            const icon = mobileMenuButton.querySelector(".material-symbols-outlined");
+            icon.textContent = isOpen ? "close" : "menu";
+        }
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener("click", () => setMobileMenuState(!mobileMenuOpen));
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && mobileMenuOpen) {
+                    setMobileMenuState(false);
+                }
+            });
+            document.addEventListener("click", (event) => {
+                if (!mobileMenuOpen) return;
+                if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                    setMobileMenuState(false);
+                }
+            });
+            mobileMenu.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", () => setMobileMenuState(false));
+            });
+        }
+
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const rotatingTitleEl = document.getElementById("rotating-title");
+        const titlePrefixEl = document.getElementById("title-prefix");
+        const rotatingTitles = [
+            "Data Analyst",
+            "Actuarial Analyst",
+            "Data Scientist",
+            "Economics Researcher",
+            "Statistical Modeller"
+        ];
+        let rotatingTitleIndex = 0;
+        const aboutSlides = Array.from(document.querySelectorAll(".about-carousel-slide"));
+        let aboutSlideIndex = 0;
+
+        function updateTitlePrefix(title) {
+            if (!titlePrefixEl) return;
+            const startsWithVowel = /^[aeiou]/i.test((title || "").trim());
+            titlePrefixEl.textContent = startsWithVowel ? "I'm an " : "I'm a ";
+        }
+
+        function startTitleRotation() {
+            if (!rotatingTitleEl) return;
+            updateTitlePrefix(rotatingTitleEl.textContent || rotatingTitles[0]);
+            if (prefersReducedMotion) return;
+            setInterval(() => {
+                rotatingTitleEl.style.opacity = "0";
+                setTimeout(() => {
+                    rotatingTitleIndex = (rotatingTitleIndex + 1) % rotatingTitles.length;
+                    rotatingTitleEl.textContent = rotatingTitles[rotatingTitleIndex];
+                    updateTitlePrefix(rotatingTitles[rotatingTitleIndex]);
+                    rotatingTitleEl.style.opacity = "1";
+                }, 400);
+            }, 6000);
+        }
+
+        function startAboutCarousel() {
+            if (aboutSlides.length <= 1 || prefersReducedMotion) return;
+            setInterval(() => {
+                aboutSlides[aboutSlideIndex].classList.remove("active");
+                aboutSlideIndex = (aboutSlideIndex + 1) % aboutSlides.length;
+                aboutSlides[aboutSlideIndex].classList.add("active");
+            }, 7000);
+        }
+
+        function animateCounter(counter) {
+            const target = Number(counter.dataset.target || 0);
+            const duration = 1100;
+            const startTime = performance.now();
+
+            function updateCounter(currentTime) {
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+                counter.textContent = String(Math.floor(progress * target));
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = String(target);
+                }
+            }
+            requestAnimationFrame(updateCounter);
+        }
+
+        function initAnimations() {
+            const revealTargets = Array.from(document.querySelectorAll(".reveal-target"));
+            if (prefersReducedMotion) {
+                revealTargets.forEach((el) => {
+                    el.classList.add("reveal-show");
+                });
+                document.querySelectorAll(".counter-value").forEach((counter) => {
+                    counter.textContent = String(counter.dataset.target || "0");
+                });
+                return;
+            }
+
+            revealTargets.forEach((el) => {
+                el.classList.add("reveal-ready");
+            });
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add("reveal-show");
+                    observer.unobserve(entry.target);
+                });
+            }, { threshold: 0.2, rootMargin: "0px 0px -40px 0px" });
+
+            revealTargets.forEach((el) => revealObserver.observe(el));
+
+            const counters = document.querySelectorAll(".counter-value");
+            const statsRow = document.getElementById("academic-stats");
+            if (statsRow && counters.length) {
+                const counterObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) return;
+                        counters.forEach((counter) => animateCounter(counter));
+                        observer.unobserve(entry.target);
+                    });
+                }, { threshold: 0.45 });
+                counterObserver.observe(statsRow);
+            }
+        }
+
+        async function handleContactSubmit(event) {
+            event.preventDefault();
+            const form = event.currentTarget;
+            const email = document.getElementById("email");
+            const replyTo = document.getElementById("_replyto");
+            const submitButton = document.getElementById("submit-button");
+            const status = document.getElementById("form-status");
+
+            if (!email || !replyTo || !submitButton || !status) return;
+
+            replyTo.value = email.value;
+            submitButton.disabled = true;
+            status.classList.remove("hidden", "text-green-700", "text-red-700");
+            status.classList.add("text-on-surface-variant");
+            status.textContent = "Sending...";
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form),
+                    headers: { "Accept": "application/json" }
+                });
+
+                if (response.ok) {
+                    form.reset();
+                    status.classList.remove("text-on-surface-variant", "text-red-700");
+                    status.classList.add("text-green-700");
+                    status.textContent = "Thanks for reaching out. Your message was sent successfully.";
+                } else {
+                    throw new Error("Form submission failed");
+                }
+            } catch (error) {
+                status.classList.remove("text-on-surface-variant", "text-green-700");
+                status.classList.add("text-red-700");
+                status.textContent = "Something went wrong. Please try again or email me directly.";
+            } finally {
+                submitButton.disabled = false;
+            }
+        }
+
+        const contactForm = document.getElementById("contact-form");
+        if (contactForm) {
+            contactForm.addEventListener("submit", handleContactSubmit);
+        }
+
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            initAnimations();
+            startTitleRotation();
+            startAboutCarousel();
+        } else {
+            document.querySelectorAll(".reveal-target").forEach((el) => el.classList.add("reveal-show"));
+            document.querySelectorAll(".counter-value").forEach((counter) => {
+                counter.textContent = String(counter.dataset.target || "0");
+            });
+            startTitleRotation();
+        }
+    </script>
 </body></html>

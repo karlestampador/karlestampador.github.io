@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ILI Influenza Forecasting — Karl Estampador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0B1D3F;
+  --navy2: #132350;
+  --gold: #C9A227;
+  --gold2: #E8C84A;
+  --bg: #F5F3EE;
+  --white: #FFFFFF;
+  --text: #0B1D3F;
+  --muted: #7B8298;
+  --border: #DDD9D1;
+}
+body { font-family: "DM Sans", sans-serif; background: var(--bg); color: var(--text); }
+nav {
+  background: var(--navy); min-height: 56px; padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  position: sticky; top: 0; z-index: 20;
+}
+.nav-logo { font-family: "Cormorant Garant", serif; color: #fff; font-size: 26px; font-weight: 700; letter-spacing: 0.03em; text-decoration: none; }
+.nav-back {
+  color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; padding: 8px 14px;
+}
+.nav-back:hover { color: var(--gold2); border-color: rgba(232,200,74,0.5); }
+.hero { background: var(--navy); padding: 52px 24px 0; position: relative; overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; top: -120px; right: -80px; width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(201,162,39,0.11) 0%, transparent 68%);
+}
+.crumb { font-size: 11px; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
+.crumb a { color: rgba(255,255,255,0.45); text-decoration: none; }
+.crumb a:hover { color: var(--gold2); }
+.hero-eyebrow {
+  display: inline-flex; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.11em;
+  border-radius: 999px; padding: 6px 12px; margin-bottom: 18px;
+  color: var(--gold2); border: 1px solid rgba(201,162,39,0.25); background: rgba(201,162,39,0.1);
+}
+h1 {
+  font-family: "Cormorant Garant", serif; color: #fff; font-size: clamp(36px, 5vw, 60px);
+  line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 14px;
+}
+.hero-desc {
+  color: rgba(255,255,255,0.66); max-width: 720px; line-height: 1.7;
+  font-size: 15px; margin-bottom: 36px;
+}
+.stat-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.stat-card {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-top: 2px solid var(--gold);
+  border-radius: 10px 10px 0 0; padding: 14px 18px 16px; min-width: 155px;
+}
+.sv { color: var(--gold2); font-family: "Cormorant Garant", serif; font-size: 30px; line-height: 1; margin-bottom: 4px; }
+.sl { color: rgba(255,255,255,0.52); font-size: 10px; text-transform: uppercase; letter-spacing: 0.09em; font-weight: 700; }
+.ss { color: rgba(255,255,255,0.36); font-size: 10px; margin-top: 3px; }
+.content { max-width: 1080px; margin: 0 auto; padding: 54px 24px 84px; }
+.sec-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
+.sec-h { font-family: "Cormorant Garant", serif; font-size: 30px; margin-bottom: 10px; }
+.sec-sub { color: var(--muted); line-height: 1.7; margin-bottom: 24px; max-width: 760px; }
+.div { border: none; border-top: 1px solid var(--border); margin: 46px 0; }
+.card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 26px;
+  box-shadow: 0 2px 16px rgba(11,29,63,0.05);
+}
+.viz-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.viz-slot {
+  min-height: 220px; border: 1px dashed #c6bfaf; border-radius: 10px; background: #faf8f3;
+  display: grid; place-items: center; color: var(--muted); font-style: italic; padding: 16px;
+}
+ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
+.cta-box {
+  background: var(--navy); border-radius: 14px; padding: 34px 28px;
+  display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between;
+}
+.cta-box h3 { color: #fff; font-family: "Cormorant Garant", serif; font-size: 30px; margin-bottom: 6px; }
+.cta-box p { color: rgba(255,255,255,0.52); font-size: 14px; }
+.btn-gold {
+  text-decoration: none; color: var(--navy); background: var(--gold); padding: 10px 18px;
+  border-radius: 8px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-ghost {
+  text-decoration: none; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.22);
+  padding: 10px 18px; border-radius: 8px; font-size: 13px; margin-left: 10px;
+}
+@media (min-width: 800px) {
+  nav, .hero, .content { padding-left: 48px; padding-right: 48px; }
+  .viz-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="../index.html">Karl Estampador</a>
+  <a class="nav-back" href="../index.html">← Back to Portfolio</a>
+</nav>
+
+<section class="hero">
+  <div class="crumb"><a href="../index.html">Work</a> › <span>ILI Influenza Forecasting</span></div>
+  <div class="hero-eyebrow">STAT 443 — TIME SERIES</div>
+  <h1>ILI Influenza Forecasting</h1>
+  <p class="hero-desc">ARIMA, STL+ETS, and ARIMAX models evaluated on CDC FluView holdout data using rolling one-step-ahead RMSE.</p>
+  <div class="stat-row">
+    <div class="stat-card"><div class="sv">ARIMA</div><div class="sl">Best Base Model</div><div class="ss">Benchmark candidate</div></div>
+    <div class="stat-card"><div class="sv">ARIMAX</div><div class="sl">Final Model</div><div class="ss">Selected for deployment</div></div>
+    <div class="stat-card"><div class="sv">Rolling RMSE</div><div class="sl">Evaluation Method</div><div class="ss">One-step-ahead holdout</div></div>
+    <div class="stat-card"><div class="sv">CDC FluView</div><div class="sl">Data Source</div><div class="ss">ILI weekly reports</div></div>
+  </div>
+</section>
+
+<div class="content">
+  <section>
+    <div class="sec-lbl">Section 01</div>
+    <h2 class="sec-h">Project Overview</h2>
+    <p class="sec-sub">This project compares classical and exogenous-augmented forecasting approaches for influenza-like illness trends. The goal is to identify a model that balances interpretability, accuracy, and robustness under rolling out-of-sample validation.</p>
+  </section>
+
+  <hr class="div">
+
+  <section>
+    <div class="sec-lbl">Section 02</div>
+    <h2 class="sec-h">Model Comparison</h2>
+    <div class="card">
+      <p class="sec-sub">[Placeholder for RMSE comparison table or chart: ARIMA vs STL+ETS vs ARIMAX]</p>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <section>
+    <div class="sec-lbl">Section 03</div>
+    <h2 class="sec-h">Key Visualizations</h2>
+    <div class="viz-grid">
+      <div class="viz-slot">[Insert plot here]</div>
+      <div class="viz-slot">[Insert plot here]</div>
+    </div>
+    <p class="sec-sub" style="margin-top: 16px;">[Add caption text to explain what each visualization demonstrates.]</p>
+  </section>
+
+  <hr class="div">
+
+  <section>
+    <div class="sec-lbl">Section 04</div>
+    <h2 class="sec-h">Methodology Notes</h2>
+    <div class="card">
+      <ul class="notes">
+        <li>[Placeholder] Data preprocessing and seasonal decomposition decisions</li>
+        <li>[Placeholder] Feature engineering and lag selection process</li>
+        <li>[Placeholder] Validation strategy and model diagnostics</li>
+        <li>[Placeholder] Error analysis and limitations</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <section class="cta-box">
+    <div>
+      <h3>Repository</h3>
+      <p>Code, notebooks, and forecasting workflow documentation.</p>
+    </div>
+    <div>
+      <a class="btn-gold" href="[REPO_URL_ILI]">View Repository ↗</a>
+      <a class="btn-ghost" href="../index.html">← All Projects</a>
+    </div>
+  </section>
+</div>
+</body>
+</html>

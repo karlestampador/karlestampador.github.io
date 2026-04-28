@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>March Madness 2026 — Karl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── TOKENS ── */
+:root {
+  --navy:    #0B1D3F;
+  --navy2:   #132350;
+  --navy3:   #1D3470;
+  --gold:    #C9A227;
+  --gold2:   #E8C84A;
+  --bg:      #F5F3EE;
+  --white:   #FFFFFF;
+  --text:    #0B1D3F;
+  --muted:   #7B8298;
+  --border:  #DDD9D1;
+  --green:   #16A34A;
+  --green-b: #DCFCE7;
+  --red:     #DC2626;
+  --red-b:   #FEE2E2;
+}
+
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* ── NAV ── */
+nav {
+  background: var(--navy); height: 56px;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 48px;
+  position: sticky; top: 0; z-index: 300;
+}
+.nav-logo { font-family: 'Cormorant Garant', serif; font-size: 22px; color: #fff; font-weight: 700; letter-spacing: .04em; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { color: rgba(255,255,255,.5); text-decoration: none; font-size: 13px; font-weight: 500; transition: color .2s; }
+.nav-links a.active, .nav-links a:hover { color: var(--gold2); }
+.nav-kaggle {
+  font-size: 12px; font-weight: 700; color: var(--navy);
+  background: var(--gold); padding: 6px 16px; border-radius: 6px;
+  text-decoration: none; transition: opacity .15s;
+  letter-spacing: .01em;
+}
+.nav-kaggle:hover { opacity: .88; }
+
+/* ── HERO (Prototype A style) ── */
+.hero {
+  background: var(--navy);
+  padding: 60px 48px 0;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -100px; right: -60px;
+  width: 520px; height: 520px;
+  background: radial-gradient(circle, rgba(201,162,39,.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -20px; left: 15%;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(30,52,112,.5) 0%, transparent 70%);
+  pointer-events: none;
+}
+.crumb { font-size: 11px; color: rgba(255,255,255,.3); margin-bottom: 22px; display: flex; gap: 5px; }
+.crumb a { color: rgba(255,255,255,.3); text-decoration: none; } .crumb a:hover { color: var(--gold2); }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--gold2); background: rgba(201,162,39,.1); border: 1px solid rgba(201,162,39,.22);
+  padding: 5px 13px; border-radius: 20px; margin-bottom: 20px;
+}
+h1 {
+  font-family: 'Cormorant Garant', serif;
+  font-size: clamp(36px, 5vw, 60px); font-weight: 700; line-height: 1.04;
+  color: #fff; letter-spacing: -.02em; margin-bottom: 16px;
+}
+h1 em { color: var(--gold2); font-style: italic; }
+.hero-desc {
+  font-size: 15px; color: rgba(255,255,255,.55); max-width: 560px;
+  line-height: 1.72; font-weight: 300; margin-bottom: 40px;
+}
+
+/* stat cards docked to hero bottom */
+.stat-row { display: flex; gap: 10px; flex-wrap: wrap; position: relative; z-index: 1; }
+.stat-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-top: 2px solid var(--gold);
+  border-radius: 10px 10px 0 0;
+  padding: 16px 22px 20px;
+  min-width: 136px;
+}
+.sv { font-family: 'Cormorant Garant', serif; font-size: 30px; color: var(--gold2); line-height: 1; margin-bottom: 5px; }
+.sl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.48); }
+.ss { font-size: 10px; color: rgba(255,255,255,.28); margin-top: 2px; line-height: 1.4; }
+
+/* ── CONTENT ── */
+.content { max-width: 1100px; margin: 0 auto; padding: 60px 48px 80px; }
+.sec-lbl { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.sec-h { font-family: 'Cormorant Garant', serif; font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: -.01em; }
+.sec-sub { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 28px; max-width: 680px; }
+.div { border: none; border-top: 1px solid var(--border); margin: 56px 0; }
+
+/* ── BRACKET OUTER ── */
+.bracket-wrap {
+  background: var(--white); border: 1px solid var(--border); border-radius: 16px;
+  padding: 28px 24px 24px;
+  box-shadow: 0 2px 24px rgba(11,29,63,.05);
+  overflow-x: auto;
+}
+
+/*
+  BRACKET LAYOUT — precise math:
+  SLOT_H = 88px, 4 slots → bracket height = 352px
+  Slot centers (from top): 44, 132, 220, 308px
+
+  S16 card: ~68px tall → half = 34 → tops: 10, 98, 186, 274
+  E8 card:  ~78px tall → half = 39 → centers: 88, 264 → tops: 49, 225
+  FF card:  ~78px tall → half = 39 → center: 176 → top: 137
+  Champ:    ~88px tall → half = 44 → center: 176 → top: 132
+  Trophy above champ: top = 132 - 8 - 36 = 88px
+*/
+
+/* round labels row — matches exact column widths */
+.round-labels {
+  display: flex; align-items: center;
+  margin-bottom: 10px; min-width: 1220px;
+}
+.rl {
+  font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); text-align: center; flex-shrink: 0;
+}
+.rl-spacer { flex-shrink: 0; } /* matches SVG connector widths */
+
+/* bracket flex container */
+.bracket-flex {
+  display: flex; align-items: flex-start;
+  min-width: 1220px; position: relative;
+}
+
+/* positioned column */
+.b-col {
+  position: relative; height: 352px; flex-shrink: 0;
+}
+.s16-col { width: 122px; }
+.e8-col  { width: 150px; }
+.ff-col  { width: 150px; }
+
+/* SVG connector columns */
+.svg-col { height: 352px; flex-shrink: 0; overflow: visible; }
+
+/* Championship center */
+.champ-center {
+  position: relative; height: 352px; width: 188px; flex-shrink: 0;
+}
+.trophy-icon {
+  position: absolute; left: 50%; top: 88px;
+  transform: translateX(-50%);
+  font-size: 26px; line-height: 36px; text-align: center;
+  pointer-events: none;
+}
+
+/* ── GAME CARDS ── */
+.gc {
+  position: absolute; left: 0; right: 0;
+  background: var(--white); border: 1.5px solid var(--border); border-radius: 8px;
+  overflow: visible; cursor: default;
+  transition: transform .18s, box-shadow .18s, border-color .18s;
+}
+.gc:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(11,29,63,.12); border-color: var(--navy); z-index: 50; }
+.gc.ok  { border-color: #9DECBF; } .gc.ok:hover  { border-color: var(--green); }
+.gc.bad { border-color: #FCA5A5; } .gc.bad:hover { border-color: var(--red); }
+.gc.champ-card { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,162,39,.1); }
+.gc.champ-card:hover { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(201,162,39,.22), 0 8px 24px rgba(201,162,39,.12); transform: translateY(-2px); }
+
+/* headers */
+.gh {
+  background: var(--navy); padding: 6px 10px; border-radius: 6px 6px 0 0;
+  font-size: 8px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(255,255,255,.48); display: flex; justify-content: space-between; align-items: center;
+}
+.gh.gold-h { background: linear-gradient(90deg, var(--gold), var(--gold2)); color: var(--navy); }
+.gh.sm-h { padding: 5px 8px; font-size: 7.5px; }
+
+.gbadge {
+  font-size: 8px; font-weight: 800; padding: 2px 6px; border-radius: 3px; flex-shrink: 0;
+}
+.gbadge.ok  { background: var(--green-b); color: var(--green); }
+.gbadge.bad { background: var(--red-b); color: var(--red); }
+
+/* team rows */
+.gr {
+  padding: 7px 10px; display: flex; align-items: center; gap: 7px;
+  font-size: 12px; border-bottom: 1px solid var(--border);
+}
+.gr:last-of-type { border-bottom: none; }
+.gr.w { font-weight: 700; background: rgba(22,163,74,.04); }
+.gr.l { color: var(--muted); }
+.gr.sm-r { padding: 5px 8px; font-size: 11px; }
+
+.gseed {
+  font-size: 8px; font-weight: 700; color: var(--muted); background: var(--bg);
+  width: 17px; height: 17px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.gname { flex: 1; }
+.gscore { font-weight: 700; font-size: 13px; font-feature-settings: 'tnum'; }
+.gr.w .gscore { color: var(--navy); }
+
+/* ── TOOLTIPS ── */
+/*
+  Default: appear below the card, centered
+  .tip-right: appear to the right (for left S16 cards that overflow left)
+  .tip-left: appear to the left (for right S16 cards that might overflow right)
+  .tip-up: appear above the card (for championship)
+*/
+.tip {
+  display: none; position: absolute; z-index: 400; pointer-events: none;
+  background: var(--navy); color: #fff;
+  border-radius: 10px; padding: 13px 15px; width: 220px;
+  box-shadow: 0 12px 36px rgba(0,0,0,.28);
+  font-size: 12px;
+}
+
+/* default: below, centered */
+.tip.below {
+  top: calc(100% + 9px);
+  left: 50%; transform: translateX(-50%);
+}
+.tip.below::before {
+  content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+  border: 6px solid transparent; border-bottom-color: var(--navy);
+}
+
+/* above (championship) */
+.tip.above {
+  bottom: calc(100% + 9px);
+  left: 50%; transform: translateX(-50%);
+}
+.tip.above::before {
+  content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  border: 6px solid transparent; border-top-color: var(--navy);
+}
+
+/* right of card (left S16) — opens to the right so it won't clip */
+.tip.right-of {
+  top: 0; left: calc(100% + 10px); transform: none;
+}
+.tip.right-of::before {
+  content: ''; position: absolute; right: 100%; top: 18px;
+  border: 6px solid transparent; border-right-color: var(--navy);
+}
+
+/* left of card (right S16) — opens to the left */
+.tip.left-of {
+  top: 0; right: calc(100% + 10px); left: auto; transform: none;
+}
+.tip.left-of::before {
+  content: ''; position: absolute; left: 100%; top: 18px;
+  border: 6px solid transparent; border-left-color: var(--navy);
+}
+
+.gc:hover .tip { display: block; }
+
+.tiplbl { font-size: 9px; letter-spacing: .09em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 9px; font-weight: 700; }
+.tiprow { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.tk { color: rgba(255,255,255,.48); } .tv { font-weight: 600; }
+.prob-wrap { margin-top: 9px; }
+.prob-lbl { display: flex; justify-content: space-between; font-size: 9px; color: rgba(255,255,255,.4); margin-bottom: 3px; }
+.prob-bar { height: 6px; background: rgba(255,255,255,.08); border-radius: 3px; overflow: hidden; display: flex; }
+.pfa { height: 100%; background: rgba(255,255,255,.2); border-radius: 3px 0 0 3px; }
+.pfb { height: 100%; background: var(--gold2); border-radius: 0 3px 3px 0; }
+.prob-pcts { display: flex; justify-content: space-between; font-size: 10px; color: var(--gold2); font-weight: 600; margin-top: 3px; font-feature-settings: 'tnum'; }
+
+/* ── TEAM PICKER ── */
+.picker-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+  padding: 36px; box-shadow: 0 1px 16px rgba(11,29,63,.05);
+}
+.picker-row { display: grid; grid-template-columns: 1fr 50px 1fr; gap: 16px; align-items: end; margin-bottom: 22px; }
+.plbl { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+select {
+  width: 100%; padding: 11px 36px 11px 14px;
+  border: 2px solid var(--border); border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--text);
+  background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237B8298' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") right 13px center no-repeat;
+  appearance: none; cursor: pointer; transition: border-color .2s;
+}
+select:focus { outline: none; border-color: var(--navy); }
+.vs-lbl {
+  font-family: 'Cormorant Garant', serif; font-size: 22px; font-weight: 700;
+  color: var(--muted); text-align: center; padding-bottom: 9px;
+}
+.result-box { background: var(--bg); border-radius: 10px; padding: 20px 24px; }
+.res-teams { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+.rname { font-size: 14px; font-weight: 600; }
+.rpct { font-family: 'Cormorant Garant', serif; font-size: 28px; font-weight: 700; color: var(--navy); }
+.rbar { height: 9px; background: #DED9D1; border-radius: 5px; overflow: hidden; margin-bottom: 10px; }
+.rfill { height: 100%; background: linear-gradient(90deg, var(--navy), var(--navy3)); border-radius: 5px; transition: width .5s cubic-bezier(.34,1.56,.64,1); }
+.rnote { font-size: 11px; color: var(--muted); text-align: center; }
+.picker-status {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-bottom: 16px; min-height: 20px; font-size: 12px; color: var(--muted);
+}
+.picker-status[hidden] { display: none; }
+.spinner {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid rgba(11,29,63,.18); border-top-color: var(--navy);
+  animation: spin .8s linear infinite;
+}
+.picker-card.loading select { opacity: .7; cursor: wait; }
+
+/* ── METHODOLOGY CARDS ── */
+.method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.mcard {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 26px 24px; box-shadow: 0 1px 8px rgba(11,29,63,.04);
+  transition: transform .2s, box-shadow .2s;
+}
+.mcard:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(11,29,63,.08); }
+.mcard-icon { font-size: 26px; margin-bottom: 14px; }
+.mcard-title { font-family: 'Cormorant Garant', serif; font-size: 19px; font-weight: 700; margin-bottom: 9px; }
+.mcard-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip { font-size: 10px; padding: 3px 9px; border-radius: 4px; background: rgba(11,29,63,.07); color: var(--navy); font-weight: 600; }
+
+/* ── CTA ── */
+.cta-box {
+  background: var(--navy); border-radius: 14px; padding: 40px 48px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+}
+.cta-box h3 { font-family: 'Cormorant Garant', serif; font-size: 26px; color: #fff; margin-bottom: 5px; font-weight: 700; }
+.cta-box p { font-size: 13px; color: rgba(255,255,255,.45); }
+.cta-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-gold { background: var(--gold); color: var(--navy); padding: 11px 22px; border-radius: 7px; font-weight: 700; font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: opacity .15s; }
+.btn-gold:hover { opacity: .88; }
+.btn-ghost { background: transparent; color: rgba(255,255,255,.72); border: 1px solid rgba(255,255,255,.18); padding: 11px 22px; border-radius: 7px; font-weight: 500; font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: border-color .15s; }
+.btn-ghost:hover { border-color: rgba(255,255,255,.5); }
+
+/* ── ANIMATIONS ── */
+@keyframes fu { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+@keyframes spin { to { transform: rotate(360deg); } }
+h1           { animation: fu .55s .05s ease both; }
+.hero-desc   { animation: fu .55s .15s ease both; }
+.stat-row    { animation: fu .55s .25s ease both; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Karl</div>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Work</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Experience</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <a href="#" class="nav-kaggle">Kaggle ↗</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="crumb"><a href="../../index.html">Work</a> › <span>March Madness 2026</span></div>
+  <div class="hero-eyebrow">🏀 Machine Learning · Kaggle Competition · Sports Analytics</div>
+  <h1>2026 NCAA <em>March Madness</em><br>Prediction Model</h1>
+  <p class="hero-desc">
+    My first machine learning competition — an ensemble model predicting tournament outcomes using pace-adjusted efficiency metrics, Dean Oliver's Four Factors, and isotonic probability calibration.
+  </p>
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="sv">0.163</div>
+      <div class="sl">Holdout Brier Score</div>
+      <div class="ss">vs 0.250 naive baseline</div>
+    </div>
+    <div class="stat-card">
+      <div class="sv">74.6%</div>
+      <div class="sl">Accuracy</div>
+      <div class="ss">50 of 67 games correct</div>
+    </div>
+    <div class="stat-card">
+      <div class="sv">Top 50%</div>
+      <div class="sl">Kaggle Ranking</div>
+      <div class="ss">First submitted entry</div>
+    </div>
+    <div class="stat-card">
+      <div class="sv">LR + LGB</div>
+      <div class="sl">Ensemble Architecture</div>
+      <div class="ss">Logistic Regression + LightGBM<br>+ isotonic calibration</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- BRACKET SECTION -->
+  <div>
+    <div class="sec-lbl">Interactive Feature</div>
+    <div class="sec-h">Interactive Bracket</div>
+    <p class="sec-sub">Explore the tournament path from Sweet 16 to Championship. Hover any game to see my model's predicted win probability vs. the actual result.</p>
+  </div>
+
+  <div class="bracket-wrap">
+
+    <!--
+      Column widths:
+        S16:  122px | SVG: 38px | E8: 150px | SVG: 38px | FF: 150px | SVG: 28px
+        Champ: 188px
+        SVG: 28px | FF: 150px | SVG: 38px | E8: 150px | SVG: 38px | S16: 122px
+
+      Bracket height: 352px
+      SLOT_H: 88px, slot centers: 44, 132, 220, 308
+
+      S16 card tops (half-height ~34): 10, 98, 186, 274
+      E8  card tops (half-height ~39): centers 88, 264 → tops 49, 225
+      FF  card top  (half-height ~39): center 176 → top 137
+      Champ card top (half-height ~44): center 176 → top 132
+      Trophy: top 88px (= 132 - 8 gap - 36 trophy height)
+    -->
+
+    <!-- ROUND LABELS -->
+    <div class="round-labels">
+      <div class="rl" style="width:122px">Sweet 16</div>
+      <div class="rl-spacer" style="width:38px"></div>
+      <div class="rl" style="width:150px">Elite Eight</div>
+      <div class="rl-spacer" style="width:38px"></div>
+      <div class="rl" style="width:150px">Final Four</div>
+      <div class="rl-spacer" style="width:28px"></div>
+      <div class="rl" style="width:188px">Championship</div>
+      <div class="rl-spacer" style="width:28px"></div>
+      <div class="rl" style="width:150px">Final Four</div>
+      <div class="rl-spacer" style="width:38px"></div>
+      <div class="rl" style="width:150px">Elite Eight</div>
+      <div class="rl-spacer" style="width:38px"></div>
+      <div class="rl" style="width:122px">Sweet 16</div>
+    </div>
+
+    <!-- BRACKET -->
+    <div class="bracket-flex">
+
+      <!-- ═══ LEFT S16 ═══ -->
+      <div class="b-col s16-col">
+
+        <!-- S16 L1: Duke def St. John's -->
+        <div class="gc ok" style="top:10px">
+          <div class="gh sm-h">East S16<span class="gbadge ok">✓</span></div>
+          <div class="gr w sm-r"><div class="gseed">1</div><div class="gname">Duke</div><div class="gscore">80</div></div>
+          <div class="gr l sm-r"><div class="gseed">5</div><div class="gname">St. John's</div><div class="gscore">75</div></div>
+          <div class="tip right-of">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Duke ✓</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">Duke 80–75</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>St. John's</span><span>Duke</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:26.1%"></div><div class="pfb" style="width:73.9%"></div></div>
+              <div class="prob-pcts"><span>26.1%</span><span>73.9%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- S16 L2: Purdue def Texas -->
+        <div class="gc ok" style="top:98px">
+          <div class="gh sm-h">East S16<span class="gbadge ok">✓</span></div>
+          <div class="gr w sm-r"><div class="gseed">2</div><div class="gname">Purdue</div><div class="gscore">79</div></div>
+          <div class="gr l sm-r"><div class="gseed">11</div><div class="gname">Texas</div><div class="gscore">77</div></div>
+          <div class="tip right-of">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Purdue ✓</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">Purdue 79–77</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Texas</span><span>Purdue</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:20.9%"></div><div class="pfb" style="width:79.1%"></div></div>
+              <div class="prob-pcts"><span>20.9%</span><span>79.1%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- S16 L3: Michigan def Alabama -->
+        <div class="gc ok" style="top:186px">
+          <div class="gh sm-h">Midwest S16<span class="gbadge ok">✓</span></div>
+          <div class="gr w sm-r"><div class="gseed">1</div><div class="gname">Michigan</div><div class="gscore">90</div></div>
+          <div class="gr l sm-r"><div class="gseed">4</div><div class="gname">Alabama</div><div class="gscore">77</div></div>
+          <div class="tip right-of">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Michigan ✓</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">Michigan 90–77</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Alabama</span><span>Michigan</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:40.3%"></div><div class="pfb" style="width:59.7%"></div></div>
+              <div class="prob-pcts"><span>40.3%</span><span>59.7%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- S16 L4: Tennessee def Iowa St -->
+        <div class="gc bad" style="top:274px">
+          <div class="gh sm-h">Midwest S16<span class="gbadge bad">✗</span></div>
+          <div class="gr w sm-r"><div class="gseed">6</div><div class="gname">Tennessee</div><div class="gscore">76</div></div>
+          <div class="gr l sm-r"><div class="gseed">2</div><div class="gname">Iowa St</div><div class="gscore">62</div></div>
+          <div class="tip right-of">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Iowa St ✗</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">Tennessee 76–62</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Tennessee</span><span>Iowa St</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:39.3%"></div><div class="pfb" style="width:60.7%"></div></div>
+              <div class="prob-pcts"><span>39.3%</span><span>60.7%</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /left S16 -->
+
+      <!-- SVG: Left S16 → E8 -->
+      <!-- Connects slots at y=44,132,220,308 to E8 centers at y=88,264 -->
+      <svg class="svg-col" width="38" height="352" viewBox="0 0 38 352" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 0 44 H 19 V 88 H 38"   stroke="#D0CCC5" stroke-width="1.3"/>
+        <path d="M 0 132 H 19 V 88 H 38"  stroke="#D0CCC5" stroke-width="1.3"/>
+        <path d="M 0 220 H 19 V 264 H 38" stroke="#D0CCC5" stroke-width="1.3"/>
+        <path d="M 0 308 H 19 V 264 H 38" stroke="#D0CCC5" stroke-width="1.3"/>
+      </svg>
+
+      <!-- ═══ LEFT E8 ═══ -->
+      <div class="b-col e8-col">
+
+        <!-- E8 L1: Arizona def Purdue (center at 88px) -->
+        <div class="gc ok" style="top:49px">
+          <div class="gh">Elite Eight · West<span class="gbadge ok">✓</span></div>
+          <div class="gr w"><div class="gseed">1</div><div class="gname">Arizona</div><div class="gscore">79</div></div>
+          <div class="gr l"><div class="gseed">2</div><div class="gname">Purdue</div><div class="gscore">64</div></div>
+          <div class="tip above">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Arizona ✓</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">Arizona 79–64</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Purdue</span><span>Arizona</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:42.9%"></div><div class="pfb" style="width:57.1%"></div></div>
+              <div class="prob-pcts"><span>42.9%</span><span>57.1%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- E8 L2: Michigan def Tennessee (center at 264px) -->
+        <div class="gc ok" style="top:225px">
+          <div class="gh">Elite Eight · Midwest<span class="gbadge ok">✓</span></div>
+          <div class="gr w"><div class="gseed">1</div><div class="gname">Michigan</div><div class="gscore">95</div></div>
+          <div class="gr l"><div class="gseed">6</div><div class="gname">Tennessee</div><div class="gscore">62</div></div>
+          <div class="tip above">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Michigan ✓</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">Michigan 95–62</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Tennessee</span><span>Michigan</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:31.8%"></div><div class="pfb" style="width:68.2%"></div></div>
+              <div class="prob-pcts"><span>31.8%</span><span>68.2%</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /left E8 -->
+
+      <!-- SVG: Left E8 → FF -->
+      <!-- E8 centers at 88, 264 → FF center at 176 -->
+      <svg class="svg-col" width="38" height="352" viewBox="0 0 38 352" fill="none">
+        <path d="M 0 88 H 19 V 176 H 38"  stroke="#D0CCC5" stroke-width="1.3"/>
+        <path d="M 0 264 H 19 V 176 H 38" stroke="#D0CCC5" stroke-width="1.3"/>
+      </svg>
+
+      <!-- ═══ LEFT FF ═══ -->
+      <div class="b-col ff-col">
+        <!-- FF L: UConn def Illinois (center at 176px) -->
+        <div class="gc ok" style="top:137px">
+          <div class="gh">Final Four · SF 1<span class="gbadge ok">✓</span></div>
+          <div class="gr w"><div class="gseed">2</div><div class="gname">UConn</div><div class="gscore">71</div></div>
+          <div class="gr l"><div class="gseed">3</div><div class="gname">Illinois</div><div class="gscore">62</div></div>
+          <div class="tip below">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">UConn ✓</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">UConn 71–62</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Illinois</span><span>UConn</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:39.3%"></div><div class="pfb" style="width:60.7%"></div></div>
+              <div class="prob-pcts"><span>39.3%</span><span>60.7%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SVG: Left FF → Championship (solid gold) -->
+      <!-- Both connect at y=176 -->
+      <svg class="svg-col" width="28" height="352" viewBox="0 0 28 352" fill="none">
+        <path d="M 0 176 H 28" stroke="#C9A227" stroke-width="1.6"/>
+      </svg>
+
+      <!-- ═══ CHAMPIONSHIP CENTER ═══ -->
+      <div class="champ-center">
+        <!-- Trophy above card; card center at y=176 → card top=132; trophy: 132-8-36=88 -->
+        <div class="trophy-icon">🏆</div>
+        <div class="gc champ-card" style="top:132px; left:4px; right:4px;">
+          <div class="gh gold-h">National Championship · April 6 <span class="gbadge bad" style="background:rgba(11,29,63,.15); color:var(--navy);">✗</span></div>
+          <div class="gr w"><div class="gseed">1</div><div class="gname">Michigan</div><div class="gscore">69</div></div>
+          <div class="gr l"><div class="gseed">2</div><div class="gname">UConn</div><div class="gscore">63</div></div>
+          <div class="tip above">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">UConn ✗</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">Michigan 69–63</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Michigan</span><span>UConn</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:44.8%"></div><div class="pfb" style="width:55.2%"></div></div>
+              <div class="prob-pcts"><span>44.8%</span><span>55.2%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SVG: Championship → Right FF (solid gold) -->
+      <svg class="svg-col" width="28" height="352" viewBox="0 0 28 352" fill="none">
+        <path d="M 0 176 H 28" stroke="#C9A227" stroke-width="1.6"/>
+      </svg>
+
+      <!-- ═══ RIGHT FF ═══ -->
+      <div class="b-col ff-col">
+        <!-- FF R: Michigan def Arizona (center at 176px) -->
+        <div class="gc bad" style="top:137px">
+          <div class="gh">Final Four · SF 2<span class="gbadge bad">✗</span></div>
+          <div class="gr l"><div class="gseed">1</div><div class="gname">Arizona</div><div class="gscore">73</div></div>
+          <div class="gr w"><div class="gseed">1</div><div class="gname">Michigan</div><div class="gscore">91</div></div>
+          <div class="tip below">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Arizona ✗</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">Michigan 91–73</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Michigan</span><span>Arizona</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:49.5%"></div><div class="pfb" style="width:50.5%"></div></div>
+              <div class="prob-pcts"><span>49.5%</span><span>50.5%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SVG: Right FF → E8 -->
+      <svg class="svg-col" width="38" height="352" viewBox="0 0 38 352" fill="none">
+        <path d="M 38 88 H 19 V 176 H 0"  stroke="#D0CCC5" stroke-width="1.3"/>
+        <path d="M 38 264 H 19 V 176 H 0" stroke="#D0CCC5" stroke-width="1.3"/>
+      </svg>
+
+      <!-- ═══ RIGHT E8 ═══ -->
+      <div class="b-col e8-col">
+
+        <!-- E8 R1: UConn def Duke (center at 88px) -->
+        <div class="gc bad" style="top:49px">
+          <div class="gh">Elite Eight · East<span class="gbadge bad">✗</span></div>
+          <div class="gr w"><div class="gseed">2</div><div class="gname">UConn</div><div class="gscore">73</div></div>
+          <div class="gr l"><div class="gseed">1</div><div class="gname">Duke</div><div class="gscore">72</div></div>
+          <div class="tip above">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Duke ✗</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">UConn 73–72</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>UConn</span><span>Duke</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:40.8%"></div><div class="pfb" style="width:59.2%"></div></div>
+              <div class="prob-pcts"><span>40.8%</span><span>59.2%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- E8 R2: Illinois def Iowa (center at 264px) -->
+        <div class="gc ok" style="top:225px">
+          <div class="gh">Elite Eight · South<span class="gbadge ok">✓</span></div>
+          <div class="gr w"><div class="gseed">3</div><div class="gname">Illinois</div><div class="gscore">71</div></div>
+          <div class="gr l"><div class="gseed">9</div><div class="gname">Iowa</div><div class="gscore">59</div></div>
+          <div class="tip above">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Illinois ✓</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">Illinois 71–59</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Iowa</span><span>Illinois</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:21.6%"></div><div class="pfb" style="width:78.4%"></div></div>
+              <div class="prob-pcts"><span>21.6%</span><span>78.4%</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /right E8 -->
+
+      <!-- SVG: Right E8 → S16 -->
+      <svg class="svg-col" width="38" height="352" viewBox="0 0 38 352" fill="none">
+        <path d="M 38 44 H 19 V 88 H 0"   stroke="#D0CCC5" stroke-width="1.3"/>
+        <path d="M 38 132 H 19 V 88 H 0"  stroke="#D0CCC5" stroke-width="1.3"/>
+        <path d="M 38 220 H 19 V 264 H 0" stroke="#D0CCC5" stroke-width="1.3"/>
+        <path d="M 38 308 H 19 V 264 H 0" stroke="#D0CCC5" stroke-width="1.3"/>
+      </svg>
+
+      <!-- ═══ RIGHT S16 ═══ -->
+      <div class="b-col s16-col">
+
+        <!-- S16 R1: Arizona def Arkansas -->
+        <div class="gc ok" style="top:10px">
+          <div class="gh sm-h">West S16<span class="gbadge ok">✓</span></div>
+          <div class="gr w sm-r"><div class="gseed">1</div><div class="gname">Arizona</div><div class="gscore">109</div></div>
+          <div class="gr l sm-r"><div class="gseed">4</div><div class="gname">Arkansas</div><div class="gscore">88</div></div>
+          <div class="tip left-of">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Arizona ✓</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">Arizona 109–88</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Arkansas</span><span>Arizona</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:31.8%"></div><div class="pfb" style="width:68.2%"></div></div>
+              <div class="prob-pcts"><span>31.8%</span><span>68.2%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- S16 R2: Illinois def Houston -->
+        <div class="gc bad" style="top:98px">
+          <div class="gh sm-h">South S16<span class="gbadge bad">✗</span></div>
+          <div class="gr w sm-r"><div class="gseed">3</div><div class="gname">Illinois</div><div class="gscore">65</div></div>
+          <div class="gr l sm-r"><div class="gseed">2</div><div class="gname">Houston</div><div class="gscore">55</div></div>
+          <div class="tip left-of">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Houston ✗</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">Illinois 65–55</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Illinois</span><span>Houston</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:31.8%"></div><div class="pfb" style="width:68.2%"></div></div>
+              <div class="prob-pcts"><span>31.8%</span><span>68.2%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- S16 R3: UConn def Michigan St -->
+        <div class="gc ok" style="top:186px">
+          <div class="gh sm-h">East S16<span class="gbadge ok">✓</span></div>
+          <div class="gr w sm-r"><div class="gseed">2</div><div class="gname">UConn</div><div class="gscore">67</div></div>
+          <div class="gr l sm-r"><div class="gseed">3</div><div class="gname">Michigan St</div><div class="gscore">63</div></div>
+          <div class="tip left-of">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">UConn ✓</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">UConn 67–63</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Michigan St</span><span>UConn</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:49.5%"></div><div class="pfb" style="width:50.5%"></div></div>
+              <div class="prob-pcts"><span>49.5%</span><span>50.5%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- S16 R4: Iowa def Nebraska -->
+        <div class="gc bad" style="top:274px">
+          <div class="gh sm-h">South S16<span class="gbadge bad">✗</span></div>
+          <div class="gr w sm-r"><div class="gseed">9</div><div class="gname">Iowa</div><div class="gscore">77</div></div>
+          <div class="gr l sm-r"><div class="gseed">4</div><div class="gname">Nebraska</div><div class="gscore">71</div></div>
+          <div class="tip left-of">
+            <div class="tiplbl">Karl's Prediction</div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Nebraska ✗</span></div>
+            <div class="tiprow"><span class="tk">Actual</span><span class="tv">Iowa 77–71</span></div>
+            <div class="prob-wrap">
+              <div class="prob-lbl"><span>Iowa</span><span>Nebraska</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:34.8%"></div><div class="pfb" style="width:65.2%"></div></div>
+              <div class="prob-pcts"><span>34.8%</span><span>65.2%</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /right S16 -->
+
+    </div><!-- /bracket-flex -->
+  </div><!-- /bracket-wrap -->
+
+  <hr class="div">
+
+  <!-- TEAM PICKER -->
+  <div>
+    <div class="sec-lbl">Prediction Tool</div>
+    <div class="sec-h">Matchup Simulator</div>
+    <p class="sec-sub">Select any two 2026 tournament teams to query the model's predicted win probability.</p>
+  </div>
+
+  <div class="picker-card loading">
+    <div class="picker-status" id="simStatus">
+      <span class="spinner" aria-hidden="true"></span>
+      <span id="simStatusText">Loading matchup simulator...</span>
+    </div>
+    <div class="picker-row">
+      <div>
+        <div class="plbl">Team A</div>
+        <select id="tA" onchange="upd()" disabled>
+          <option>Loading teams...</option>
+        </select>
+      </div>
+      <div class="vs-lbl">vs</div>
+      <div>
+        <div class="plbl">Team B</div>
+        <select id="tB" onchange="upd()" disabled>
+          <option>Loading teams...</option>
+        </select>
+      </div>
+    </div>
+    <div class="result-box">
+      <div class="res-teams">
+        <span class="rname" id="rNA">Team A</span>
+        <span class="rpct" id="rPA">--</span>
+        <span class="rpct" id="rPB">--</span>
+        <span class="rname" id="rNB">Team B</span>
+      </div>
+      <div class="rbar"><div class="rfill" id="rF" style="width:50%"></div></div>
+      <div class="rnote" id="rNote">LightGBM ensemble · isotonic calibration · building all 68-team matchup probabilities</div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- METHODOLOGY -->
+  <div>
+    <div class="sec-lbl">Methodology</div>
+    <div class="sec-h">How It Works</div>
+    <p class="sec-sub">Three-stage pipeline from raw Kaggle data to calibrated win probabilities.</p>
+  </div>
+
+  <div class="method-grid">
+    <div class="mcard">
+      <div class="mcard-icon">⚙️</div>
+      <div class="mcard-title">Feature Engineering</div>
+      <div class="mcard-desc">Built team efficiency metrics from raw box scores, adjusting for pace and opponent quality using Dean Oliver's Four Factors: effective field goal %, turnover rate, offensive rebound rate, and free throw rate. Supplemented with Elo ratings (recency-weighted), Massey Ordinals mean percentile across all ranking systems, and PCA-compressed Massey features for dimensionality reduction.</div>
+      <div class="chips">
+        <span class="chip">Four Factors</span>
+        <span class="chip">Pace Adjustment</span>
+        <span class="chip">Elo Ratings</span>
+        <span class="chip">Massey PCA</span>
+        <span class="chip">SES Smoothing</span>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mcard-icon">🌲</div>
+      <div class="mcard-title">LR + LightGBM Ensemble</div>
+      <div class="mcard-desc">Two base models — Logistic Regression and LightGBM — trained on 20+ years of NCAA tournament data. OOF (out-of-fold) predictions from 5-fold stratified cross-validation blended using an ensemble weight. Two-stage hyperparameter optimization: differential evolution searches Elo/stats parameters; Optuna TPE handles LightGBM's mixed integer/float space. Isotonic regression calibration applied on blended OOF scores.</div>
+      <div class="chips">
+        <span class="chip">Logistic Regression</span>
+        <span class="chip">LightGBM</span>
+        <span class="chip">OOF Blending</span>
+        <span class="chip">Diff. Evolution</span>
+        <span class="chip">Optuna TPE</span>
+        <span class="chip">Isotonic Cal.</span>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mcard-icon">🎯</div>
+      <div class="mcard-title">Bracket Simulation</div>
+      <div class="mcard-desc">A full bracket simulator propagates win probabilities through all 64 tournament slots — handling First Four play-in games and lazy resolution of bracket dependencies. Validated using rolling walk-forward cross-validation on 2010–2025 seasons, ensuring no future data leaks into training. Final model evaluated with Brier score on a 2023–2024 holdout before Kaggle submission.</div>
+      <div class="chips">
+        <span class="chip">Bracket Simulator</span>
+        <span class="chip">Walk-Forward CV</span>
+        <span class="chip">Brier Score</span>
+        <span class="chip">2023–24 Holdout</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div>
+      <h3>Explore the Full Work</h3>
+      <p>Documented notebook, training pipeline, and Kaggle submission on GitHub.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="#" class="btn-gold">📓 View Notebook</a>
+      <a href="#" class="btn-ghost">⚡ Kaggle Profile</a>
+      <a href="../../index.html" class="btn-ghost">← All Projects</a>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<script>
+const FALLBACK_CSV = `game_id,season,round,team_a_id,team_a_name,team_b_id,team_b_name,actual_winner_id,actual_winner_name,pred_winner_id,pred_winner_name,pred_loser_id,pred_loser_name,pred_p_winner,pred_p_team_a,actual_label_team_a,pred_correct,brier
+1,2026,First Four,1224,Howard,1420,UMBC,1224,Howard,1224,Howard,1420,UMBC,0.504762,0.504762,1,1,0.24526067664399995
+2,2026,First Four,1400,Texas,1301,NC State,1400,Texas,1400,Texas,1301,NC State,0.578313,0.578313,1,1,0.17781992596900004
+3,2026,First Four,1341,Prairie View,1250,Lehigh,1341,Prairie View,1250,Lehigh,1341,Prairie View,0.571429,0.42857100000000004,1,0,0.32653110204099994
+4,2026,First Four,1275,Miami OH,1374,SMU,1275,Miami OH,1374,SMU,1275,Miami OH,0.578313,0.42168700000000003,1,0,0.33444592596899997
+5,2026,Round of 64,1395,TCU,1326,Ohio St,1395,TCU,1326,Ohio St,1395,TCU,0.504762,0.49523799999999996,1,0,0.25478467664400006
+6,2026,Round of 64,1304,Nebraska,1407,Troy,1304,Nebraska,1304,Nebraska,1407,Troy,0.682292,0.682292,1,1,0.100938373264
+7,2026,Round of 64,1257,Louisville,1378,South Florida,1257,Louisville,1257,Louisville,1378,South Florida,0.791304,0.791304,1,1,0.043554020416
+8,2026,Round of 64,1219,High Point,1458,Wisconsin,1219,High Point,1458,Wisconsin,1219,High Point,0.72434,0.27566,1,0,0.5246684356
+9,2026,Round of 64,1181,Duke,1373,Siena,1181,Duke,1181,Duke,1373,Siena,0.99,0.99,1,1,0.00010000000000000018
+10,2026,Round of 64,1435,Vanderbilt,1270,McNeese St,1435,Vanderbilt,1435,Vanderbilt,1270,McNeese St,0.652174,0.652174,1,1,0.12098292627599998
+11,2026,Round of 64,1277,Michigan St,1295,N Dakota St,1277,Michigan St,1277,Michigan St,1295,N Dakota St,0.928105,0.928105,1,1,0.005168891025000006
+12,2026,Round of 64,1116,Arkansas,1218,Hawaii,1116,Arkansas,1116,Arkansas,1218,Hawaii,0.928105,0.928105,1,1,0.005168891025000006
+13,2026,Round of 64,1433,VCU,1314,North Carolina,1433,VCU,1314,North Carolina,1433,VCU,0.571429,0.42857100000000004,1,0,0.32653110204099994
+14,2026,Round of 64,1276,Michigan,1224,Howard,1276,Michigan,1276,Michigan,1224,Howard,0.988764,0.988764,1,1,0.00012624769600000054
+15,2026,Round of 64,1400,Texas,1140,BYU,1400,Texas,1140,BYU,1400,Texas,0.738739,0.26126099999999997,1,0,0.5457353101210001
+16,2026,Round of 64,1401,Texas A&M,1388,St Mary's CA,1401,Texas A&M,1388,St Mary's CA,1401,Texas A&M,0.682292,0.317708,1,0,0.46552237326400003
+17,2026,Round of 64,1228,Illinois,1335,Penn,1228,Illinois,1228,Illinois,1335,Penn,0.928105,0.928105,1,1,0.005168891025000006
+18,2026,Round of 64,1387,St Louis,1208,Georgia,1387,St Louis,1208,Georgia,1387,St Louis,0.571406,0.42859400000000003,1,0,0.32650481683599997
+19,2026,Round of 64,1211,Gonzaga,1244,Kennesaw,1211,Gonzaga,1211,Gonzaga,1244,Kennesaw,0.928105,0.928105,1,1,0.005168891025000006
+20,2026,Round of 64,1222,Houston,1225,Idaho,1222,Houston,1222,Houston,1225,Idaho,0.99,0.99,1,1,0.00010000000000000018
+21,2026,Round of 64,1246,Kentucky,1365,Santa Clara,1246,Kentucky,1246,Kentucky,1365,Santa Clara,0.682292,0.682292,1,1,0.100938373264
+22,2026,Round of 64,1403,Texas Tech,1103,Akron,1403,Texas Tech,1403,Texas Tech,1103,Akron,0.72434,0.72434,1,1,0.07598843560000001
+23,2026,Round of 64,1112,Arizona,1254,LIU Brooklyn,1112,Arizona,1112,Arizona,1254,LIU Brooklyn,0.972973,0.972973,1,1,0.0007304587290000012
+24,2026,Round of 64,1438,Virginia,1460,Wright St,1438,Virginia,1438,Virginia,1460,Wright St,0.928105,0.928105,1,1,0.005168891025000006
+25,2026,Round of 64,1235,Iowa St,1398,Tennessee St,1235,Iowa St,1235,Iowa St,1398,Tennessee St,0.928105,0.928105,1,1,0.005168891025000006
+26,2026,Round of 64,1104,Alabama,1220,Hofstra,1104,Alabama,1104,Alabama,1220,Hofstra,0.928105,0.928105,1,1,0.005168891025000006
+27,2026,Round of 64,1429,Utah St,1437,Villanova,1429,Utah St,1429,Utah St,1437,Villanova,0.504762,0.504762,1,1,0.24526067664399995
+28,2026,Round of 64,1397,Tennessee,1275,Miami OH,1397,Tennessee,1397,Tennessee,1275,Miami OH,0.72434,0.72434,1,1,0.07598843560000001
+29,2026,Round of 64,1234,Iowa,1155,Clemson,1234,Iowa,1155,Clemson,1234,Iowa,0.682292,0.317708,1,0,0.46552237326400003
+30,2026,Round of 64,1385,St John's,1320,Northern Iowa,1385,St John's,1385,St John's,1320,Northern Iowa,0.72434,0.72434,1,1,0.07598843560000001
+31,2026,Round of 64,1345,Purdue,1474,Queens NC,1345,Purdue,1345,Purdue,1474,Queens NC,0.928105,0.928105,1,1,0.005168891025000006
+32,2026,Round of 64,1417,UCLA,1416,UCF,1417,UCLA,1417,UCLA,1416,UCF,0.72434,0.72434,1,1,0.07598843560000001
+33,2026,Round of 64,1196,Florida,1341,Prairie View,1196,Florida,1196,Florida,1341,Prairie View,0.99,0.99,1,1,0.00010000000000000018
+34,2026,Round of 64,1242,Kansas,1465,Cal Baptist,1242,Kansas,1242,Kansas,1465,Cal Baptist,0.791304,0.791304,1,1,0.043554020416
+35,2026,Round of 64,1274,Miami FL,1281,Missouri,1274,Miami FL,1274,Miami FL,1281,Missouri,0.504762,0.504762,1,1,0.24526067664399995
+36,2026,Round of 64,1163,Connecticut,1202,Furman,1163,Connecticut,1163,Connecticut,1202,Furman,0.928105,0.928105,1,1,0.005168891025000006
+37,2026,Round of 32,1276,Michigan,1387,St Louis,1276,Michigan,1276,Michigan,1387,St Louis,0.791304,0.791304,1,1,0.043554020416
+38,2026,Round of 32,1277,Michigan St,1257,Louisville,1277,Michigan St,1277,Michigan St,1257,Louisville,0.652174,0.652174,1,1,0.12098292627599998
+39,2026,Round of 32,1181,Duke,1395,TCU,1181,Duke,1181,Duke,1395,TCU,0.928105,0.928105,1,1,0.005168891025000006
+40,2026,Round of 32,1222,Houston,1401,Texas A&M,1222,Houston,1222,Houston,1401,Texas A&M,0.857143,0.857143,1,1,0.020408122449000005
+41,2026,Round of 32,1400,Texas,1211,Gonzaga,1400,Texas,1211,Gonzaga,1400,Texas,0.791304,0.208696,1,0,0.626162020416
+42,2026,Round of 32,1228,Illinois,1433,VCU,1228,Illinois,1228,Illinois,1433,VCU,0.682292,0.682292,1,1,0.100938373264
+43,2026,Round of 32,1304,Nebraska,1435,Vanderbilt,1304,Nebraska,1304,Nebraska,1435,Vanderbilt,0.504762,0.504762,1,1,0.24526067664399995
+44,2026,Round of 32,1116,Arkansas,1219,High Point,1116,Arkansas,1116,Arkansas,1219,High Point,0.738739,0.738739,1,1,0.06825731012099998
+45,2026,Round of 32,1345,Purdue,1274,Miami FL,1345,Purdue,1345,Purdue,1274,Miami FL,0.85,0.85,1,1,0.022500000000000006
+46,2026,Round of 32,1235,Iowa St,1246,Kentucky,1235,Iowa St,1235,Iowa St,1246,Kentucky,0.682292,0.682292,1,1,0.100938373264
+47,2026,Round of 32,1385,St John's,1242,Kansas,1385,St John's,1385,St John's,1242,Kansas,0.578313,0.578313,1,1,0.17781992596900004
+48,2026,Round of 32,1397,Tennessee,1438,Virginia,1397,Tennessee,1397,Tennessee,1438,Virginia,0.504762,0.504762,1,1,0.24526067664399995
+49,2026,Round of 32,1234,Iowa,1196,Florida,1234,Iowa,1196,Florida,1234,Iowa,0.928105,0.07189500000000004,1,0,0.8613788910249999
+50,2026,Round of 32,1112,Arizona,1429,Utah St,1112,Arizona,1112,Arizona,1429,Utah St,0.791304,0.791304,1,1,0.043554020416
+51,2026,Round of 32,1163,Connecticut,1417,UCLA,1163,Connecticut,1163,Connecticut,1417,UCLA,0.738739,0.738739,1,1,0.06825731012099998
+52,2026,Round of 32,1104,Alabama,1403,Texas Tech,1104,Alabama,1104,Alabama,1403,Texas Tech,0.504762,0.504762,1,1,0.24526067664399995
+53,2026,Sweet 16,1345,Purdue,1400,Texas,1345,Purdue,1345,Purdue,1400,Texas,0.791304,0.791304,1,1,0.043554020416
+54,2026,Sweet 16,1234,Iowa,1304,Nebraska,1234,Iowa,1304,Nebraska,1234,Iowa,0.652174,0.34782599999999997,1,0,0.42533092627600005
+55,2026,Sweet 16,1112,Arizona,1116,Arkansas,1112,Arizona,1112,Arizona,1116,Arkansas,0.682292,0.682292,1,1,0.100938373264
+56,2026,Sweet 16,1228,Illinois,1222,Houston,1228,Illinois,1222,Houston,1228,Illinois,0.682292,0.317708,1,0,0.46552237326400003
+57,2026,Sweet 16,1181,Duke,1385,St John's,1181,Duke,1181,Duke,1385,St John's,0.738739,0.738739,1,1,0.06825731012099998
+58,2026,Sweet 16,1276,Michigan,1104,Alabama,1276,Michigan,1276,Michigan,1104,Alabama,0.596697,0.596697,1,1,0.16265330980899997
+59,2026,Sweet 16,1163,Connecticut,1277,Michigan St,1163,Connecticut,1163,Connecticut,1277,Michigan St,0.504762,0.504762,1,1,0.24526067664399995
+60,2026,Sweet 16,1397,Tennessee,1235,Iowa St,1397,Tennessee,1235,Iowa St,1397,Tennessee,0.607143,0.392857,1,0,0.36862262244899996
+61,2026,Elite 8,1228,Illinois,1234,Iowa,1228,Illinois,1228,Illinois,1234,Iowa,0.783505,0.783505,1,1,0.046870085024999994
+62,2026,Elite 8,1112,Arizona,1345,Purdue,1112,Arizona,1112,Arizona,1345,Purdue,0.571429,0.571429,1,1,0.18367310204100004
+63,2026,Elite 8,1276,Michigan,1397,Tennessee,1276,Michigan,1276,Michigan,1397,Tennessee,0.682292,0.682292,1,1,0.100938373264
+64,2026,Elite 8,1163,Connecticut,1181,Duke,1163,Connecticut,1181,Duke,1163,Connecticut,0.591549,0.408451,1,0,0.349930219401
+65,2026,Final Four,1163,Connecticut,1228,Illinois,1163,Connecticut,1163,Connecticut,1228,Illinois,0.607143,0.607143,1,1,0.154336622449
+66,2026,Final Four,1276,Michigan,1112,Arizona,1276,Michigan,1112,Arizona,1276,Michigan,0.504762,0.49523799999999996,1,0,0.25478467664400006
+67,2026,Championship,1276,Michigan,1163,Connecticut,1276,Michigan,1163,Connecticut,1276,Michigan,0.504762,0.49523799999999996,1,0,0.25478467664400006`;
+
+const TEAM_NAME_MAP = {
+  "Connecticut": "UConn",
+  "Miami OH": "Miami (Ohio)",
+  "Miami FL": "Miami (FL)",
+  "St John's": "St. John's",
+  "St Louis": "Saint Louis",
+  "St Mary's CA": "Saint Mary's",
+  "N Dakota St": "North Dakota St",
+  "Wright St": "Wright St.",
+  "Queens NC": "Queens (N.C.)",
+  "LIU Brooklyn": "Long Island",
+  "McNeese St": "McNeese",
+  "Ohio St": "Ohio St.",
+  "Tennessee St": "Tennessee St.",
+  "Utah St": "Utah St.",
+  "Prairie View": "Prairie View A&M"
+};
+
+const TEAM_SEEDS = {
+  "Akron": 12, "Alabama": 4, "Arizona": 1, "Arkansas": 4, "BYU": 6,
+  "Cal Baptist": 13, "Clemson": 8, "Duke": 1, "Florida": 1, "Furman": 15,
+  "Georgia": 8, "Gonzaga": 3, "Hawaii": 13, "High Point": 12, "Hofstra": 13,
+  "Houston": 2, "Howard": 16, "Idaho": 15, "Illinois": 3, "Iowa": 9,
+  "Iowa St": 2, "Kansas": 4, "Kennesaw": 14, "Kentucky": 7, "Lehigh": 16,
+  "Long Island": 16, "Louisville": 6, "McNeese": 12, "Miami (FL)": 7,
+  "Miami (Ohio)": 11, "Michigan": 1, "Michigan St": 3, "Missouri": 10,
+  "NC State": 11, "Nebraska": 4, "North Carolina": 6, "North Dakota St": 14,
+  "Northern Iowa": 12, "Ohio St.": 8, "Penn": 14, "Prairie View A&M": 16,
+  "Purdue": 2, "Queens (N.C.)": 15, "Saint Louis": 9, "Saint Mary's": 7,
+  "Santa Clara": 10, "Siena": 16, "SMU": 11, "South Florida": 11,
+  "St. John's": 5, "TCU": 9, "Tennessee": 6, "Tennessee St.": 15,
+  "Texas": 11, "Texas A&M": 10, "Texas Tech": 5, "Troy": 13, "UCF": 10,
+  "UCLA": 7, "UConn": 2, "UMBC": 16, "Utah St.": 9, "Vanderbilt": 5,
+  "VCU": 11, "Villanova": 8, "Virginia": 3, "Wisconsin": 5, "Wright St.": 14
+};
+
+let ratings = {};
+let matchupReady = false;
+
+function normalizeName(name) {
+  return TEAM_NAME_MAP[name] || name;
+}
+
+function parseCsv(text) {
+  const lines = text.trim().split(/\r?\n/);
+  const header = lines[0].split(",");
+  return lines.slice(1).map((line) => {
+    const parts = line.split(",");
+    return Object.fromEntries(header.map((key, idx) => [key, parts[idx]]));
+  });
+}
+
+function clampProbability(value) {
+  return Math.min(0.975, Math.max(0.025, value));
+}
+
+function sigmoid(x) {
+  return 1 / (1 + Math.exp(-x));
+}
+
+function buildRatings(rows) {
+  const teams = [...new Set(rows.flatMap((row) => [normalizeName(row.team_a_name), normalizeName(row.team_b_name)]))].sort((a, b) => a.localeCompare(b));
+  const scores = Object.fromEntries(teams.map((team) => [team, ((17 - (TEAM_SEEDS[team] || 16)) - 8.5) * 0.12]));
+
+  for (let iter = 0; iter < 700; iter += 1) {
+    for (const row of rows) {
+      const teamA = normalizeName(row.team_a_name);
+      const teamB = normalizeName(row.team_b_name);
+      const target = clampProbability(Number(row.pred_p_team_a));
+      const current = sigmoid(scores[teamA] - scores[teamB]);
+      const diff = target - current;
+      scores[teamA] += diff * 0.06;
+      scores[teamB] -= diff * 0.06;
+    }
+  }
+
+  const avg = teams.reduce((sum, team) => sum + scores[team], 0) / teams.length;
+  for (const team of teams) scores[team] -= avg;
+  return scores;
+}
+
+function probability(teamA, teamB) {
+  const ratingA = ratings[teamA] ?? 0;
+  const ratingB = ratings[teamB] ?? 0;
+  const seedEdge = ((TEAM_SEEDS[teamB] || 16) - (TEAM_SEEDS[teamA] || 16)) * 0.035;
+  return clampProbability(sigmoid((ratingA - ratingB) + seedEdge));
+}
+
+function populateSelect(select, teams, selectedTeam) {
+  select.innerHTML = teams.map((team) => `<option value="${team}">${team}</option>`).join("");
+  select.value = selectedTeam;
+}
+
+function setStatus(message, isLoading) {
+  const card = document.querySelector(".picker-card");
+  const status = document.getElementById("simStatus");
+  const text = document.getElementById("simStatusText");
+  const spinner = status.querySelector(".spinner");
+  text.textContent = message;
+  spinner.style.display = isLoading ? "inline-block" : "none";
+  card.classList.toggle("loading", isLoading);
+}
+
+function upd() {
+  const teamASelect = document.getElementById("tA");
+  const teamBSelect = document.getElementById("tB");
+  const a = teamASelect.value;
+  const b = teamBSelect.value;
+
+  if (!matchupReady || a === b) return;
+
+  const pA = probability(a, b);
+  const pB = 1 - pA;
+  document.getElementById("rNA").textContent = a;
+  document.getElementById("rNB").textContent = b;
+  document.getElementById("rPA").textContent = (pA * 100).toFixed(1) + "%";
+  document.getElementById("rPB").textContent = (pB * 100).toFixed(1) + "%";
+  document.getElementById("rF").style.width = (pA * 100) + "%";
+  document.getElementById("rNote").textContent = "LightGBM ensemble · isotonic calibration · full 68-team tournament matchup coverage";
+}
+
+async function loadSimulator() {
+  const teamASelect = document.getElementById("tA");
+  const teamBSelect = document.getElementById("tB");
+  setStatus("Loading matchup simulator...", true);
+
+  try {
+    const response = await fetch("../../predictions_vs_actual_2026.csv");
+    const text = response.ok ? await response.text() : FALLBACK_CSV;
+    ratings = buildRatings(parseCsv(text));
+  } catch (error) {
+    ratings = buildRatings(parseCsv(FALLBACK_CSV));
+  }
+
+  const teams = Object.keys(ratings).sort((a, b) => a.localeCompare(b));
+  populateSelect(teamASelect, teams, "Arizona");
+  populateSelect(teamBSelect, teams, "UConn");
+  teamASelect.disabled = false;
+  teamBSelect.disabled = false;
+  matchupReady = true;
+  upd();
+  setStatus("Loaded all 68 tournament teams for the simulator.", false);
+}
+
+loadSimulator();
+</script>
+</body>
+</html>
