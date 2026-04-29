@@ -306,10 +306,7 @@ function chartOptions(yTitle) {
         title: { display: true, text: yTitle, color: "#7B8298", font: { family: "DM Sans", size: 12, weight: "600" } }
       }
     },
-    animation: {
-      x: { type: "number", easing: "easeInOutQuart", duration: 1400, from: NaN, delay: 0 },
-      y: { duration: 0 }
-    }
+    animation: false
   };
 }
 
@@ -354,25 +351,8 @@ function createErrorChart() {
   });
 }
 
-const chartInitializers = new Map([
-  ["forecastChart", createForecastChart],
-  ["errorChart", createErrorChart]
-]);
-
-const chartObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-
-    const initializer = chartInitializers.get(entry.target.id);
-    if (initializer) initializer();
-    observer.unobserve(entry.target);
-  });
-}, { threshold: 0.25 });
-
-chartInitializers.forEach((_, id) => {
-  const canvas = document.getElementById(id);
-  if (canvas) chartObserver.observe(canvas);
-});
+createForecastChart();
+createErrorChart();
 </script>
 </body>
 </html>
