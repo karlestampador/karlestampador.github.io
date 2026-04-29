@@ -110,6 +110,9 @@ h1 {
   font-weight: 600;
   letter-spacing: 0.02em;
 }
+.viz-loader.is-stale .viz-loader-text {
+  color: #6B7280;
+}
 @keyframes viz-spin {
   to { transform: rotate(360deg); }
 }
@@ -121,12 +124,13 @@ h1 {
 .viz-embed iframe {
   width: 100%;
   min-width: 1200px;
-  height: 620px;
+  height: 820px;
   border: 0;
   border-radius: 8px;
   background: #fff;
 }
 .viz-embed iframe.viz-wide { min-width: 1700px; }
+.viz-embed iframe.viz-occupancy { min-width: 1727px; }
 .callout {
   background: #FAF8F3; border: 1px solid #E5DED0; border-radius: 10px;
   padding: 18px; color: var(--text); line-height: 1.6;
@@ -155,12 +159,14 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
   .findings { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 1024px) {
-  .viz-embed iframe { height: 560px; min-width: 1100px; }
+  .viz-embed iframe { height: 760px; min-width: 1100px; }
   .viz-embed iframe.viz-wide { min-width: 1600px; }
+  .viz-embed iframe.viz-occupancy { min-width: 1620px; }
 }
 @media (max-width: 768px) {
-  .viz-embed iframe { height: 500px; min-width: 980px; }
+  .viz-embed iframe { height: 700px; min-width: 980px; }
   .viz-embed iframe.viz-wide { min-width: 1500px; }
+  .viz-embed iframe.viz-occupancy { min-width: 1500px; }
 }
 </style>
 </head>
@@ -216,7 +222,7 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
           <div class="viz-spinner" aria-hidden="true"></div>
           <div class="viz-loader-text">Loading visualization...</div>
         </div>
-        <iframe class="js-viz-frame" frameborder="0" src="view2.html" title="Booking Behaviour and Occupancy Patterns"></iframe>
+        <iframe class="viz-occupancy js-viz-frame" frameborder="0" src="../../view2_occupancy_analysis.html" title="Booking Behaviour and Occupancy Patterns"></iframe>
       </div>
     </div>
 
@@ -265,6 +271,64 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
 </div>
 <script>
   (function () {
+    // Guard log emission to avoid Live Preview reload loops from workspace log writes.
+    // Enable only when explicitly debugging with ?debuglogs=1 in the URL.
+    var enableDebugCollector = window.location.search.indexOf("debuglogs=1") !== -1;
+
+    function sendDebugLog(hypothesisId, message, data) {
+      if (!enableDebugCollector) return;
+      fetch('http://127.0.0.1:7408/ingest/1b8ce364-fc12-4369-ba98-13e99106c98b',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'875039'},body:JSON.stringify({sessionId:'875039',runId:'run1',hypothesisId:hypothesisId,location:'projects/airbnb-nyc/nyc_airbnb.html:script',message:message,data:data,timestamp:Date.now()})}).catch(()=>{});
+      fetch('http://127.0.0.1:7408/ingest/1b8ce364-fc12-4369-ba98-13e99106c98b',{method:'POST',mode:'no-cors',body:JSON.stringify({sessionId:'875039',runId:'run1',hypothesisId:hypothesisId,location:'projects/airbnb-nyc/nyc_airbnb.html:script',message:message,data:data,timestamp:Date.now()})}).catch(()=>{});
+      try {
+        navigator.sendBeacon(
+          'http://127.0.0.1:7408/ingest/1b8ce364-fc12-4369-ba98-13e99106c98b',
+          new Blob([JSON.stringify({sessionId:'875039',runId:'run1',hypothesisId:hypothesisId,location:'projects/airbnb-nyc/nyc_airbnb.html:script',message:message,data:data,timestamp:Date.now()})], { type: 'application/json' })
+        );
+      } catch (e) {}
+    }
+
+    // #region agent log
+    sendDebugLog('H0', 'script-bootstrap', {
+      href: window.location.href,
+      protocol: window.location.protocol,
+      userAgent: navigator.userAgent
+    });
+    // #endregion
+
+    // #region agent log
+    sendDebugLog('H12', 'navigation-bootstrap', {
+      visibilityState: document.visibilityState,
+      referrer: document.referrer,
+      navType: (performance.getEntriesByType && performance.getEntriesByType("navigation")[0] && performance.getEntriesByType("navigation")[0].type) || null
+    });
+    // #endregion
+
+    window.addEventListener("beforeunload", function () {
+      // #region agent log
+      sendDebugLog('H12', 'window-beforeunload', {
+        href: window.location.href,
+        visibilityState: document.visibilityState
+      });
+      // #endregion
+    });
+
+    window.addEventListener("pagehide", function (event) {
+      // #region agent log
+      sendDebugLog('H12', 'window-pagehide', {
+        persisted: !!event.persisted,
+        href: window.location.href
+      });
+      // #endregion
+    });
+
+    document.addEventListener("visibilitychange", function () {
+      // #region agent log
+      sendDebugLog('H12', 'document-visibilitychange', {
+        visibilityState: document.visibilityState
+      });
+      // #endregion
+    });
+
     var frames = document.querySelectorAll(".js-viz-frame");
     frames.forEach(function (frame) {
       var wrap = frame.closest(".viz-frame-wrap");
@@ -272,12 +336,277 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
       var loader = wrap.querySelector(".viz-loader");
       if (!loader) return;
 
-      var hideLoader = function () {
-        loader.classList.add("is-hidden");
+      // #region agent log
+      sendDebugLog('H2', 'frame-init-metrics', {
+        title: frame.title,
+        frameSrc: frame.getAttribute("src"),
+        wrapClientWidth: wrap.clientWidth,
+        wrapScrollWidth: wrap.scrollWidth,
+        frameClientWidth: frame.clientWidth,
+        frameScrollWidth: frame.scrollWidth,
+        frameInitTs: Date.now()
+      });
+      // #endregion
+
+      var srcObserver = new MutationObserver(function () {
+        // #region agent log
+        sendDebugLog('H13', 'frame-src-attribute-mutated', {
+          title: frame.title,
+          frameSrcAttr: frame.getAttribute("src"),
+          frameCurrentSrc: frame.currentSrc || null
+        });
+        // #endregion
+      });
+      srcObserver.observe(frame, { attributes: true, attributeFilter: ["src"] });
+
+      var shownAt = Date.now();
+      var loaderHidden = false;
+      var loadEventSeen = false;
+      var hideLoader = function (reason) {
+        if (loaderHidden) return;
+        loaderHidden = true;
+        var elapsed = Date.now() - shownAt;
+        var wait = Math.max(0, 350 - elapsed);
+        setTimeout(function () {
+          loader.classList.add("is-hidden");
+          // #region agent log
+          sendDebugLog('H8', 'loader-hidden', {
+            title: frame.title,
+            frameSrc: frame.getAttribute("src"),
+            reason: reason || "unknown"
+          });
+          // #endregion
+        }, wait);
       };
 
-      frame.addEventListener("load", hideLoader, { once: true });
-      setTimeout(hideLoader, 12000);
+      var getRenderState = function (doc) {
+        if (!doc) return { renderedNodeCount: 0, visClientHeight: 0 };
+        var renderedNodeCount = doc.querySelectorAll("canvas, svg").length;
+        var vis = doc.getElementById("vis");
+        var visClientHeight = vis ? vis.clientHeight : 0;
+        return { renderedNodeCount: renderedNodeCount, visClientHeight: visClientHeight };
+      };
+
+      frame.addEventListener("load", function () {
+        loadEventSeen = true;
+        // #region agent log
+        sendDebugLog('H13', 'frame-load-event', {
+          title: frame.title,
+          frameSrcAttr: frame.getAttribute("src"),
+          frameCurrentSrc: frame.currentSrc || null
+        });
+        // #endregion
+        var iframeDoc = frame.contentDocument;
+        var iframeBody = iframeDoc && iframeDoc.body;
+        var iframeHtml = iframeDoc && iframeDoc.documentElement;
+
+        // #region agent log
+        sendDebugLog('H11', 'apply-inner-overflow-override-start', {
+          title: frame.title,
+          frameSrc: frame.getAttribute("src"),
+          hasDoc: !!iframeDoc
+        });
+        // #endregion
+        if (iframeHtml && iframeBody) {
+          iframeHtml.style.overflow = "hidden";
+          iframeBody.style.overflow = "hidden";
+          iframeHtml.style.margin = "0";
+          iframeBody.style.margin = "0";
+          iframeHtml.style.padding = "0";
+          iframeBody.style.padding = "0";
+        }
+        // #region agent log
+        sendDebugLog('H11', 'apply-inner-overflow-override-done', {
+          title: frame.title,
+          frameSrc: frame.getAttribute("src"),
+          htmlOverflow: iframeHtml ? getComputedStyle(iframeHtml).overflow : null,
+          bodyOverflow: iframeBody ? getComputedStyle(iframeBody).overflow : null
+        });
+        // #endregion
+
+        // #region agent log
+        sendDebugLog('H1', 'frame-load-inner-overflow', {
+          title: frame.title,
+          frameSrc: frame.getAttribute("src"),
+          bodyOverflowX: iframeBody ? getComputedStyle(iframeBody).overflowX : null,
+          bodyOverflowY: iframeBody ? getComputedStyle(iframeBody).overflowY : null,
+          bodyScrollWidth: iframeBody ? iframeBody.scrollWidth : null,
+          bodyClientWidth: iframeBody ? iframeBody.clientWidth : null,
+          htmlOverflowX: iframeHtml ? getComputedStyle(iframeHtml).overflowX : null,
+          htmlOverflowY: iframeHtml ? getComputedStyle(iframeHtml).overflowY : null,
+          htmlScrollWidth: iframeHtml ? iframeHtml.scrollWidth : null,
+          htmlClientWidth: iframeHtml ? iframeHtml.clientWidth : null
+        });
+        // #endregion
+
+        // #region agent log
+        sendDebugLog('H5', 'frame-load-margin-metrics', {
+          title: frame.title,
+          bodyMargin: iframeBody ? getComputedStyle(iframeBody).margin : null,
+          bodyPadding: iframeBody ? getComputedStyle(iframeBody).padding : null,
+          htmlMargin: iframeHtml ? getComputedStyle(iframeHtml).margin : null,
+          htmlPadding: iframeHtml ? getComputedStyle(iframeHtml).padding : null
+        });
+        // #endregion
+
+        // #region agent log
+        sendDebugLog('H3', 'frame-load-parent-vs-inner', {
+          title: frame.title,
+          wrapClientWidth: wrap.clientWidth,
+          wrapScrollWidth: wrap.scrollWidth,
+          frameClientWidth: frame.clientWidth,
+          frameScrollWidth: frame.scrollWidth,
+          loaderVisible: !loader.classList.contains("is-hidden")
+        });
+        // #endregion
+
+        // #region agent log
+        sendDebugLog('H6', 'frame-load-render-state', {
+          title: frame.title,
+          frameSrc: frame.getAttribute("src"),
+          docReadyState: iframeDoc ? iframeDoc.readyState : null,
+          renderedNodeCountNow: getRenderState(iframeDoc).renderedNodeCount,
+          visClientHeightNow: getRenderState(iframeDoc).visClientHeight
+        });
+        // #endregion
+
+        var inlineScripts = iframeDoc ? iframeDoc.querySelectorAll("script:not([src])") : [];
+        var scriptText = inlineScripts.length ? (inlineScripts[0].textContent || "") : "";
+        var iframeLocationHref = null;
+        var iframeDocTitle = null;
+        var iframeBodyPreview = null;
+        try {
+          iframeLocationHref = iframeDoc && iframeDoc.location ? iframeDoc.location.href : null;
+          iframeDocTitle = iframeDoc ? iframeDoc.title : null;
+          iframeBodyPreview = iframeDoc && iframeDoc.body ? (iframeDoc.body.textContent || "").trim().slice(0, 180) : null;
+        } catch (e) {}
+        // #region agent log
+        sendDebugLog('H7', 'iframe-inline-script-shape', {
+          title: frame.title,
+          frameSrc: frame.getAttribute("src"),
+          frameCurrentSrc: frame.currentSrc || null,
+          iframeLocationHref: iframeLocationHref,
+          iframeDocTitle: iframeDocTitle,
+          inlineScriptCount: inlineScripts.length,
+          hasVarSpec: scriptText.indexOf("var spec") !== -1,
+          hasEmbedCall: scriptText.indexOf("vegaEmbed(\"#vis\"") !== -1,
+          hasShowErrorFn: scriptText.indexOf("function showError") !== -1,
+          inlineScriptLength: scriptText.length
+        });
+        // #endregion
+
+        // #region agent log
+        try {
+          var sliderInputs = iframeDoc ? iframeDoc.querySelectorAll("input[type='range']") : [];
+          var bindingsWrap = iframeDoc ? iframeDoc.querySelector(".vega-bindings") : null;
+          var sciTicks = [];
+          if (iframeDoc) {
+            var tickTexts = iframeDoc.querySelectorAll("text");
+            for (var ti = 0; ti < tickTexts.length; ti++) {
+              var txt = (tickTexts[ti].textContent || "").trim();
+              if (txt.indexOf("e+") !== -1 || txt.indexOf("e-") !== -1) {
+                sciTicks.push(txt);
+              }
+              if (sciTicks.length >= 8) break;
+            }
+          }
+          var boroughTicks = [];
+          var boroughCandidates = ["Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island"];
+          if (iframeDoc) {
+            var allTexts = iframeDoc.querySelectorAll("text");
+            for (var bi = 0; bi < allTexts.length; bi++) {
+              var bt = (allTexts[bi].textContent || "").trim();
+              if (boroughCandidates.indexOf(bt) !== -1 && boroughTicks.indexOf(bt) === -1) {
+                boroughTicks.push(bt);
+              }
+            }
+          }
+          sendDebugLog('H20', 'ui-audit-after-load', {
+            title: frame.title,
+            frameSrc: frame.getAttribute("src"),
+            sliderCount: sliderInputs.length,
+            bindingsExists: !!bindingsWrap,
+            bindingsDisplay: bindingsWrap ? getComputedStyle(bindingsWrap).display : null,
+            bindingsVisibility: bindingsWrap ? getComputedStyle(bindingsWrap).visibility : null,
+            bindingsHeight: bindingsWrap ? bindingsWrap.getBoundingClientRect().height : null,
+            scientificTickSamples: sciTicks,
+            boroughTickLabelsSeen: boroughTicks,
+            bodyScrollWidth: iframeBody ? iframeBody.scrollWidth : null,
+            bodyClientWidth: iframeBody ? iframeBody.clientWidth : null,
+            visScrollWidth: iframeDoc && iframeDoc.getElementById("vis") ? iframeDoc.getElementById("vis").scrollWidth : null,
+            visClientWidth: iframeDoc && iframeDoc.getElementById("vis") ? iframeDoc.getElementById("vis").clientWidth : null
+          });
+        } catch (auditError) {
+          sendDebugLog('H20', 'ui-audit-error', { title: frame.title, message: String(auditError) });
+        }
+        // #endregion
+
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            var rafDoc = frame.contentDocument;
+            var afterRafState = getRenderState(rafDoc);
+            // #region agent log
+            sendDebugLog('H6', 'frame-after-2raf-render-state', {
+              title: frame.title,
+              frameSrc: frame.getAttribute("src"),
+              renderedNodeCountAfter2Raf: afterRafState.renderedNodeCount,
+              visClientHeightAfter2Raf: afterRafState.visClientHeight
+            });
+            // #endregion
+
+            if (afterRafState.renderedNodeCount > 0 && afterRafState.visClientHeight > 0) {
+              hideLoader("render-ready-2raf");
+              return;
+            }
+
+            var visRoot = rafDoc && rafDoc.getElementById("vis");
+            if (!visRoot || !rafDoc) return;
+            var renderObserver = new MutationObserver(function () {
+              var liveState = getRenderState(rafDoc);
+              if (liveState.renderedNodeCount > 0 && liveState.visClientHeight > 0) {
+                // #region agent log
+                sendDebugLog('H6', 'frame-render-observer-ready', {
+                  title: frame.title,
+                  frameSrc: frame.getAttribute("src"),
+                  renderedNodeCount: liveState.renderedNodeCount,
+                  visClientHeight: liveState.visClientHeight
+                });
+                // #endregion
+                renderObserver.disconnect();
+                hideLoader("render-observer-ready");
+              }
+            });
+            renderObserver.observe(visRoot, { childList: true, subtree: true });
+          });
+        });
+      }, { once: true });
+
+      frame.addEventListener("error", function () {
+        // #region agent log
+        sendDebugLog('H9', 'frame-error-event', {
+          title: frame.title,
+          frameSrc: frame.getAttribute("src"),
+          frameCurrentSrc: frame.currentSrc || null
+        });
+        // #endregion
+      });
+
+      setTimeout(function () {
+        // #region agent log
+        sendDebugLog('H4', 'loader-timeout-fired', {
+          title: frame.title,
+          loaderVisibleBeforeTimeoutHide: !loader.classList.contains("is-hidden"),
+          loadEventSeen: loadEventSeen
+        });
+        // #endregion
+        if (!loader.classList.contains("is-hidden")) {
+          loader.classList.add("is-stale");
+          var textNode = loader.querySelector(".viz-loader-text");
+          if (textNode) {
+            textNode.textContent = "Still loading visualization...";
+          }
+        }
+      }, 12000);
     });
   })();
 </script>
