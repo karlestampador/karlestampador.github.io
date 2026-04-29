@@ -69,11 +69,27 @@ h1 {
   background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 26px;
   box-shadow: 0 2px 16px rgba(11,29,63,0.05);
 }
+.rmse-chart { display: grid; gap: 12px; margin-bottom: 18px; }
+.rmse-row { display: grid; grid-template-columns: minmax(150px, 250px) 1fr; gap: 14px; align-items: center; }
+.rmse-model { font-size: 13px; color: var(--text); }
+.rmse-track { background: #EEEAE2; border-radius: 999px; overflow: hidden; }
+.rmse-bar {
+  height: 30px; border-radius: 999px; background: var(--muted); color: #fff;
+  display: flex; align-items: center; justify-content: flex-end; padding-right: 10px;
+  font-size: 12px; font-weight: 700; min-width: 48px;
+}
+.rmse-bar.best { background: var(--gold); color: var(--navy); }
+.chart-note { color: var(--muted); line-height: 1.7; font-size: 13px; }
 .viz-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
 .viz-slot {
   min-height: 220px; border: 1px dashed #c6bfaf; border-radius: 10px; background: #faf8f3;
   display: grid; place-items: center; color: var(--muted); font-style: italic; padding: 16px;
 }
+.viz-slot.has-image {
+  min-height: 0; border: none; background: transparent; display: block; padding: 0; font-style: normal;
+}
+.viz-slot img { width: 100%; border-radius: 8px; display: block; }
+.fig-caption { color: var(--muted); font-size: 13px; line-height: 1.6; margin-top: 10px; text-align: left; }
 ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
 .cta-box {
   background: var(--navy); border-radius: 14px; padding: 34px 28px;
@@ -127,7 +143,29 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
     <div class="sec-lbl">Section 02</div>
     <h2 class="sec-h">Model Comparison</h2>
     <div class="card">
-      <p class="sec-sub">[Placeholder for RMSE comparison table or chart: ARIMA vs STL+ETS vs ARIMAX]</p>
+      <div class="rmse-chart" aria-label="Holdout RMSE by model">
+        <div class="rmse-row">
+          <div class="rmse-model">ARIMA(1,1,2)(2,0,0)[52]</div>
+          <div class="rmse-track"><div class="rmse-bar best" style="width: 13.1%;">0.270</div></div>
+        </div>
+        <div class="rmse-row">
+          <div class="rmse-model">STL+ETS</div>
+          <div class="rmse-track"><div class="rmse-bar" style="width: 18.3%;">0.376</div></div>
+        </div>
+        <div class="rmse-row">
+          <div class="rmse-model">ARIMAX(1,1,0)(1,1,0)[52]</div>
+          <div class="rmse-track"><div class="rmse-bar" style="width: 18.3%;">0.378</div></div>
+        </div>
+        <div class="rmse-row">
+          <div class="rmse-model">Mean</div>
+          <div class="rmse-track"><div class="rmse-bar" style="width: 74.3%;">1.530</div></div>
+        </div>
+        <div class="rmse-row">
+          <div class="rmse-model">SNaive</div>
+          <div class="rmse-track"><div class="rmse-bar" style="width: 100%;">2.060</div></div>
+        </div>
+      </div>
+      <p class="chart-note">ARIMA outperforms ARIMAX on holdout RMSE despite a higher AIC (371 vs. 380), suggesting the lagged age-group covariates add limited out-of-sample signal.</p>
     </div>
   </section>
 
@@ -137,10 +175,15 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
     <div class="sec-lbl">Section 03</div>
     <h2 class="sec-h">Key Visualizations</h2>
     <div class="viz-grid">
-      <div class="viz-slot">[Insert plot here]</div>
-      <div class="viz-slot">[Insert plot here]</div>
+      <figure>
+        <div class="viz-slot has-image"><img src="images/forecast_vs_actual.png" alt="Rolling one-step-ahead forecasts vs. actual % Weighted ILI (2023–2024 holdout)"></div>
+        <figcaption class="fig-caption">Rolling one-step-ahead forecasts vs. observed % Weighted ILI over the 2023–2024 holdout. ARIMA and ARIMAX track the seasonal peak closely; Mean and SNaive diverge substantially during the Nov 2023 – Feb 2024 flu surge.</figcaption>
+      </figure>
+      <figure>
+        <div class="viz-slot has-image"><img src="images/absolute_forecast_error.png" alt="Absolute one-step-ahead forecast error over the 2023–2024 holdout"></div>
+        <figcaption class="fig-caption">Absolute forecast error by week across all five models. ARIMA(1,1,2)(2,0,0)[52] and ARIMAX maintain consistently low errors throughout the holdout, while SNaive spikes sharply around the 2023–2024 flu peak.</figcaption>
+      </figure>
     </div>
-    <p class="sec-sub" style="margin-top: 16px;">[Add caption text to explain what each visualization demonstrates.]</p>
   </section>
 
   <hr class="div">
@@ -150,10 +193,10 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
     <h2 class="sec-h">Methodology Notes</h2>
     <div class="card">
       <ul class="notes">
-        <li>[Placeholder] Data preprocessing and seasonal decomposition decisions</li>
-        <li>[Placeholder] Feature engineering and lag selection process</li>
-        <li>[Placeholder] Validation strategy and model diagnostics</li>
-        <li>[Placeholder] Error analysis and limitations</li>
+        <li>CDC FluView national weekly % weighted ILI data (2002–2024), comprising 1,200 observations. Three duplicate week rows resolved by within-week averaging; 384 pre-2010 rows with missing age_25_49 / age_50_64 imputed as age_25_64 / 2, consistent with CDC's post-2009 reporting change. Residual ILI gaps filled by linear interpolation.</li>
+        <li>Train/holdout split: final 104 weeks (2023 W01 – 2024 W52) held out as the evaluation window; remaining 1,094 weeks used for training. All models evaluated via rolling one-step-ahead RMSE using an expanding window — fable's stretch_tsibble() for ETS and ARIMA; a custom loop via base arima() for ARIMAX, required because fable does not natively support external regressors in rolling windows.</li>
+        <li>ARIMAX covariate selection via CCF analysis on first-differenced series. age_5_24 showed the strongest lead-1 correlation with ILI (CCF = 0.585), followed by age_0_4 (0.422), age_25_49 (0.304), age_50_64 (0.288), and age_65 (0.156). A one-week lag was applied before differencing to prevent future data leakage.</li>
+        <li>Limitations: ETS suppresses seasonality for periods > 24 (period = 52 here), so STL handles all seasonal structure while ETS operates only on the seasonally adjusted component. ARIMAX regressor coefficients were near-zero with several NaN standard errors, suggesting the lagged age-group covariates are largely redundant with the ILI series itself — likely because age-group counts are a constituent of the ILI aggregate.</li>
       </ul>
     </div>
   </section>
