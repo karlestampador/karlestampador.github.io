@@ -36,7 +36,7 @@ nav {
   display: flex; align-items: center; justify-content: space-between; padding: 0 48px;
   position: sticky; top: 0; z-index: 300;
 }
-.nav-logo { font-family: 'Cormorant Garant', serif; font-size: 22px; color: #fff; font-weight: 700; letter-spacing: .04em; }
+.nav-logo { font-family: 'Cormorant Garant', serif; font-size: 22px; color: #fff; font-weight: 700; letter-spacing: .04em; text-decoration: none; }
 .nav-links { display: flex; gap: 28px; list-style: none; }
 .nav-links a { color: rgba(255,255,255,.5); text-decoration: none; font-size: 13px; font-weight: 500; transition: color .2s; }
 .nav-links a.active, .nav-links a:hover { color: var(--gold2); }
@@ -354,39 +354,33 @@ h1           { animation: fu .55s .05s ease both; }
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Karl</div>
-  <ul class="nav-links">
-    <li><a href="#" class="active">Work</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Experience</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
-  <a href="#" class="nav-kaggle">Kaggle ↗</a>
+  <a class="nav-logo" href="../../index.html">Karl Estampador</a>
+  <a href="https://www.kaggle.com/karlestampador" target="_blank" rel="noopener noreferrer" class="nav-kaggle">Kaggle ↗</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="crumb"><a href="../../index.html">Work</a> › <span>March Madness 2026</span></div>
+  <div class="crumb"><a href="../../index.html#projects">Work</a> › <span>March Madness 2026</span></div>
   <div class="hero-eyebrow">🏀 Machine Learning · Kaggle Competition · Sports Analytics</div>
   <h1>2026 NCAA <em>March Madness</em><br>Prediction Model</h1>
   <p class="hero-desc">
-    My first machine learning competition — an ensemble model predicting tournament outcomes using pace-adjusted efficiency metrics, Dean Oliver's Four Factors, and isotonic probability calibration.
+    My entry into my first Kaggle competition involves building an ensemble that predicted NCAA basketball tournament outcomes by combining pace-adjusted team efficiency, Elo ratings, and a two-stage hyperparameter search. This project was submitted to the 2026 Kaggle March Mania competition.
   </p>
   <div class="stat-row">
     <div class="stat-card">
-      <div class="sv">0.163</div>
+      <div class="sv">0.143</div>
       <div class="sl">Holdout Brier Score</div>
-      <div class="ss">vs 0.250 naive baseline</div>
+      <div class="ss">Men's + Women's combined · vs 0.250 naive baseline</div>
     </div>
     <div class="stat-card">
       <div class="sv">74.6%</div>
       <div class="sl">Accuracy</div>
-      <div class="ss">50 of 67 games correct</div>
+      <div class="ss">49 of 67 games correct</div>
     </div>
     <div class="stat-card">
-      <div class="sv">Top 50%</div>
+      <div class="sv">Top 49%</div>
       <div class="sl">Kaggle Ranking</div>
-      <div class="ss">First submitted entry</div>
+      <div class="ss">1711 / 3462 · First submitted entry</div>
     </div>
     <div class="stat-card">
       <div class="sv">LR + LGB</div>
@@ -534,7 +528,7 @@ h1           { animation: fu .55s .05s ease both; }
           <div class="gh">Elite Eight · West<span class="gbadge ok">✓</span></div>
           <div class="gr w"><div class="gseed">1</div><div class="gname">Arizona</div><div class="gscore">79</div></div>
           <div class="gr l"><div class="gseed">2</div><div class="gname">Purdue</div><div class="gscore">64</div></div>
-          <div class="tip above">
+          <div class="tip below">
             <div class="tiplbl">Karl's Prediction</div>
             <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Arizona ✓</span></div>
             <div class="tiprow"><span class="tk">Actual</span><span class="tv">Arizona 79–64</span></div>
@@ -575,18 +569,18 @@ h1           { animation: fu .55s .05s ease both; }
       <!-- ═══ LEFT FF ═══ -->
       <div class="b-col ff-col">
         <!-- FF L: Michigan def Arizona (center at 176px) -->
-        <div class="gc ok" style="top:137px">
-          <div class="gh">Final Four · SF 1<span class="gbadge ok">✓</span></div>
+        <div class="gc bad" style="top:137px">
+          <div class="gh">Final Four · SF 1<span class="gbadge bad">✗</span></div>
           <div class="gr w"><div class="gseed">1</div><div class="gname">Michigan</div><div class="gscore">91</div></div>
           <div class="gr l"><div class="gseed">1</div><div class="gname">Arizona</div><div class="gscore">73</div></div>
           <div class="tip below">
             <div class="tiplbl">Karl's Prediction</div>
-            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Michigan ✓</span></div>
+            <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Arizona ✗</span></div>
             <div class="tiprow"><span class="tk">Actual</span><span class="tv">Michigan 91–73</span></div>
             <div class="prob-wrap">
               <div class="prob-lbl"><span>Arizona</span><span>Michigan</span></div>
-              <div class="prob-bar"><div class="pfa" style="width:49.5%"></div><div class="pfb" style="width:50.5%"></div></div>
-              <div class="prob-pcts"><span>49.5%</span><span>50.5%</span></div>
+              <div class="prob-bar"><div class="pfa" style="width:50.5%"></div><div class="pfb" style="width:49.5%"></div></div>
+              <div class="prob-pcts"><span>50.5%</span><span>49.5%</span></div>
             </div>
           </div>
         </div>
@@ -606,7 +600,7 @@ h1           { animation: fu .55s .05s ease both; }
           <div class="gh gold-h">National Championship · April 6 <span class="gbadge bad" style="background:rgba(11,29,63,.15); color:var(--navy);">✗</span></div>
           <div class="gr w"><div class="gseed">1</div><div class="gname">Michigan</div><div class="gscore">69</div></div>
           <div class="gr l"><div class="gseed">2</div><div class="gname">UConn</div><div class="gscore">63</div></div>
-          <div class="tip above">
+          <div class="tip below">
             <div class="tiplbl">Karl's Prediction</div>
             <div class="tiprow"><span class="tk">Predicted</span><span class="tv">UConn ✗</span></div>
             <div class="tiprow"><span class="tk">Actual</span><span class="tv">Michigan 69–63</span></div>
@@ -631,7 +625,7 @@ h1           { animation: fu .55s .05s ease both; }
           <div class="gh">Final Four · SF 2<span class="gbadge ok">✓</span></div>
           <div class="gr w"><div class="gseed">2</div><div class="gname">UConn</div><div class="gscore">71</div></div>
           <div class="gr l"><div class="gseed">3</div><div class="gname">Illinois</div><div class="gscore">62</div></div>
-          <div class="tip below">
+          <div class="tip above">
             <div class="tiplbl">Karl's Prediction</div>
             <div class="tiprow"><span class="tk">Predicted</span><span class="tv">UConn ✓</span></div>
             <div class="tiprow"><span class="tk">Actual</span><span class="tv">UConn 71–62</span></div>
@@ -658,7 +652,7 @@ h1           { animation: fu .55s .05s ease both; }
           <div class="gh">Elite Eight · East<span class="gbadge bad">✗</span></div>
           <div class="gr w"><div class="gseed">2</div><div class="gname">UConn</div><div class="gscore">73</div></div>
           <div class="gr l"><div class="gseed">1</div><div class="gname">Duke</div><div class="gscore">72</div></div>
-          <div class="tip above">
+          <div class="tip below">
             <div class="tiplbl">Karl's Prediction</div>
             <div class="tiprow"><span class="tk">Predicted</span><span class="tv">Duke ✗</span></div>
             <div class="tiprow"><span class="tk">Actual</span><span class="tv">UConn 73–72</span></div>
@@ -827,42 +821,74 @@ h1           { animation: fu .55s .05s ease both; }
     <div class="mcard">
       <div class="mcard-icon">⚙️</div>
       <div class="mcard-title">Feature Engineering</div>
-      <div class="mcard-desc">Built team efficiency metrics from raw box scores, adjusting for pace and opponent quality using Dean Oliver's Four Factors: effective field goal %, turnover rate, offensive rebound rate, and free throw rate. Supplemented with Elo ratings (recency-weighted), Massey Ordinals mean percentile across all ranking systems, and PCA-compressed Massey features for dimensionality reduction.</div>
+      <div class="mcard-desc">Team efficiency metrics were built from raw box scores and adjusted for pace and opponent strength. Elo ratings handled recency weighting, Massey Ordinals were compressed via PCA to reduce dimensionality, and exponential smoothing was applied to smooth out noisy season-to-season trends.</div>
       <div class="chips">
-        <span class="chip">Four Factors</span>
-        <span class="chip">Pace Adjustment</span>
-        <span class="chip">Elo Ratings</span>
         <span class="chip">Massey PCA</span>
-        <span class="chip">SES Smoothing</span>
+        <span class="chip">Exponential Smoothing</span>
+        <span class="chip">Elo Ratings</span>
       </div>
     </div>
     <div class="mcard">
       <div class="mcard-icon">🌲</div>
       <div class="mcard-title">LR + LightGBM Ensemble</div>
-      <div class="mcard-desc">Two base models — Logistic Regression and LightGBM — trained on 20+ years of NCAA tournament data. OOF (out-of-fold) predictions from 5-fold stratified cross-validation blended using an ensemble weight. Two-stage hyperparameter optimization: differential evolution searches Elo/stats parameters; Optuna TPE handles LightGBM's mixed integer/float space. Isotonic regression calibration applied on blended OOF scores.</div>
+      <div class="mcard-desc">Two models trained on 20+ years of tournament data and blended using a tuned ensemble weight. Hyperparameter search ran in two stages: Differential Evolution for the feature and Elo parameters, then Optuna TPE for LightGBM. Isotonic regression was used to calibrate the final probabilities.</div>
       <div class="chips">
-        <span class="chip">Logistic Regression</span>
-        <span class="chip">LightGBM</span>
-        <span class="chip">OOF Blending</span>
-        <span class="chip">Diff. Evolution</span>
+        <span class="chip">Differential Evolution</span>
         <span class="chip">Optuna TPE</span>
-        <span class="chip">Isotonic Cal.</span>
+        <span class="chip">Isotonic Calibration</span>
       </div>
     </div>
     <div class="mcard">
       <div class="mcard-icon">🎯</div>
       <div class="mcard-title">Bracket Simulation</div>
-      <div class="mcard-desc">A full bracket simulator propagates win probabilities through all 64 tournament slots — handling First Four play-in games and lazy resolution of bracket dependencies. Validated using rolling walk-forward cross-validation on 2010–2025 seasons, ensuring no future data leaks into training. Final model evaluated with Brier score on a 2023–2024 holdout before Kaggle submission.</div>
+      <div class="mcard-desc">Win probabilities are propagated through all 64 tournament slots using a bracket simulator, with each round's matchups resolved lazily from the previous round's predictions. Performance was validated using walk-forward cross-validation across 15 seasons before final submission.</div>
       <div class="chips">
-        <span class="chip">Bracket Simulator</span>
         <span class="chip">Walk-Forward CV</span>
-        <span class="chip">Brier Score</span>
-        <span class="chip">2023–24 Holdout</span>
       </div>
     </div>
   </div>
 
   <hr class="div">
+
+  <div>
+    <div class="sec-lbl">FAQ</div>
+    <div class="sec-h">Common Questions</div>
+    <p class="sec-sub">A few things worth explaining for anyone who wants to dig deeper into the approach.</p>
+  </div>
+
+  <div class="method-grid">
+
+    <div class="mcard">
+      <div class="mcard-icon">🤝</div>
+      <div class="mcard-title">Why an ensemble model?</div>
+      <div class="mcard-desc">No single model reliably dominates at predicting tournament upsets. Logistic regression tends to be well-calibrated and stable, while LightGBM captures non-linear interactions between team statistics. Blending the two hedges against each model's individual weaknesses and produces better-calibrated probabilities than either alone.</div>
+    </div>
+
+    <div class="mcard">
+      <div class="mcard-icon">📅</div>
+      <div class="mcard-title">What is walk-forward cross-validation?</div>
+      <div class="mcard-desc">Instead of randomly splitting data across seasons, walk-forward CV trains on all seasons up to year N and evaluates on year N+1, then moves the window forward one season at a time. This respects the time structure of the data and prevents future seasons from leaking into training, which would artificially inflate performance estimates.</div>
+    </div>
+
+    <div class="mcard">
+      <div class="mcard-icon">📊</div>
+      <div class="mcard-title">What is a Brier score?</div>
+      <div class="mcard-desc">A Brier score measures the accuracy of probability predictions. It's the average squared difference between your predicted probability and the actual outcome (0 or 1). Lower is better, with 0 being perfect. A naive model that always predicts 50/50 scores around 0.250, so the model's result represents a meaningful improvement over guessing.</div>
+    </div>
+
+    <div class="mcard">
+      <div class="mcard-icon">🗂️</div>
+      <div class="mcard-title">Where did the data come from?</div>
+      <div class="mcard-desc">The training data came from Kaggle's official March Machine Learning Mania competition dataset, which includes historical NCAA game results, team seeds, and Massey Ordinal rankings going back to 2003.</div>
+    </div>
+
+    <div class="mcard">
+      <div class="mcard-icon">🎯</div>
+      <div class="mcard-title">Where does the 0.250 naive baseline come from?</div>
+      <div class="mcard-desc">If you predict every game as a 50/50 coin flip, the Brier score works out to 0.25, since (0.5 - 1)² = 0.25 and (0.5 - 0)² = 0.25, averaged together. It's the simplest possible benchmark, and any useful model should beat it comfortably.</div>
+    </div>
+
+  </div>
 
   <!-- CTA -->
   <div class="cta-box">
@@ -871,9 +897,9 @@ h1           { animation: fu .55s .05s ease both; }
       <p>Documented notebook, training pipeline, and Kaggle submission on GitHub.</p>
     </div>
     <div class="cta-btns">
-      <a href="#" class="btn-gold">📓 View Notebook</a>
-      <a href="#" class="btn-ghost">⚡ Kaggle Profile</a>
-      <a href="../../index.html" class="btn-ghost">← All Projects</a>
+      <a href="https://github.com/karlestampador/march-madness-mania-2026" target="_blank" rel="noopener noreferrer" class="btn-gold">📓 View Notebook</a>
+      <a href="https://www.kaggle.com/karlestampador" target="_blank" rel="noopener noreferrer" class="btn-ghost">⚡ Kaggle Profile</a>
+      <a href="../../index.html#projects" class="btn-ghost">← All Projects</a>
     </div>
   </div>
 
@@ -986,6 +1012,8 @@ const TEAM_SEEDS = {
 };
 
 let ratings = {};
+/** @type {Map<string, number>|null} */
+let matchupLookup = null;
 let matchupReady = false;
 
 function normalizeName(name) {
@@ -999,6 +1027,44 @@ function parseCsv(text) {
     const parts = line.split(",");
     return Object.fromEntries(header.map((key, idx) => [key, parts[idx]]));
   });
+}
+
+/** P(first beats second) for every ordered pair that appears in the tournament CSV. */
+function buildMatchupLookup(rows) {
+  const m = new Map();
+  for (const row of rows) {
+    const ta = normalizeName(row.team_a_name);
+    const tb = normalizeName(row.team_b_name);
+    const p = Number(row.pred_p_team_a);
+    if (!Number.isFinite(p)) continue;
+    m.set(`${ta}\0${tb}`, p);
+    m.set(`${tb}\0${ta}`, 1 - p);
+  }
+  return m;
+}
+
+function syncBracketProbabilitiesFromLookup() {
+  const wraps = document.querySelectorAll(".tip .prob-wrap");
+  for (const wrap of wraps) {
+    const labels = wrap.querySelectorAll(".prob-lbl span");
+    const pctSpans = wrap.querySelectorAll(".prob-pcts span");
+    const barA = wrap.querySelector(".prob-bar .pfa");
+    const barB = wrap.querySelector(".prob-bar .pfb");
+    if (labels.length !== 2 || pctSpans.length !== 2 || !barA || !barB) continue;
+
+    const teamA = labels[0].textContent ? labels[0].textContent.trim() : "";
+    const teamB = labels[1].textContent ? labels[1].textContent.trim() : "";
+    const pA = matchupLookup ? matchupLookup.get(`${teamA}\0${teamB}`) : undefined;
+    if (pA === undefined) continue;
+
+    const pB = 1 - pA;
+    const aPct = `${(pA * 100).toFixed(1)}%`;
+    const bPct = `${(pB * 100).toFixed(1)}%`;
+    pctSpans[0].textContent = aPct;
+    pctSpans[1].textContent = bPct;
+    barA.style.width = aPct;
+    barB.style.width = bPct;
+  }
 }
 
 function clampProbability(value) {
@@ -1060,14 +1126,18 @@ function upd() {
 
   if (!matchupReady || a === b) return;
 
-  const pA = probability(a, b);
+  const exact = matchupLookup && matchupLookup.get(`${a}\0${b}`);
+  const pA = exact !== undefined ? exact : probability(a, b);
   const pB = 1 - pA;
   document.getElementById("rNA").textContent = a;
   document.getElementById("rNB").textContent = b;
   document.getElementById("rPA").textContent = (pA * 100).toFixed(1) + "%";
   document.getElementById("rPB").textContent = (pB * 100).toFixed(1) + "%";
   document.getElementById("rF").style.width = (pA * 100) + "%";
-  document.getElementById("rNote").textContent = "LightGBM ensemble · isotonic calibration · full 68-team tournament matchup coverage";
+  document.getElementById("rNote").textContent =
+    exact !== undefined
+      ? "Exact probability from tournament predictions CSV (same source as the bracket)."
+      : "Approximate: rating fit from all CSV games (pair not in bracket) · seed-adjusted query";
 }
 
 async function loadSimulator() {
@@ -1075,13 +1145,17 @@ async function loadSimulator() {
   const teamBSelect = document.getElementById("tB");
   setStatus("Loading matchup simulator...", true);
 
+  let rows;
   try {
     const response = await fetch("../../predictions_vs_actual_2026.csv");
     const text = response.ok ? await response.text() : FALLBACK_CSV;
-    ratings = buildRatings(parseCsv(text));
+    rows = parseCsv(text);
   } catch (error) {
-    ratings = buildRatings(parseCsv(FALLBACK_CSV));
+    rows = parseCsv(FALLBACK_CSV);
   }
+  ratings = buildRatings(rows);
+  matchupLookup = buildMatchupLookup(rows);
+  syncBracketProbabilitiesFromLookup();
 
   const teams = Object.keys(ratings).sort((a, b) => a.localeCompare(b));
   populateSelect(teamASelect, teams, "Arizona");

@@ -32,8 +32,12 @@ nav {
 .nav-back:hover { color: var(--gold2); border-color: rgba(232,200,74,0.5); }
 .hero { background: var(--navy); padding: 52px 24px 0; position: relative; overflow: hidden; }
 .hero::before {
-  content: ""; position: absolute; top: -120px; right: -80px; width: 420px; height: 420px;
-  background: radial-gradient(circle, rgba(201,162,39,0.11) 0%, transparent 68%);
+  content: ""; position: absolute; top: -100px; right: -60px; width: 520px; height: 520px;
+  background: radial-gradient(circle, rgba(201,162,39,0.08) 0%, transparent 65%);
+}
+.hero::after {
+  content: ""; position: absolute; bottom: -20px; left: 15%; width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(30,52,112,0.5) 0%, transparent 70%);
 }
 .crumb { font-size: 11px; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
 .crumb a { color: rgba(255,255,255,0.45); text-decoration: none; }
@@ -173,11 +177,11 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
 <body>
 <nav>
   <a class="nav-logo" href="../../index.html">Karl Estampador</a>
-  <a class="nav-back" href="../../index.html">← Back to Portfolio</a>
+  <a class="nav-back" href="../../index.html#projects">← Back to Portfolio</a>
 </nav>
 
 <section class="hero">
-  <div class="crumb"><a href="../../index.html">Work</a> › <span>NYC Airbnb Data Visualization</span></div>
+  <div class="crumb"><a href="../../index.html#projects">Work</a> › <span>NYC Airbnb Data Visualization</span></div>
   <div class="hero-eyebrow">DSCI 320 — DATA VISUALIZATION</div>
   <h1>NYC Airbnb Data Visualization</h1>
   <p class="hero-desc">Exploratory data analysis and interactive visual storytelling of New York City's short-term rental market using Python and Altair.</p>
@@ -204,7 +208,7 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
 
     <div class="viz-embed">
       <h3>Price Distribution by Room Type &amp; Neighbourhood</h3>
-      <p>[Describe what the reader should notice in this chart]</p>
+      <p>Each borough panel shows how listing counts are distributed across price bins, broken down by room type. Manhattan and Brooklyn contain the most listings, with Entire Home/Apt and Private Room distributions largely overlapping in shape — the price spread within each room type is wide in both boroughs. The Bronx and Staten Island show much thinner distributions at lower price points, reflecting smaller and cheaper markets. Click a heatmap cell on the right to isolate that borough–room type combination across all panels, or use the price sliders to zoom into a specific range.</p>
       <div class="viz-frame-wrap">
         <div class="viz-loader" aria-live="polite">
           <div class="viz-spinner" aria-hidden="true"></div>
@@ -216,7 +220,7 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
 
     <div class="viz-embed">
       <h3>Booking Behaviour &amp; Occupancy Patterns</h3>
-      <p>[Describe what the reader should notice in this chart]</p>
+      <p>The heatmap (left) crosses price tier against cancellation policy to show median booked nights — look for which price bands retain demand regardless of policy flexibility. The scatter (top right) plots individual listings by price and booked nights, coloured by room type, revealing how much variance there is within each category. The borough bar chart (bottom right) shows where listings are concentrated. Click a borough bar to filter the heatmap and scatter, or brush the scatter to narrow the heatmap's view.</p>
       <div class="viz-frame-wrap">
         <div class="viz-loader" aria-live="polite">
           <div class="viz-spinner" aria-hidden="true"></div>
@@ -250,9 +254,9 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
     <div class="sec-lbl">Section 04</div>
     <h2 class="sec-h">Findings</h2>
     <div class="findings">
-      <div class="callout">[Placeholder insight #1: highlight a notable pricing pattern by room type.]</div>
-      <div class="callout">[Placeholder insight #2: summarize a neighborhood concentration trend.]</div>
-      <div class="callout">[Placeholder insight #3: explain occupancy or booking behavior contrast.]</div>
+      <div class="callout">Entire Home/Apt and Private Room listings show nearly identical median prices across all five boroughs — the more telling pattern is the distribution shape. Both room types produce wide, right-skewed curves, with a long tail of high-priced listings pulling averages up while the bulk of inventory clusters in the $200–$800 range.</div>
+      <div class="callout">Brooklyn and Manhattan together account for over 80% of all listings in the dataset. Despite this dominance, Staten Island stands apart on the occupancy side — with a median of just 111 booked nights per year versus 280+ for Manhattan and Brooklyn, suggesting weaker demand or lower host activity in outer-borough markets.</div>
+      <div class="callout">Long minimum-night requirements (30+ nights) are associated with meaningfully lower booking activity — a median of 172 booked nights annually versus 275 for short-stay listings. Price tier, by contrast, has almost no relationship with occupancy: high-priced listings book as frequently as budget ones, suggesting demand is driven more by availability constraints than by price sensitivity.</div>
     </div>
   </section>
 
@@ -264,8 +268,8 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
       <p>Code, notebook workflow, and interactive visualization assets.</p>
     </div>
     <div>
-      <a class="btn-gold" href="[REPO_URL_NYC_AIRBNB]">View Repository ↗</a>
-      <a class="btn-ghost" href="../../index.html">← All Projects</a>
+      <a class="btn-gold" href="https://github.com/karlestampador/dataviz-airbnbNYC-personal" rel="noopener noreferrer" target="_blank">View Repository ↗</a>
+      <a class="btn-ghost" href="../../index.html#projects">← All Projects</a>
     </div>
   </section>
 </div>

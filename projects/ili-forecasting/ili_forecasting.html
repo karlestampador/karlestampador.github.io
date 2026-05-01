@@ -33,8 +33,12 @@ nav {
 .nav-back:hover { color: var(--gold2); border-color: rgba(232,200,74,0.5); }
 .hero { background: var(--navy); padding: 52px 24px 0; position: relative; overflow: hidden; }
 .hero::before {
-  content: ""; position: absolute; top: -120px; right: -80px; width: 420px; height: 420px;
-  background: radial-gradient(circle, rgba(201,162,39,0.11) 0%, transparent 68%);
+  content: ""; position: absolute; top: -100px; right: -60px; width: 520px; height: 520px;
+  background: radial-gradient(circle, rgba(201,162,39,0.08) 0%, transparent 65%);
+}
+.hero::after {
+  content: ""; position: absolute; bottom: -20px; left: 15%; width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(30,52,112,0.5) 0%, transparent 70%);
 }
 .crumb { font-size: 11px; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
 .crumb a { color: rgba(255,255,255,0.45); text-decoration: none; }
@@ -97,7 +101,6 @@ h1 {
 .chart-canvas-wrap { position: relative; min-height: 480px; height: 480px; }
 .chart-canvas-wrap canvas { width: 100% !important; height: 100% !important; }
 .fig-caption { color: var(--muted); font-size: 13px; line-height: 1.6; margin-top: 10px; text-align: left; }
-ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
 .cta-box {
   background: var(--navy); border-radius: 14px; padding: 34px 28px;
   display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between;
@@ -116,24 +119,49 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
   nav, .hero, .content { padding-left: 48px; padding-right: 48px; }
   .viz-grid { grid-template-columns: 1fr 1fr; }
 }
+.method-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.mcard { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 26px 24px; box-shadow: 0 1px 8px rgba(11,29,63,0.04); transition: transform .2s, box-shadow .2s; }
+.mcard:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(11,29,63,0.08); }
+.mcard-icon { font-size: 24px; margin-bottom: 12px; }
+.mcard-title { font-family: 'Cormorant Garant', serif; font-size: 19px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+.mcard-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip { font-size: 10px; padding: 3px 9px; border-radius: 4px; background: rgba(11,29,63,0.07); color: var(--navy); font-weight: 600; }
+@media (min-width: 800px) { .method-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
 </head>
 <body>
 <nav>
-  <a class="nav-logo" href="../index.html">Karl Estampador</a>
-  <a class="nav-back" href="../index.html">← Back to Portfolio</a>
+  <a class="nav-logo" href="../../index.html">Karl Estampador</a>
+  <a class="nav-back" href="../../index.html#projects">← Back to Portfolio</a>
 </nav>
 
 <section class="hero">
-  <div class="crumb"><a href="../index.html">Work</a> › <span>ILI Influenza Forecasting</span></div>
+  <div class="crumb"><a href="../../index.html#projects">Work</a> › <span>ILI Influenza Forecasting</span></div>
   <div class="hero-eyebrow">STAT 443 — TIME SERIES</div>
   <h1>ILI Influenza Forecasting</h1>
-  <p class="hero-desc">ARIMA, STL+ETS, and ARIMAX models evaluated on CDC FluView holdout data using rolling one-step-ahead RMSE.</p>
+  <p class="hero-desc">A group project comparing multiple classical time-series models on CDC FluView weekly influenza data, evaluated over a two-year holdout set using rolling one-step-ahead forecasting.</p>
   <div class="stat-row">
-    <div class="stat-card"><div class="sv">ARIMA</div><div class="sl">Best Base Model</div><div class="ss">Benchmark candidate</div></div>
-    <div class="stat-card"><div class="sv">ARIMAX</div><div class="sl">Final Model</div><div class="ss">Selected for deployment</div></div>
-    <div class="stat-card"><div class="sv">Rolling RMSE</div><div class="sl">Evaluation Method</div><div class="ss">One-step-ahead holdout</div></div>
-    <div class="stat-card"><div class="sv">CDC FluView</div><div class="sl">Data Source</div><div class="ss">ILI weekly reports</div></div>
+    <div class="stat-card">
+      <div class="sv">0.216</div>
+      <div class="sl">Best Holdout RMSE</div>
+      <div class="ss">ARIMA(1,1,2)(2,0,0)[52]</div>
+    </div>
+    <div class="stat-card">
+      <div class="sv">5</div>
+      <div class="sl">Models Compared</div>
+      <div class="ss">Mean, SNaive, STL+ETS, ARIMA, ARIMAX</div>
+    </div>
+    <div class="stat-card">
+      <div class="sv">104 wks</div>
+      <div class="sl">Holdout Window</div>
+      <div class="ss">2023 W01 – 2024 W52</div>
+    </div>
+    <div class="stat-card">
+      <div class="sv">20 yrs</div>
+      <div class="sl">Training Data</div>
+      <div class="ss">CDC FluView 2002–2022 (initial training)</div>
+    </div>
   </div>
 </section>
 
@@ -141,7 +169,7 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
   <section>
     <div class="sec-lbl">Section 01</div>
     <h2 class="sec-h">Project Overview</h2>
-    <p class="sec-sub">This project compares classical and exogenous-augmented forecasting approaches for influenza-like illness trends. The goal is to identify a model that balances interpretability, accuracy, and robustness under rolling out-of-sample validation.</p>
+    <p class="sec-sub">This project benchmarks a set of time-series models ranging from simple baselines to a covariate-augmented ARIMAX on national weekly influenza-like illness data from the CDC. Models were assessed on their ability to track seasonal flu dynamics over a 2023–2024 holdout, using an expanding rolling evaluation window rather than a fixed test split.</p>
   </section>
 
   <hr class="div">
@@ -173,6 +201,7 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
         </div>
       </div>
       <p class="chart-note">ARIMA(1,1,2)(2,0,0)[52] delivers the lowest holdout RMSE (0.216), with ARIMAX close behind (0.250); SNaive and Mean remain substantially weaker baselines.</p>
+      <p class="chart-note" style="margin-top: 10px; font-size: 12px; color: var(--muted);">* ARIMA(1,1,2)(2,0,0)[52] produced 11 missing forecasts during the rolling evaluation, likely due to convergence failures at certain refitting windows; n=93 reflects the non-missing forecasts used in RMSE computation.</p>
     </div>
   </section>
 
@@ -195,6 +224,7 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
         <figcaption class="fig-caption">Absolute forecast error by week across all five models. ARIMA(1,1,2)(2,0,0)[52] and ARIMAX maintain consistently low errors throughout the holdout, while SNaive spikes sharply around the 2023–2024 flu peak.</figcaption>
       </figure>
     </div>
+    <p style="font-size: 12px; color: var(--muted); margin-top: 18px; line-height: 1.6;">* <strong>% Weighted ILI</strong> is the CDC's national estimate of the percentage of outpatient visits for influenza-like illness, weighted by regional patient volume. <strong>Absolute error</strong> is the unsigned difference between the model's one-step-ahead forecast and the observed % weighted ILI value for that week.</p>
   </section>
 
   <hr class="div">
@@ -202,13 +232,31 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
   <section>
     <div class="sec-lbl">Section 04</div>
     <h2 class="sec-h">Methodology Notes</h2>
-    <div class="card">
-      <ul class="notes">
-        <li>CDC FluView national weekly % weighted ILI data (2002–2024), comprising 1,200 observations. Three duplicate week rows resolved by within-week averaging; 384 pre-2010 rows with missing age_25_49 / age_50_64 imputed as age_25_64 / 2, consistent with CDC's post-2009 reporting change. Residual ILI gaps filled by linear interpolation.</li>
-        <li>Train/holdout split: final 104 weeks (2023 W01 – 2024 W52) held out as the evaluation window; remaining 1,094 weeks used for training. All models evaluated via rolling one-step-ahead RMSE using an expanding window — fable's stretch_tsibble() for ETS and ARIMA; a custom loop via base arima() for ARIMAX, required because fable does not natively support external regressors in rolling windows.</li>
-        <li>ARIMAX covariate selection via CCF analysis on first-differenced series. age_5_24 showed the strongest lead-1 correlation with ILI (CCF = 0.585), followed by age_0_4 (0.422), age_25_49 (0.304), age_50_64 (0.288), and age_65 (0.156). A one-week lag was applied before differencing to prevent future data leakage.</li>
-        <li>Limitations: ETS suppresses seasonality for periods > 24 (period = 52 here), so STL handles all seasonal structure while ETS operates only on the seasonally adjusted component. ARIMAX regressor coefficients were near-zero with several NaN standard errors, suggesting the lagged age-group covariates are largely redundant with the ILI series itself — likely because age-group counts are a constituent of the ILI aggregate.</li>
-      </ul>
+    <div class="method-grid">
+      <div class="mcard">
+        <div class="mcard-icon">🗂️</div>
+        <div class="mcard-title">Data & Preprocessing</div>
+        <p class="mcard-desc">We used CDC FluView national weekly % weighted ILI data from 2002–2022, which provides 1,200 observations after data cleaning. We had three duplicate week entries were resolved by within-week averaging. Additionally, pre-2010 age-group breakdowns were sparse due to CDC's post-2009 reporting split, so missing values were filled by linear interpolation, which connects adjacent known values with a straight line.</p>
+        <div class="chips"><span class="chip">CDC FluView</span><span class="chip">1,200 obs</span><span class="chip">Linear Interpolation</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-icon">📐</div>
+        <div class="mcard-title">Train / Holdout Split</div>
+        <p class="mcard-desc">The final 104 weeks (2023 W01 – 2024 W52) were held out as the evaluation set; the remaining 1,094 weeks formed the training base. Rather than a fixed train/test split, all five models were assessed via expanding-window rolling one-step-ahead forecasting — at each step, the model is re-fit on all data up to that point and asked to predict one week ahead. This mimics real-world forecasting conditions.</p>
+        <div class="chips"><span class="chip">104-week holdout</span><span class="chip">Expanding window</span><span class="chip">fable / base R</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-icon">🔗</div>
+        <div class="mcard-title">Covariate Selection (ARIMAX)</div>
+        <p class="mcard-desc">The CDC FluView dataset also reports ILI broken down by age group each week. To find which age group best predicts overall ILI, cross-correlation functions (CCF) were computed on first-differenced series. The 5–24 age group showed the strongest lead-1 correlation (CCF = 0.585), meaning its ILI count one week earlier is the single best predictor of national ILI the following week. A one-week lag was applied before differencing to prevent data leakage.</p>
+        <div class="chips"><span class="chip">CCF Analysis</span><span class="chip">age_5_24 (CCF=0.585)</span><span class="chip">Leakage Prevention</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-icon">⚠️</div>
+        <div class="mcard-title">Limitations</div>
+        <p class="mcard-desc">Two notable issues emerged. First, fable's ETS implementation suppresses seasonality for series with period &gt; 24, so STL handles all seasonal structure for the STL+ETS model — ETS only fits the trend-remainder component. Second, the ARIMAX covariate (age-group ILI) is a direct input to the CDC's national ILI aggregate, meaning it contains no independent information. This likely explains why the ARIMAX regressor coefficients were near-zero and its RMSE only marginally exceeded ARIMA's.</p>
+        <div class="chips"><span class="chip">ETS period &gt; 24 cap</span><span class="chip">Near-zero ARIMAX coefficients</span><span class="chip">Collinearity</span></div>
+      </div>
     </div>
   </section>
 
@@ -220,8 +268,8 @@ ul.notes { margin-left: 18px; color: var(--text); line-height: 1.8; }
       <p>Code, notebooks, and forecasting workflow documentation.</p>
     </div>
     <div>
-      <a class="btn-gold" href="[REPO_URL_ILI]">View Repository ↗</a>
-      <a class="btn-ghost" href="../index.html">← All Projects</a>
+      <a class="btn-gold" href="https://github.com/karlestampador/influenza-like-illness" rel="noopener noreferrer" target="_blank">View Repository ↗</a>
+      <a class="btn-ghost" href="../../index.html#projects">← All Projects</a>
     </div>
   </section>
 </div>
@@ -286,7 +334,27 @@ function chartOptions(yTitle) {
           usePointStyle: false
         }
       },
-      tooltip: { enabled: false }
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          title: function(items) {
+            return items[0]?.label || '';
+          },
+          label: function(item) {
+            const val = item.raw;
+            if (val === null || val === undefined) return null;
+            return `${item.dataset.label}: ${Number(val).toFixed(3)}`;
+          }
+        },
+        backgroundColor: '#0B1D3F',
+        titleColor: 'rgba(255,255,255,0.5)',
+        bodyColor: '#ffffff',
+        borderColor: 'rgba(255,255,255,0.08)',
+        borderWidth: 1,
+        padding: 10,
+        bodyFont: { family: 'DM Sans', size: 12 },
+        titleFont: { family: 'DM Sans', size: 11 }
+      }
     },
     scales: {
       x: {
