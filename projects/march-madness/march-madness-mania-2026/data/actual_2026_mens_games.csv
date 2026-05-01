@@ -1,0 +1,68 @@
+game_id,round,team_a,team_b,winner
+1,First Four,Howard,UMBC,Howard
+2,First Four,Texas,NC State,Texas
+3,First Four,Prairie View A&M,Lehigh,Prairie View A&M
+4,First Four,Miami (Ohio),SMU,Miami (Ohio)
+5,Round of 64,TCU,Ohio State,TCU
+6,Round of 64,Nebraska,Troy,Nebraska
+7,Round of 64,Louisville,South Florida,Louisville
+8,Round of 64,High Point,Wisconsin,High Point
+9,Round of 64,Duke,Siena,Duke
+10,Round of 64,Vanderbilt,McNeese,Vanderbilt
+11,Round of 64,Michigan State,North Dakota State,Michigan State
+12,Round of 64,Arkansas,Hawai'i,Arkansas
+13,Round of 64,VCU,North Carolina,VCU
+14,Round of 64,Michigan,Howard,Michigan
+15,Round of 64,Texas,BYU,Texas
+16,Round of 64,Texas A&M,Saint Mary's,Texas A&M
+17,Round of 64,Illinois,Penn,Illinois
+18,Round of 64,Saint Louis,Georgia,Saint Louis
+19,Round of 64,Gonzaga,Kennesaw State,Gonzaga
+20,Round of 64,Houston,Idaho,Houston
+21,Round of 64,Kentucky,Santa Clara,Kentucky
+22,Round of 64,Texas Tech,Akron,Texas Tech
+23,Round of 64,Arizona,Long Island University,Arizona
+24,Round of 64,Virginia,Wright State,Virginia
+25,Round of 64,Iowa State,Tennessee State,Iowa State
+26,Round of 64,Alabama,Hofstra,Alabama
+27,Round of 64,Utah State,Villanova,Utah State
+28,Round of 64,Tennessee,Miami (Ohio),Tennessee
+29,Round of 64,Iowa,Clemson,Iowa
+30,Round of 64,St. John's,UNI,St. John's
+31,Round of 64,Purdue,Queens,Purdue
+32,Round of 64,UCLA,UCF,UCLA
+33,Round of 64,Florida,Prairie View A&M,Florida
+34,Round of 64,Kansas,Cal Baptist,Kansas
+35,Round of 64,Miami (Fla.),Missouri,Miami (Fla.)
+36,Round of 64,UConn,Furman,UConn
+37,Round of 32,Michigan,Saint Louis,Michigan
+38,Round of 32,Michigan State,Louisville,Michigan State
+39,Round of 32,Duke,TCU,Duke
+40,Round of 32,Houston,Texas A&M,Houston
+41,Round of 32,Texas,Gonzaga,Texas
+42,Round of 32,Illinois,VCU,Illinois
+43,Round of 32,Nebraska,Vanderbilt,Nebraska
+44,Round of 32,Arkansas,High Point,Arkansas
+45,Round of 32,Purdue,Miami (Fla.),Purdue
+46,Round of 32,Iowa State,Kentucky,Iowa State
+47,Round of 32,St. John's,Kansas,St. John's
+48,Round of 32,Tennessee,Virginia,Tennessee
+49,Round of 32,Iowa,Florida,Iowa
+50,Round of 32,Arizona,Utah State,Arizona
+51,Round of 32,UConn,UCLA,UConn
+52,Round of 32,Alabama,Texas Tech,Alabama
+53,Sweet 16,Purdue,Texas,Purdue
+54,Sweet 16,Iowa,Nebraska,Iowa
+55,Sweet 16,Arizona,Arkansas,Arizona
+56,Sweet 16,Illinois,Houston,Illinois
+57,Sweet 16,Duke,St. John's,Duke
+58,Sweet 16,Michigan,Alabama,Michigan
+59,Sweet 16,UConn,Michigan State,UConn
+60,Sweet 16,Tennessee,Iowa State,Tennessee
+61,Elite 8,Illinois,Iowa,Illinois
+62,Elite 8,Arizona,Purdue,Arizona
+63,Elite 8,Michigan,Tennessee,Michigan
+64,Elite 8,UConn,Duke,UConn
+65,Final Four,UConn,Illinois,UConn
+66,Final Four,Michigan,Arizona,Michigan
+67,Championship,Michigan,UConn,Michigan
