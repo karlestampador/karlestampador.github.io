@@ -593,16 +593,63 @@
 <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/15 rounded-xl z-10">
 <span class="material-symbols-outlined text-white" style="font-size:40px">code</span>
 </div>
-<svg class="w-full h-40" viewbox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-<circle cx="30" cy="80" fill="#F0C040" opacity="0.6" r="2"></circle>
-<circle cx="50" cy="70" fill="#F0C040" opacity="0.6" r="2"></circle>
-<circle cx="70" cy="75" fill="#F0C040" opacity="0.6" r="2"></circle>
-<circle cx="90" cy="55" fill="#F0C040" opacity="0.6" r="2"></circle>
-<circle cx="110" cy="45" fill="#F0C040" opacity="0.6" r="2"></circle>
-<circle cx="130" cy="50" fill="#F0C040" opacity="0.6" r="2"></circle>
-<circle cx="150" cy="30" fill="#F0C040" opacity="0.6" r="2"></circle>
-<circle cx="170" cy="20" fill="#F0C040" opacity="0.6" r="2"></circle>
-<line stroke="#F0C040" stroke-width="2" x1="20" x2="180" y1="90" y2="10"></line>
+<svg class="w-full h-full" viewBox="0 0 280 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background: listing price scatter (gold, low opacity) -->
+  <circle cx="18"  cy="107" r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="30"  cy="102" r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="44"  cy="97"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="38"  cy="82"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="56"  cy="93"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="68"  cy="88"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="80"  cy="82"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="92"  cy="77"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="106" cy="73"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="118" cy="68"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="128" cy="71"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="142" cy="64"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="155" cy="60"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="168" cy="56"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="180" cy="54"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="194" cy="50"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="210" cy="46"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="224" cy="43"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="240" cy="40"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <circle cx="256" cy="37"  r="1.5" fill="rgba(240,192,64,0.25)"/>
+  <!-- Regression line: bottom-left to top-right, dashed -->
+  <line x1="10" y1="112" x2="268" y2="22" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="5 3"/>
+  <!-- Danube river: dark cobalt horizontal band beneath bridge deck -->
+  <rect x="0" y="82" width="280" height="22" fill="rgba(0,24,82,0.42)"/>
+  <!-- Bridge deck -->
+  <line x1="12" y1="82" x2="268" y2="82" stroke="rgba(255,255,255,0.85)" stroke-width="2"/>
+  <!-- Tower 1 (x=98) -->
+  <rect x="95" y="32" width="7" height="50" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
+  <polygon points="94,32 102,32 101,26 96,26" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
+  <path d="M 96,68 a 3,6 0 0 1 6,0" fill="none" stroke="rgba(255,255,255,0.68)" stroke-width="0.8"/>
+  <!-- Tower 2 (x=178) -->
+  <rect x="175" y="32" width="7" height="50" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
+  <polygon points="174,32 182,32 181,26 176,26" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
+  <path d="M 176,68 a 3,6 0 0 1 6,0" fill="none" stroke="rgba(255,255,255,0.68)" stroke-width="0.8"/>
+  <!-- Main suspension cables -->
+  <!-- Left: shore anchor to tower 1 top -->
+  <line x1="12" y1="82" x2="98" y2="28" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
+  <!-- Centre catenary between tower tops (sags to y≈44 at mid) -->
+  <path d="M 98,28 Q 140,44 178,28" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
+  <!-- Right: tower 2 to shore anchor -->
+  <line x1="181" y1="28" x2="268" y2="82" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
+  <!-- Hangers: left cable (12,82)→(98,28) -->
+  <line x1="28" y1="72" x2="28"  y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
+  <line x1="45" y1="61" x2="45"  y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
+  <line x1="62" y1="51" x2="62"  y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
+  <line x1="79" y1="40" x2="79"  y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
+  <!-- Hangers: centre catenary Q(98,28 140,44 178,28) -->
+  <line x1="120" y1="34" x2="120" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
+  <line x1="140" y1="36" x2="140" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
+  <line x1="159" y1="34" x2="159" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
+  <!-- Hangers: right cable (181,28)→(268,82) -->
+  <line x1="198" y1="38" x2="198" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
+  <line x1="215" y1="49" x2="215" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
+  <line x1="235" y1="62" x2="235" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
+  <line x1="252" y1="72" x2="252" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
 </svg></div>
 <h4 class="font-headline text-2xl font-bold text-primary mb-3">Budapest Airbnb Price Prediction</h4>
 <p class="text-on-surface-variant mb-4">OLS and LASSO regression with 10-fold cross-validation predicting listing prices.</p>
