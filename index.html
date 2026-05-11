@@ -666,10 +666,40 @@
 <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/15 rounded-xl z-10">
 <span class="material-symbols-outlined text-white" style="font-size:40px">code</span>
 </div>
-<svg class="w-full h-40" viewbox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-<path d="M20,90 Q60,10 100,90" fill="#F0C040" fill-opacity="0.3" stroke="#F0C040" stroke-width="2"></path>
-<path d="M80,90 Q120,30 160,90" fill="#F0C040" fill-opacity="0.15" stroke="#F0C040" stroke-dasharray="2 2" stroke-width="2"></path>
-<line opacity="0.3" stroke="#F0C040" stroke-width="1" x1="10" x2="190" y1="90" y2="90"></line>
+<svg id="income-svg" class="w-full h-full" viewBox="0 0 280 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+  <!-- Wage ladder: vertical spine -->
+  <line x1="130" y1="12" x2="130" y2="108" stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <!-- 7 rungs at equal steps -->
+  <line x1="122" y1="12"  x2="138" y2="12"  stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <line x1="122" y1="27"  x2="138" y2="27"  stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <line x1="122" y1="42"  x2="138" y2="42"  stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <line x1="122" y1="57"  x2="138" y2="57"  stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <line x1="122" y1="72"  x2="138" y2="72"  stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <line x1="122" y1="87"  x2="138" y2="87"  stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <line x1="122" y1="102" x2="138" y2="102" stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <!-- Axis labels -->
+  <text x="130" y="7"   text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="4.5" font-weight="700" font-family="system-ui,sans-serif" letter-spacing="0.5">HIGHER INCOME</text>
+  <text x="130" y="117" text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="4.5" font-weight="700" font-family="system-ui,sans-serif" letter-spacing="0.5">LOWER INCOME</text>
+  <!-- Immigrant group: slides in from LEFT on scroll -->
+  <g class="income-slide-left">
+    <line x1="35" y1="72" x2="138" y2="72" stroke="#F0C040" stroke-width="1.5"/>
+    <circle cx="88" cy="63" r="5"   fill="rgba(255,255,255,0.80)"/>
+    <ellipse cx="88" cy="75" rx="4.5" ry="6" fill="rgba(255,255,255,0.80)"/>
+  </g>
+  <!-- Canadian-born group: slides in from RIGHT on scroll -->
+  <g class="income-slide-right">
+    <line x1="122" y1="42" x2="240" y2="42" stroke="#F0C040" stroke-width="1.5"/>
+    <circle cx="172" cy="33" r="6"  fill="rgba(255,255,255,0.80)"/>
+    <ellipse cx="172" cy="46" rx="5" ry="7" fill="rgba(255,255,255,0.80)"/>
+    <!-- Gap bracket: vertical accent between the two markers -->
+    <line x1="141" y1="42" x2="141" y2="72" stroke="#F0C040" stroke-width="1"/>
+    <line x1="138" y1="42" x2="144" y2="42" stroke="#F0C040" stroke-width="1"/>
+    <line x1="138" y1="72" x2="144" y2="72" stroke="#F0C040" stroke-width="1"/>
+    <text x="148" y="60" fill="#F0C040" font-size="8" font-family="system-ui,sans-serif">&#916;</text>
+    <!-- Marker labels -->
+    <text x="156" y="45" fill="rgba(255,255,255,0.72)" font-size="5" font-family="system-ui,sans-serif">Canadian-Born</text>
+    <text x="156" y="75" fill="rgba(255,255,255,0.72)" font-size="5" font-family="system-ui,sans-serif">Immigrants</text>
+  </g>
 </svg></div>
 <h4 class="font-headline text-2xl font-bold text-primary mb-3">Canadian Immigrant Income Disparities</h4>
 <p class="text-on-surface-variant mb-4">Econometric analysis of immigrant income gaps using 2021 Census PUMF with heteroskedasticity-robust standard errors.</p>
@@ -1164,6 +1194,34 @@
                 scrollIndicator.classList.add("hidden-indicator");
             }
         }, { passive: true });
+
+        // ---- Project 5: Income Wage Ladder IntersectionObserver ----
+        (function () {
+            var incomeSvg = document.getElementById("income-svg");
+            if (!incomeSvg) return;
+            if (prefersReducedMotion) {
+                incomeSvg.querySelectorAll(".income-slide-left, .income-slide-right").forEach(function (el) {
+                    el.style.opacity = "1";
+                    el.style.transform = "none";
+                });
+                return;
+            }
+            var incomeObserver = new IntersectionObserver(function (entries, obs) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    obs.unobserve(entry.target);
+                    incomeSvg.querySelectorAll(".income-slide-left").forEach(function (el) {
+                        el.classList.add("income-animate-left");
+                    });
+                    setTimeout(function () {
+                        incomeSvg.querySelectorAll(".income-slide-right").forEach(function (el) {
+                            el.classList.add("income-animate-right");
+                        });
+                    }, 200);
+                });
+            }, { threshold: 0.40 });
+            incomeObserver.observe(incomeSvg);
+        })();
 
         // ---- Project 1: Bracket IntersectionObserver ----
         (function () {
