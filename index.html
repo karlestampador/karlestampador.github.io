@@ -538,13 +538,43 @@
 <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/15 rounded-xl z-10">
 <span class="material-symbols-outlined text-white" style="font-size:40px">arrow_forward</span>
 </div>
-<div class="grid grid-cols-8 gap-4 opacity-40">
-<div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-20"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-60"></div>
-<div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-40"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-10"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div>
-<div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-80"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-30"></div>
-<div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-50"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-90"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div>
-<div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-20"></div><div class="w-2 h-2 rounded-full bg-[#F0C040]"></div><div class="w-2 h-2 rounded-full bg-[#F0C040] opacity-60"></div>
-</div></div>
+<svg id="nyc-svg" class="w-full h-full" viewBox="0 0 280 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+  <!-- Vertical divider between panels -->
+  <line x1="154" y1="8" x2="154" y2="114" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+  <!-- LEFT PANEL: Price Distribution Histogram -->
+  <line x1="8" y1="105" x2="148" y2="105" stroke="rgba(255,255,255,0.12)" stroke-width="0.5"/>
+  <!-- 8 bars in bell-curve shape; bar w=14, step=17, base y=105 -->
+  <rect x="10"  y="83" width="14" height="22" rx="1" fill="rgba(240,192,64,0.30)"/>
+  <rect x="27"  y="61" width="14" height="44" rx="1" fill="rgba(240,192,64,0.50)"/>
+  <rect x="44"  y="39" width="14" height="66" rx="1" fill="rgba(240,192,64,0.65)"/>
+  <rect x="61"  y="25" width="14" height="80" rx="1" fill="rgba(240,192,64,0.82)"/>
+  <rect x="78"  y="33" width="14" height="72" rx="1" fill="rgba(240,192,64,0.74)"/>
+  <rect x="95"  y="51" width="14" height="54" rx="1" fill="rgba(240,192,64,0.60)"/>
+  <rect x="112" y="69" width="14" height="36" rx="1" fill="rgba(240,192,64,0.42)"/>
+  <rect x="129" y="87" width="14" height="18" rx="1" fill="rgba(240,192,64,0.28)"/>
+  <!-- Brush highlight: sweeps bar-to-bar on a 3s loop -->
+  <rect class="nyc-brush" x="10" y="12" width="14" height="93" rx="1" fill="rgba(255,255,255,0.12)"/>
+  <!-- Axis label -->
+  <text x="79" y="114" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="5.5" font-family="system-ui,sans-serif">Price Distribution</text>
+  <!-- RIGHT PANEL: NYC Borough Schematic -->
+  <g class="nyc-borough-group">
+    <!-- Manhattan: narrow vertical island -->
+    <polygon points="200,32 211,30 213,90 199,92" fill="rgba(240,192,64,0.75)" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
+    <text x="206" y="63" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="4.5" font-weight="700" font-family="system-ui,sans-serif">MAN</text>
+    <!-- Bronx: north of Manhattan -->
+    <polygon points="211,30 209,14 243,11 252,32 240,40 211,42" fill="rgba(240,192,64,0.35)" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
+    <text x="230" y="28" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="4.5" font-weight="700" font-family="system-ui,sans-serif">BRX</text>
+    <!-- Queens: large east borough -->
+    <polygon points="213,30 252,32 240,40 268,84 213,91 211,42 240,40" fill="rgba(240,192,64,0.55)" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
+    <text x="246" y="62" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="4.5" font-weight="700" font-family="system-ui,sans-serif">QNS</text>
+    <!-- Brooklyn: south -->
+    <polygon points="199,92 213,91 268,84 262,112 193,112" fill="rgba(240,192,64,0.48)" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
+    <text x="232" y="103" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="4.5" font-weight="700" font-family="system-ui,sans-serif">BKN</text>
+    <!-- Staten Island: lower-left, isolated -->
+    <polygon points="162,97 183,93 182,112 163,112" fill="rgba(240,192,64,0.18)" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
+    <text x="173" y="105" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="4" font-weight="700" font-family="system-ui,sans-serif">SI</text>
+  </g>
+</svg></div>
 <div class="flex items-center gap-3 mb-3">
 <a class="project-pill-link" href="projects/airbnb-nyc/nyc_airbnb.html">PROJECT PAGE ↗</a>
 <h4 class="font-headline text-2xl font-bold text-primary mb-3">NYC Airbnb Pricing &amp; Demand Dashboards</h4>
