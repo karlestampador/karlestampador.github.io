@@ -219,17 +219,7 @@
         /* ---- Project 2: ILI Wave ---- */
         .ili-peak-dot { display: none; }
         /* ---- Project 3: NYC Histogram Brush ---- */
-        @keyframes nycBrushSweep {
-            0%,10%   { transform: translateX(0px); }
-            12.6%,22% { transform: translateX(17px); }
-            25.1%,35% { transform: translateX(34px); }
-            37.6%,47% { transform: translateX(51px); }
-            50.1%,60% { transform: translateX(68px); }
-            62.6%,72% { transform: translateX(85px); }
-            75.1%,85% { transform: translateX(102px); }
-            87.6%,97% { transform: translateX(119px); }
-            99%,100%  { transform: translateX(0px); }
-        }
+        /* brush movement handled via SMIL <animate> on x attr (SVG user-unit safe) */
         @keyframes nycMapPulse {
             0%,12%   { opacity: 0.85; }
             13%,24%  { opacity: 1; }
@@ -240,7 +230,6 @@
             73%,84%  { opacity: 0.88; }
             85%,100% { opacity: 0.85; }
         }
-        .nyc-brush { animation: nycBrushSweep 3s steps(1,end) infinite; }
         .nyc-borough-group { animation: nycMapPulse 3s steps(1,end) infinite; }
         /* ---- Project 5: Income Wage Ladder ---- */
         @keyframes incomeSlideLeft {
@@ -279,8 +268,7 @@
             /* Project 2 */
             .ili-wave-dot { display: none !important; }
             .ili-peak-dot { display: block !important; }
-            /* Project 3 */
-            .nyc-brush { animation: none !important; }
+            /* Project 3 — SMIL brush paused via JS; CSS stops borough pulse */
             .nyc-borough-group { animation: none !important; }
             /* Project 5 */
             .income-slide-left, .income-slide-right {
@@ -552,8 +540,10 @@
   <rect x="95"  y="51" width="14" height="54" rx="1" fill="rgba(240,192,64,0.60)"/>
   <rect x="112" y="69" width="14" height="36" rx="1" fill="rgba(240,192,64,0.42)"/>
   <rect x="129" y="87" width="14" height="18" rx="1" fill="rgba(240,192,64,0.28)"/>
-  <!-- Brush highlight: sweeps bar-to-bar on a 3s loop -->
-  <rect class="nyc-brush" x="10" y="12" width="14" height="93" rx="1" fill="rgba(255,255,255,0.12)"/>
+  <!-- Brush highlight: sweeps bar-to-bar using SMIL (SVG user-unit safe) -->
+  <rect x="10" y="12" width="14" height="93" rx="1" fill="rgba(255,255,255,0.12)">
+    <animate attributeName="x" values="10;27;44;61;78;95;112;129;10" dur="3s" repeatCount="indefinite" calcMode="discrete"/>
+  </rect>
   <!-- Axis label -->
   <text x="79" y="114" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="5.5" font-family="system-ui,sans-serif">Price Distribution</text>
   <!-- RIGHT PANEL: NYC Borough Schematic -->
@@ -1194,6 +1184,13 @@
                 scrollIndicator.classList.add("hidden-indicator");
             }
         }, { passive: true });
+
+        // ---- Project 3: Pause SMIL brush + borough CSS animation under reduced motion ----
+        (function () {
+            if (!prefersReducedMotion) return;
+            var nycSvg = document.getElementById("nyc-svg");
+            if (nycSvg && nycSvg.pauseAnimations) nycSvg.pauseAnimations();
+        })();
 
         // ---- Project 5: Income Wage Ladder IntersectionObserver ----
         (function () {
