@@ -197,52 +197,6 @@
         .about-carousel-slide.active {
             opacity: 1;
         }
-        /* ---- Project 1: Bracket SVG Animation ---- */
-        @keyframes drawBracketLine { to { stroke-dashoffset: 0; } }
-        @keyframes bracketChampionPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.12); }
-        }
-        .bracket-champ-slot { opacity: 0; transition: opacity 0.4s ease; }
-        .bracket-champ-slot.bracket-show { opacity: 1; }
-        #bracket-c1, #bracket-c2, #bracket-c3, #bracket-c4 { opacity: 0; }
-        #bracket-c1.bracket-draw, #bracket-c2.bracket-draw,
-        #bracket-c3.bracket-draw, #bracket-c4.bracket-draw {
-            opacity: 1;
-            animation: drawBracketLine 0.45s ease-out forwards;
-        }
-        #bracket-champ-final.bracket-pulse {
-            transform-origin: center center;
-            transform-box: fill-box;
-            animation: bracketChampionPulse 0.6s ease-in-out;
-        }
-        /* ---- Project 2: ILI Wave ---- */
-        .ili-peak-dot { display: none; }
-        /* ---- Project 3: NYC Histogram Brush ---- */
-        /* brush movement handled via SMIL <animate> on x attr (SVG user-unit safe) */
-        @keyframes nycMapPulse {
-            0%,12%   { opacity: 0.85; }
-            13%,24%  { opacity: 1; }
-            25%,36%  { opacity: 0.78; }
-            37%,48%  { opacity: 0.95; }
-            49%,60%  { opacity: 0.82; }
-            61%,72%  { opacity: 1; }
-            73%,84%  { opacity: 0.88; }
-            85%,100% { opacity: 0.85; }
-        }
-        .nyc-borough-group { animation: nycMapPulse 3s steps(1,end) infinite; }
-        /* ---- Project 5: Income Wage Ladder ---- */
-        @keyframes incomeSlideLeft {
-            from { transform: translateX(-35px); opacity: 0; }
-            to   { transform: translateX(0);     opacity: 1; }
-        }
-        @keyframes incomeSlideRight {
-            from { transform: translateX(35px); opacity: 0; }
-            to   { transform: translateX(0);    opacity: 1; }
-        }
-        .income-slide-left, .income-slide-right { opacity: 0; }
-        .income-animate-left  { animation: incomeSlideLeft  0.6s ease-out forwards; }
-        .income-animate-right { animation: incomeSlideRight 0.6s ease-out forwards; }
         @media (prefers-reduced-motion: reduce) {
             .hero-chart-path,
             .reveal-ready,
@@ -257,25 +211,6 @@
             .typewriter-cursor::after { animation: none !important; }
             nav { transition: none !important; }
             .scroll-indicator { transition: none !important; }
-            /* Project 1 */
-            .bracket-champ-slot { opacity: 1 !important; transition: none !important; }
-            #bracket-c1, #bracket-c2, #bracket-c3, #bracket-c4 {
-                opacity: 1 !important;
-                stroke-dashoffset: 0 !important;
-                animation: none !important;
-            }
-            #bracket-champ-final { animation: none !important; }
-            /* Project 2 */
-            .ili-wave-dot { display: none !important; }
-            .ili-peak-dot { display: block !important; }
-            /* Project 3 — SMIL brush paused via JS; CSS stops borough pulse */
-            .nyc-borough-group { animation: none !important; }
-            /* Project 5 */
-            .income-slide-left, .income-slide-right {
-                opacity: 1 !important;
-                transform: none !important;
-                animation: none !important;
-            }
         }
     </style>
 </head>
@@ -323,7 +258,7 @@
                 Hi, I'm Karl.
             </h1>
 <p class="font-label text-lg md:text-xl mb-8 min-h-[2rem] flex items-center justify-center gap-0">
-                <span class="text-white/85 font-medium" id="title-prefix">I'm a </span><span class="typewriter-cursor text-[#F0C040] font-bold tracking-[0.2em] uppercase" id="rotating-title">Data Analyst</span><span class="text-white/85 font-medium">.</span>
+                <span class="text-white/85 font-medium" id="title-prefix">I'm a&nbsp;</span><span class="typewriter-cursor text-[#F0C040] font-bold tracking-[0.2em] uppercase" id="rotating-title">Data Analyst</span><span class="text-white/85 font-medium">.</span>
             </p>
 <p class="text-on-primary-container text-xl md:text-2xl font-light max-w-2xl mx-auto leading-relaxed mb-8">
                 Translating risk and data into decisions that matter.
@@ -334,9 +269,9 @@
 <span class="material-symbols-outlined text-[#F0C040]" style="font-size:16px">verified</span>
 <span class="text-white/90 font-semibold">SOA Exams P &amp; FM — Passed</span>
 <span class="text-white/30 hidden sm:inline">·</span>
-<span class="text-white/60 hidden sm:inline">Kaggle Competition Submitted</span>
-<span class="text-white/30 hidden sm:inline">·</span>
 <span class="text-white/60 hidden sm:inline">UBC Economics &amp; Statistics</span>
+<span class="text-white/30 hidden sm:inline">·</span>
+<span class="text-white/60 hidden sm:inline">Data Science Minor</span>
 </div>
 </div>
 <!-- CTAs: primary dominant, secondary lighter -->
@@ -366,90 +301,8 @@
 <!-- Project 1: Featured -->
 <div class="mb-20 group reveal-target">
 <div class="bg-surface-container-lowest rounded-xl overflow-hidden editorial-shadow border-t-4 border-[#F0C040] flex flex-col md:flex-row transition-transform duration-500 hover:-translate-y-2">
-<div class="md:w-3/5 h-[300px] md:h-[400px] cobalt-gradient flex items-center justify-center p-8 md:p-12 overflow-hidden relative">
-<div class="absolute inset-0 opacity-10 flex items-center justify-center">
-<div class="grid grid-cols-12 gap-1 w-full h-full">
-<div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div><div class="border-r border-b border-white/20"></div>
-</div>
-</div>
-<svg id="bracket-svg" class="w-full h-full z-10" viewBox="0 0 500 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-  <!-- Round labels -->
-  <text x="43" y="20" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="7" font-weight="700" font-family="system-ui,sans-serif" letter-spacing="1">R1</text>
-  <text x="143" y="20" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="7" font-weight="700" font-family="system-ui,sans-serif" letter-spacing="1">QF</text>
-  <text x="243" y="20" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="7" font-weight="700" font-family="system-ui,sans-serif" letter-spacing="1">SF</text>
-  <text x="343" y="20" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="7" font-weight="700" font-family="system-ui,sans-serif" letter-spacing="1">FINAL</text>
-  <text x="443" y="20" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="7" font-weight="700" font-family="system-ui,sans-serif" letter-spacing="1">CHAMP</text>
-  <!-- R1 slots (16) -->
-  <rect x="8" y="32" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="46" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="66" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="80" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="100" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="114" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="134" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="148" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="168" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="182" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="202" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="216" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="236" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="250" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="270" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="8" y="284" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <!-- QF slots (8) -->
-  <rect x="108" y="39" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="108" y="73" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="108" y="107" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="108" y="141" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="108" y="175" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="108" y="209" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="108" y="243" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="108" y="277" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <!-- SF slots (4) -->
-  <rect x="208" y="56" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="208" y="124" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="208" y="192" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="208" y="260" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <!-- Final slots (2) -->
-  <rect x="308" y="90" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <rect x="308" y="226" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <!-- Champion slot -->
-  <rect x="408" y="158" width="70" height="12" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <!-- R1→QF dim bracket arms (top,bot,mid per pair) -->
-  <path d="M 78,38 H 93 V 52 M 78,52 H 93 M 93,45 H 108" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <path d="M 78,72 H 93 V 86 M 78,86 H 93 M 93,79 H 108" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <path d="M 78,106 H 93 V 120 M 78,120 H 93 M 93,113 H 108" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <path d="M 78,140 H 93 V 154 M 78,154 H 93 M 93,147 H 108" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <path d="M 78,174 H 93 V 188 M 78,188 H 93 M 93,181 H 108" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <path d="M 78,208 H 93 V 222 M 78,222 H 93 M 93,215 H 108" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <path d="M 78,242 H 93 V 256 M 78,256 H 93 M 93,249 H 108" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <path d="M 78,276 H 93 V 290 M 78,290 H 93 M 93,283 H 108" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <!-- QF→SF dim bracket arms -->
-  <path d="M 178,45 H 193 V 79 M 178,79 H 193 M 193,62 H 208" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <path d="M 178,113 H 193 V 147 M 178,147 H 193 M 193,130 H 208" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <path d="M 178,181 H 193 V 215 M 178,215 H 193 M 193,198 H 208" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <path d="M 178,249 H 193 V 283 M 178,283 H 193 M 193,266 H 208" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <!-- SF→Final dim bracket arms -->
-  <path d="M 278,62 H 293 V 130 M 278,130 H 293 M 293,96 H 308" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <path d="M 278,198 H 293 V 266 M 278,266 H 293 M 293,232 H 308" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <!-- Final→Champion dim bracket arm -->
-  <path d="M 378,96 H 393 V 232 M 378,232 H 393 M 393,164 H 408" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" stroke-linecap="round"/>
-  <!-- Gold champion path slot highlights (fade in on scroll) -->
-  <rect class="bracket-champ-slot" x="8"   y="32"  width="70" height="12" rx="2" fill="rgba(240,192,64,0.2)"  stroke="#F0C040" stroke-width="1"/>
-  <rect class="bracket-champ-slot" x="108" y="39"  width="70" height="12" rx="2" fill="rgba(240,192,64,0.2)"  stroke="#F0C040" stroke-width="1"/>
-  <rect class="bracket-champ-slot" x="208" y="56"  width="70" height="12" rx="2" fill="rgba(240,192,64,0.2)"  stroke="#F0C040" stroke-width="1"/>
-  <rect class="bracket-champ-slot" x="308" y="90"  width="70" height="12" rx="2" fill="rgba(240,192,64,0.2)"  stroke="#F0C040" stroke-width="1"/>
-  <rect id="bracket-champ-final" class="bracket-champ-slot" x="408" y="158" width="70" height="12" rx="2" fill="rgba(240,192,64,0.38)" stroke="#F0C040" stroke-width="1.5"/>
-  <!-- Gold animated connectors: draw in sequentially on scroll (dashoffset = path length) -->
-  <!-- c1: R1(38)→QF(45)  length=37 -->
-  <path id="bracket-c1" d="M 78,38 H 93 V 45 H 108" fill="none" stroke="#F0C040" stroke-width="2" stroke-linecap="round" stroke-dasharray="37" stroke-dashoffset="37" style="filter:drop-shadow(0 0 3px rgba(240,192,64,0.7))"/>
-  <!-- c2: QF(45)→SF(62)  length=47 -->
-  <path id="bracket-c2" d="M 178,45 H 193 V 62 H 208" fill="none" stroke="#F0C040" stroke-width="2" stroke-linecap="round" stroke-dasharray="47" stroke-dashoffset="47" style="filter:drop-shadow(0 0 3px rgba(240,192,64,0.7))"/>
-  <!-- c3: SF(62)→Final(96)  length=64 -->
-  <path id="bracket-c3" d="M 278,62 H 293 V 96 H 308" fill="none" stroke="#F0C040" stroke-width="2" stroke-linecap="round" stroke-dasharray="64" stroke-dashoffset="64" style="filter:drop-shadow(0 0 3px rgba(240,192,64,0.7))"/>
-  <!-- c4: Final(96)→Champ(164)  length=98 -->
-  <path id="bracket-c4" d="M 378,96 H 393 V 164 H 408" fill="none" stroke="#F0C040" stroke-width="2" stroke-linecap="round" stroke-dasharray="98" stroke-dashoffset="98" style="filter:drop-shadow(0 0 3px rgba(240,192,64,0.7))"/>
-</svg>
+<div class="md:w-3/5 h-[300px] md:h-[400px] overflow-hidden relative">
+<img src="images/MM_Homepage.png" alt="March Madness bracket results" class="w-full h-full object-contain">
 </div>
 <div class="md:w-2/5 p-8 md:p-12 flex flex-col justify-center">
 <div class="flex items-center gap-3 mb-4">
@@ -478,36 +331,8 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
 <!-- Project 2: ILI Forecasting — has project page, shows arrow_forward on hover -->
 <div class="group reveal-target" style="--stagger-delay: 100ms;">
-<div class="bg-surface-container-high aspect-video rounded-xl mb-8 flex items-center justify-center p-10 overflow-hidden relative cobalt-gradient hover:-translate-y-1.5 transition-transform duration-300">
-<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/15 rounded-xl z-10">
-<span class="material-symbols-outlined text-white" style="font-size:40px">arrow_forward</span>
-</div>
-<svg id="ili-svg" class="w-full h-full" viewBox="0 0 280 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <!-- Faint gridlines -->
-  <line x1="0" y1="100" x2="280" y2="100" stroke="rgba(255,255,255,0.10)" stroke-width="0.5"/>
-  <line x1="0" y1="55"  x2="280" y2="55"  stroke="rgba(255,255,255,0.10)" stroke-width="0.5"/>
-  <!-- Forecast region: semi-transparent gold cone -->
-  <path d="M 222,84 L 280,52 L 280,100 Z" fill="rgba(240,192,64,0.13)"/>
-  <line x1="222" y1="84" x2="280" y2="68" stroke="rgba(240,192,64,0.30)" stroke-width="0.8" stroke-dasharray="3 3"/>
-  <line x1="222" y1="84" x2="280" y2="82" stroke="rgba(240,192,64,0.15)" stroke-width="0.5" stroke-dasharray="2 3"/>
-  <!-- ILI wave: seasonal oscillation + single epidemic spike (peak ~x=95, y=8) -->
-  <path id="ili-wave-path"
-        d="M 0,82 C 12,79 22,85 32,80 C 42,75 52,70 62,66
-           C 69,62 74,48 80,34 C 86,20 90,9 95,8
-           C 100,7 106,14 112,26 C 118,40 126,58 136,72
-           C 146,84 156,89 166,85 C 176,81 186,77 196,81
-           C 206,85 214,87 222,84"
-        fill="none" stroke="#F0C040" stroke-width="2.5"
-        stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Animated live-data cursor dot (full motion) -->
-  <circle class="ili-wave-dot" r="4" fill="#F0C040" style="filter:drop-shadow(0 0 4px rgba(240,192,64,0.8))">
-    <animateMotion dur="6s" repeatCount="indefinite" calcMode="paced">
-      <mpath href="#ili-wave-path" xlink:href="#ili-wave-path"/>
-    </animateMotion>
-  </circle>
-  <!-- Static dot at epidemic peak (shown only when reduced motion) -->
-  <circle class="ili-peak-dot" cx="95" cy="8" r="4" fill="#F0C040" style="filter:drop-shadow(0 0 4px rgba(240,192,64,0.8))"/>
-</svg></div>
+<div class="bg-surface-container-high aspect-video rounded-xl mb-8 overflow-hidden relative hover:-translate-y-1.5 transition-transform duration-300">
+<img src="images/ILI_Homepage.png" alt="ILI forecasting time series chart" class="w-full h-full object-cover"></div>
 <div class="flex items-center gap-3 mb-3">
 <a class="project-pill-link" href="projects/ili-forecasting/ili_forecasting.html">PROJECT PAGE ↗</a>
 <h4 class="font-headline text-2xl font-bold text-primary">Influenza Forecasting</h4>
@@ -522,49 +347,8 @@
 </div>
 <!-- Project 3: NYC Airbnb — has project page, shows arrow_forward on hover -->
 <div class="group reveal-target" style="--stagger-delay: 200ms;">
-<div class="bg-surface-container-high aspect-video rounded-xl mb-8 flex items-center justify-center p-10 overflow-hidden relative cobalt-gradient hover:-translate-y-1.5 transition-transform duration-300">
-<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/15 rounded-xl z-10">
-<span class="material-symbols-outlined text-white" style="font-size:40px">arrow_forward</span>
-</div>
-<svg id="nyc-svg" class="w-full h-full" viewBox="0 0 280 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-  <!-- Vertical divider between panels -->
-  <line x1="154" y1="8" x2="154" y2="114" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-  <!-- LEFT PANEL: Price Distribution Histogram -->
-  <line x1="8" y1="105" x2="148" y2="105" stroke="rgba(255,255,255,0.12)" stroke-width="0.5"/>
-  <!-- 8 bars in bell-curve shape; bar w=14, step=17, base y=105 -->
-  <rect x="10"  y="83" width="14" height="22" rx="1" fill="rgba(240,192,64,0.30)"/>
-  <rect x="27"  y="61" width="14" height="44" rx="1" fill="rgba(240,192,64,0.50)"/>
-  <rect x="44"  y="39" width="14" height="66" rx="1" fill="rgba(240,192,64,0.65)"/>
-  <rect x="61"  y="25" width="14" height="80" rx="1" fill="rgba(240,192,64,0.82)"/>
-  <rect x="78"  y="33" width="14" height="72" rx="1" fill="rgba(240,192,64,0.74)"/>
-  <rect x="95"  y="51" width="14" height="54" rx="1" fill="rgba(240,192,64,0.60)"/>
-  <rect x="112" y="69" width="14" height="36" rx="1" fill="rgba(240,192,64,0.42)"/>
-  <rect x="129" y="87" width="14" height="18" rx="1" fill="rgba(240,192,64,0.28)"/>
-  <!-- Brush highlight: sweeps bar-to-bar using SMIL (SVG user-unit safe) -->
-  <rect x="10" y="12" width="14" height="93" rx="1" fill="rgba(255,255,255,0.12)">
-    <animate attributeName="x" values="10;27;44;61;78;95;112;129;10" dur="3s" repeatCount="indefinite" calcMode="discrete"/>
-  </rect>
-  <!-- Axis label -->
-  <text x="79" y="114" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="5.5" font-family="system-ui,sans-serif">Price Distribution</text>
-  <!-- RIGHT PANEL: NYC Borough Schematic -->
-  <g class="nyc-borough-group">
-    <!-- Manhattan: narrow vertical island -->
-    <polygon points="200,32 211,30 213,90 199,92" fill="rgba(240,192,64,0.75)" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
-    <text x="206" y="63" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="4.5" font-weight="700" font-family="system-ui,sans-serif">MAN</text>
-    <!-- Bronx: north of Manhattan -->
-    <polygon points="211,30 209,14 243,11 252,32 240,40 211,42" fill="rgba(240,192,64,0.35)" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
-    <text x="230" y="28" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="4.5" font-weight="700" font-family="system-ui,sans-serif">BRX</text>
-    <!-- Queens: large east borough -->
-    <polygon points="213,30 252,32 240,40 268,84 213,91 211,42 240,40" fill="rgba(240,192,64,0.55)" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
-    <text x="246" y="62" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="4.5" font-weight="700" font-family="system-ui,sans-serif">QNS</text>
-    <!-- Brooklyn: south -->
-    <polygon points="199,92 213,91 268,84 262,112 193,112" fill="rgba(240,192,64,0.48)" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
-    <text x="232" y="103" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="4.5" font-weight="700" font-family="system-ui,sans-serif">BKN</text>
-    <!-- Staten Island: lower-left, isolated -->
-    <polygon points="162,97 183,93 182,112 163,112" fill="rgba(240,192,64,0.18)" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
-    <text x="173" y="105" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="4" font-weight="700" font-family="system-ui,sans-serif">SI</text>
-  </g>
-</svg></div>
+<div class="bg-surface-container-high aspect-video rounded-xl mb-8 overflow-hidden relative hover:-translate-y-1.5 transition-transform duration-300">
+<img src="images/NYC_Homepage.png" alt="NYC Airbnb price distribution and borough dashboards" class="w-full h-full object-cover"></div>
 <div class="flex items-center gap-3 mb-3">
 <a class="project-pill-link" href="projects/airbnb-nyc/nyc_airbnb.html">PROJECT PAGE ↗</a>
 <h4 class="font-headline text-2xl font-bold text-primary mb-3">NYC Airbnb Pricing &amp; Demand Dashboards</h4>
@@ -579,67 +363,57 @@
 </div>
 <!-- Project 4: Budapest Airbnb — repo only, shows code icon on hover -->
 <div class="group reveal-target" style="--stagger-delay: 300ms;">
-<div class="bg-surface-container-high aspect-video rounded-xl mb-8 flex items-center justify-center p-10 overflow-hidden relative cobalt-gradient hover:-translate-y-1.5 transition-transform duration-300">
-<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/15 rounded-xl z-10">
-<span class="material-symbols-outlined text-white" style="font-size:40px">code</span>
-</div>
+<div class="bg-surface-container-high aspect-video rounded-xl mb-8 overflow-hidden relative cobalt-gradient hover:-translate-y-1.5 transition-transform duration-300">
 <svg class="w-full h-full" viewBox="0 0 280 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background: listing price scatter (gold, low opacity) -->
-  <circle cx="18"  cy="107" r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="30"  cy="102" r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="44"  cy="97"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="38"  cy="82"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="56"  cy="93"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="68"  cy="88"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="80"  cy="82"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="92"  cy="77"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="106" cy="73"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="118" cy="68"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="128" cy="71"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="142" cy="64"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="155" cy="60"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="168" cy="56"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="180" cy="54"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="194" cy="50"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="210" cy="46"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="224" cy="43"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="240" cy="40"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <circle cx="256" cy="37"  r="1.5" fill="rgba(240,192,64,0.25)"/>
-  <!-- Regression line: bottom-left to top-right, dashed -->
-  <line x1="10" y1="112" x2="268" y2="22" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="5 3"/>
-  <!-- Danube river: dark cobalt horizontal band beneath bridge deck -->
-  <rect x="0" y="82" width="280" height="22" fill="rgba(0,24,82,0.42)"/>
-  <!-- Bridge deck -->
-  <line x1="12" y1="82" x2="268" y2="82" stroke="rgba(255,255,255,0.85)" stroke-width="2"/>
-  <!-- Tower 1 (x=98) -->
-  <rect x="95" y="32" width="7" height="50" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
-  <polygon points="94,32 102,32 101,26 96,26" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
-  <path d="M 96,68 a 3,6 0 0 1 6,0" fill="none" stroke="rgba(255,255,255,0.68)" stroke-width="0.8"/>
-  <!-- Tower 2 (x=178) -->
-  <rect x="175" y="32" width="7" height="50" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
-  <polygon points="174,32 182,32 181,26 176,26" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
-  <path d="M 176,68 a 3,6 0 0 1 6,0" fill="none" stroke="rgba(255,255,255,0.68)" stroke-width="0.8"/>
-  <!-- Main suspension cables -->
-  <!-- Left: shore anchor to tower 1 top -->
-  <line x1="12" y1="82" x2="98" y2="28" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
-  <!-- Centre catenary between tower tops (sags to y≈44 at mid) -->
-  <path d="M 98,28 Q 140,44 178,28" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
-  <!-- Right: tower 2 to shore anchor -->
-  <line x1="181" y1="28" x2="268" y2="82" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
-  <!-- Hangers: left cable (12,82)→(98,28) -->
-  <line x1="28" y1="72" x2="28"  y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
-  <line x1="45" y1="61" x2="45"  y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
-  <line x1="62" y1="51" x2="62"  y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
-  <line x1="79" y1="40" x2="79"  y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
-  <!-- Hangers: centre catenary Q(98,28 140,44 178,28) -->
-  <line x1="120" y1="34" x2="120" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
-  <line x1="140" y1="36" x2="140" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
-  <line x1="159" y1="34" x2="159" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
-  <!-- Hangers: right cable (181,28)→(268,82) -->
-  <line x1="198" y1="38" x2="198" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
-  <line x1="215" y1="49" x2="215" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
-  <line x1="235" y1="62" x2="235" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
-  <line x1="252" y1="72" x2="252" y2="82" stroke="rgba(255,255,255,0.48)" stroke-width="0.7"/>
+  <text x="148" y="10" text-anchor="middle" fill="rgba(255,255,255,0.40)" font-size="5.5" font-weight="700" font-family="system-ui,sans-serif" letter-spacing="1">PRICE PREDICTION · OLS / LASSO</text>
+  <!-- Grid -->
+  <line x1="32" y1="100" x2="268" y2="100" stroke="rgba(255,255,255,0.20)" stroke-width="0.6"/>
+  <line x1="32" y1="16"  x2="32"  y2="100" stroke="rgba(255,255,255,0.20)" stroke-width="0.6"/>
+  <line x1="32" y1="30"  x2="268" y2="30"  stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <line x1="32" y1="50"  x2="268" y2="50"  stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <line x1="32" y1="70"  x2="268" y2="70"  stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <line x1="92"  y1="16" x2="92"  y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <line x1="152" y1="16" x2="152" y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <line x1="212" y1="16" x2="212" y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <!-- Confidence band -->
+  <polygon points="36,14 266,72 266,90 36,32" fill="rgba(240,192,64,0.08)"/>
+  <!-- Regression line (price falls with distance) -->
+  <line x1="36" y1="22" x2="266" y2="82" stroke="#F0C040" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Scatter dots -->
+  <circle cx="42"  cy="18" r="1.8" fill="rgba(240,192,64,0.70)"/>
+  <circle cx="52"  cy="30" r="1.8" fill="rgba(240,192,64,0.60)"/>
+  <circle cx="60"  cy="22" r="1.8" fill="rgba(240,192,64,0.70)"/>
+  <circle cx="68"  cy="35" r="1.8" fill="rgba(240,192,64,0.55)"/>
+  <circle cx="76"  cy="27" r="1.8" fill="rgba(240,192,64,0.65)"/>
+  <circle cx="84"  cy="40" r="1.8" fill="rgba(240,192,64,0.60)"/>
+  <circle cx="92"  cy="30" r="1.8" fill="rgba(240,192,64,0.70)"/>
+  <circle cx="100" cy="45" r="1.8" fill="rgba(240,192,64,0.55)"/>
+  <circle cx="108" cy="36" r="1.8" fill="rgba(240,192,64,0.65)"/>
+  <circle cx="116" cy="50" r="1.8" fill="rgba(240,192,64,0.60)"/>
+  <circle cx="122" cy="40" r="1.8" fill="rgba(240,192,64,0.70)"/>
+  <circle cx="130" cy="55" r="1.8" fill="rgba(240,192,64,0.55)"/>
+  <circle cx="138" cy="44" r="1.8" fill="rgba(240,192,64,0.65)"/>
+  <circle cx="146" cy="60" r="1.8" fill="rgba(240,192,64,0.60)"/>
+  <circle cx="154" cy="50" r="1.8" fill="rgba(240,192,64,0.70)"/>
+  <circle cx="160" cy="63" r="1.8" fill="rgba(240,192,64,0.55)"/>
+  <circle cx="168" cy="53" r="1.8" fill="rgba(240,192,64,0.65)"/>
+  <circle cx="176" cy="68" r="1.8" fill="rgba(240,192,64,0.60)"/>
+  <circle cx="184" cy="57" r="1.8" fill="rgba(240,192,64,0.70)"/>
+  <circle cx="192" cy="72" r="1.8" fill="rgba(240,192,64,0.55)"/>
+  <circle cx="200" cy="60" r="1.8" fill="rgba(240,192,64,0.65)"/>
+  <circle cx="208" cy="76" r="1.8" fill="rgba(240,192,64,0.60)"/>
+  <circle cx="216" cy="65" r="1.8" fill="rgba(240,192,64,0.70)"/>
+  <circle cx="224" cy="80" r="1.8" fill="rgba(240,192,64,0.55)"/>
+  <circle cx="232" cy="68" r="1.8" fill="rgba(240,192,64,0.65)"/>
+  <circle cx="240" cy="74" r="1.8" fill="rgba(240,192,64,0.60)"/>
+  <circle cx="248" cy="84" r="1.8" fill="rgba(240,192,64,0.70)"/>
+  <circle cx="256" cy="72" r="1.8" fill="rgba(240,192,64,0.55)"/>
+  <circle cx="264" cy="88" r="1.8" fill="rgba(240,192,64,0.65)"/>
+  <!-- Axis labels -->
+  <text x="20" y="60" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="4.5" font-family="system-ui,sans-serif" transform="rotate(-90,20,60)">ln(Price)</text>
+  <text x="148" y="113" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="4.5" font-family="system-ui,sans-serif">Distance from Centre</text>
+  <text x="30" y="21" text-anchor="middle" fill="rgba(255,255,255,0.28)" font-size="4" font-family="system-ui,sans-serif">Hi</text>
+  <text x="30" y="84" text-anchor="middle" fill="rgba(255,255,255,0.28)" font-size="4" font-family="system-ui,sans-serif">Lo</text>
 </svg></div>
 <h4 class="font-headline text-2xl font-bold text-primary mb-3">Budapest Airbnb Price Prediction</h4>
 <p class="text-on-surface-variant mb-4">OLS and LASSO regression with 10-fold cross-validation predicting listing prices.</p>
@@ -652,44 +426,39 @@
 </div>
 <!-- Project 5: Canadian Immigrant Income — repo only, shows code icon on hover -->
 <div class="group reveal-target" style="--stagger-delay: 400ms;">
-<div class="bg-surface-container-high aspect-video rounded-xl mb-8 flex items-center justify-center p-10 overflow-hidden relative cobalt-gradient hover:-translate-y-1.5 transition-transform duration-300">
-<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/15 rounded-xl z-10">
-<span class="material-symbols-outlined text-white" style="font-size:40px">code</span>
-</div>
-<svg id="income-svg" class="w-full h-full" viewBox="0 0 280 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-  <!-- Wage ladder: vertical spine -->
-  <line x1="130" y1="12" x2="130" y2="108" stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
-  <!-- 7 rungs at equal steps -->
-  <line x1="122" y1="12"  x2="138" y2="12"  stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
-  <line x1="122" y1="27"  x2="138" y2="27"  stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
-  <line x1="122" y1="42"  x2="138" y2="42"  stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
-  <line x1="122" y1="57"  x2="138" y2="57"  stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
-  <line x1="122" y1="72"  x2="138" y2="72"  stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
-  <line x1="122" y1="87"  x2="138" y2="87"  stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
-  <line x1="122" y1="102" x2="138" y2="102" stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
-  <!-- Axis labels -->
-  <text x="130" y="7"   text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="4.5" font-weight="700" font-family="system-ui,sans-serif" letter-spacing="0.5">HIGHER INCOME</text>
-  <text x="130" y="117" text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="4.5" font-weight="700" font-family="system-ui,sans-serif" letter-spacing="0.5">LOWER INCOME</text>
-  <!-- Immigrant group: slides in from LEFT on scroll -->
-  <g class="income-slide-left">
-    <line x1="35" y1="72" x2="138" y2="72" stroke="#F0C040" stroke-width="1.5"/>
-    <circle cx="88" cy="63" r="5"   fill="rgba(255,255,255,0.80)"/>
-    <ellipse cx="88" cy="75" rx="4.5" ry="6" fill="rgba(255,255,255,0.80)"/>
-  </g>
-  <!-- Canadian-born group: slides in from RIGHT on scroll -->
-  <g class="income-slide-right">
-    <line x1="122" y1="42" x2="240" y2="42" stroke="#F0C040" stroke-width="1.5"/>
-    <circle cx="172" cy="33" r="6"  fill="rgba(255,255,255,0.80)"/>
-    <ellipse cx="172" cy="46" rx="5" ry="7" fill="rgba(255,255,255,0.80)"/>
-    <!-- Gap bracket: vertical accent between the two markers -->
-    <line x1="141" y1="42" x2="141" y2="72" stroke="#F0C040" stroke-width="1"/>
-    <line x1="138" y1="42" x2="144" y2="42" stroke="#F0C040" stroke-width="1"/>
-    <line x1="138" y1="72" x2="144" y2="72" stroke="#F0C040" stroke-width="1"/>
-    <text x="148" y="60" fill="#F0C040" font-size="8" font-family="system-ui,sans-serif">&#916;</text>
-    <!-- Marker labels -->
-    <text x="156" y="45" fill="rgba(255,255,255,0.72)" font-size="5" font-family="system-ui,sans-serif">Canadian-Born</text>
-    <text x="156" y="75" fill="rgba(255,255,255,0.72)" font-size="5" font-family="system-ui,sans-serif">Immigrants</text>
-  </g>
+<div class="bg-surface-container-high aspect-video rounded-xl mb-8 overflow-hidden relative cobalt-gradient hover:-translate-y-1.5 transition-transform duration-300">
+<svg class="w-full h-full" viewBox="0 0 280 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+  <text x="148" y="10" text-anchor="middle" fill="rgba(255,255,255,0.40)" font-size="5.5" font-weight="700" font-family="system-ui,sans-serif" letter-spacing="1">INCOME BY ORIGIN · 2021 CENSUS</text>
+  <!-- Baseline axis -->
+  <line x1="84" y1="16" x2="84" y2="104" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
+  <!-- Grid lines -->
+  <line x1="84"  y1="104" x2="264" y2="104" stroke="rgba(255,255,255,0.12)" stroke-width="0.5"/>
+  <line x1="124" y1="16"  x2="124" y2="104" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <line x1="164" y1="16"  x2="164" y2="104" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <line x1="204" y1="16"  x2="204" y2="104" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <line x1="244" y1="16"  x2="244" y2="104" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  <!-- Row 1: Canadian-Born (reference, gold) -->
+  <text x="80" y="26" text-anchor="end" fill="rgba(255,255,255,0.75)" font-size="5" font-family="system-ui,sans-serif">Canadian-Born</text>
+  <rect x="84" y="19" width="172" height="10" rx="1.5" fill="#F0C040" opacity="0.88"/>
+  <!-- Row 2: UK-Born -->
+  <text x="80" y="43" text-anchor="end" fill="rgba(255,255,255,0.60)" font-size="5" font-family="system-ui,sans-serif">UK-Born</text>
+  <rect x="84" y="36" width="150" height="10" rx="1.5" fill="rgba(240,192,64,0.58)"/>
+  <!-- Row 3: Philippines -->
+  <text x="80" y="60" text-anchor="end" fill="rgba(255,255,255,0.60)" font-size="5" font-family="system-ui,sans-serif">Philippines</text>
+  <rect x="84" y="53" width="120" height="10" rx="1.5" fill="rgba(240,192,64,0.42)"/>
+  <!-- Row 4: Southeast Asia -->
+  <text x="80" y="77" text-anchor="end" fill="rgba(255,255,255,0.60)" font-size="5" font-family="system-ui,sans-serif">Southeast Asia</text>
+  <rect x="84" y="70" width="102" height="10" rx="1.5" fill="rgba(240,192,64,0.32)"/>
+  <!-- Row 5: South Asia -->
+  <text x="80" y="94" text-anchor="end" fill="rgba(255,255,255,0.60)" font-size="5" font-family="system-ui,sans-serif">South Asia</text>
+  <rect x="84" y="87" width="88" height="10" rx="1.5" fill="rgba(240,192,64,0.22)"/>
+  <!-- Gap bracket (Canadian-Born vs South Asia) -->
+  <line x1="258" y1="24" x2="258" y2="92" stroke="#F0C040" stroke-width="0.9" opacity="0.55"/>
+  <line x1="254" y1="24" x2="262" y2="24" stroke="#F0C040" stroke-width="0.9" opacity="0.55"/>
+  <line x1="254" y1="92" x2="262" y2="92" stroke="#F0C040" stroke-width="0.9" opacity="0.55"/>
+  <text x="268" y="61" text-anchor="middle" fill="#F0C040" font-size="8" font-family="system-ui,sans-serif" opacity="0.80">Δ</text>
+  <!-- X-axis label -->
+  <text x="174" y="115" text-anchor="middle" fill="rgba(255,255,255,0.32)" font-size="4.5" font-family="system-ui,sans-serif">Relative Income Index</text>
 </svg></div>
 <h4 class="font-headline text-2xl font-bold text-primary mb-3">Canadian Immigrant Income Disparities</h4>
 <p class="text-on-surface-variant mb-4">Econometric analysis of immigrant income gaps using 2021 Census PUMF with heteroskedasticity-robust standard errors.</p>
@@ -1002,7 +771,7 @@
         function updateTitlePrefix(title) {
             if (!titlePrefixEl) return;
             const startsWithVowel = /^[aeiou]/i.test((title || "").trim());
-            titlePrefixEl.textContent = startsWithVowel ? "I'm an " : "I'm a ";
+            titlePrefixEl.textContent = startsWithVowel ? "I'm an\u00a0" : "I'm a\u00a0";
         }
 
         function startTypewriter() {
@@ -1185,77 +954,5 @@
             }
         }, { passive: true });
 
-        // ---- Project 3: Pause SMIL brush + borough CSS animation under reduced motion ----
-        (function () {
-            if (!prefersReducedMotion) return;
-            var nycSvg = document.getElementById("nyc-svg");
-            if (nycSvg && nycSvg.pauseAnimations) nycSvg.pauseAnimations();
-        })();
-
-        // ---- Project 5: Income Wage Ladder IntersectionObserver ----
-        (function () {
-            var incomeSvg = document.getElementById("income-svg");
-            if (!incomeSvg) return;
-            if (prefersReducedMotion) {
-                incomeSvg.querySelectorAll(".income-slide-left, .income-slide-right").forEach(function (el) {
-                    el.style.opacity = "1";
-                    el.style.transform = "none";
-                });
-                return;
-            }
-            var incomeObserver = new IntersectionObserver(function (entries, obs) {
-                entries.forEach(function (entry) {
-                    if (!entry.isIntersecting) return;
-                    obs.unobserve(entry.target);
-                    incomeSvg.querySelectorAll(".income-slide-left").forEach(function (el) {
-                        el.classList.add("income-animate-left");
-                    });
-                    setTimeout(function () {
-                        incomeSvg.querySelectorAll(".income-slide-right").forEach(function (el) {
-                            el.classList.add("income-animate-right");
-                        });
-                    }, 200);
-                });
-            }, { threshold: 0.40 });
-            incomeObserver.observe(incomeSvg);
-        })();
-
-        // ---- Project 1: Bracket IntersectionObserver ----
-        (function () {
-            var bracketSvg = document.getElementById("bracket-svg");
-            if (!bracketSvg) return;
-            if (prefersReducedMotion) {
-                ["bracket-c1","bracket-c2","bracket-c3","bracket-c4"].forEach(function (id) {
-                    var el = document.getElementById(id);
-                    if (el) { el.style.strokeDashoffset = "0"; el.style.opacity = "1"; }
-                });
-                document.querySelectorAll(".bracket-champ-slot").forEach(function (el) {
-                    el.classList.add("bracket-show");
-                });
-                return;
-            }
-            var bracketObserver = new IntersectionObserver(function (entries, obs) {
-                entries.forEach(function (entry) {
-                    if (!entry.isIntersecting) return;
-                    obs.unobserve(entry.target);
-                    document.querySelectorAll(".bracket-champ-slot").forEach(function (el) {
-                        el.classList.add("bracket-show");
-                    });
-                    var ids    = ["bracket-c1","bracket-c2","bracket-c3","bracket-c4"];
-                    var delays = [200, 700, 1200, 1800];
-                    ids.forEach(function (id, i) {
-                        setTimeout(function () {
-                            var el = document.getElementById(id);
-                            if (el) el.classList.add("bracket-draw");
-                        }, delays[i]);
-                    });
-                    setTimeout(function () {
-                        var champ = document.getElementById("bracket-champ-final");
-                        if (champ) champ.classList.add("bracket-pulse");
-                    }, 2600);
-                });
-            }, { threshold: 0.35 });
-            bracketObserver.observe(bracketSvg);
-        })();
     </script>
 </body></html>
